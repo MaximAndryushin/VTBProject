@@ -50,7 +50,6 @@ final class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        FavoritesAssembly.assembly(view: self)
         configureLabel()
         configureButton()
         configureTableView()

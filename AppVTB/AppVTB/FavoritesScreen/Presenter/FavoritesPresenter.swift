@@ -23,7 +23,7 @@ final class FavoritesPresenter {
     weak var view: FavoritesViewInput?
     var interactor: FavoritesInteractorInput?
     var router: FavoritesRouterInput?
-    let dataStore: FavoritesDataStore
+    private let dataStore: FavoritesDataStore
     
     
     // MARK: - Initializer
