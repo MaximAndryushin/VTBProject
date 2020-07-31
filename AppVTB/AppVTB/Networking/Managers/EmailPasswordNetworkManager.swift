@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class EmailCheckNetworkManager: NetworkResponseHandler {
+final class EmailPasswordNetworkManager: NetworkResponseHandler {
         
     let router = Router<EmailPasswordAPI>()
     
