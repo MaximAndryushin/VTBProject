@@ -8,14 +8,14 @@
 
 //MARK: - Response Model
 struct Breach: Codable {
-    let name, title, domain, breachDate: String?
-    let addedDate, modifiedDate: String?
-    let pwnCount: Int?
-    let breachDescription: String?
-    let logoPath: String?
-    let dataClasses: [String]?
-    let isVerified, isFabricated, isSensitive, isRetired: Bool?
-    let isSpamList: Bool?
+    let name, title, domain, breachDate: String
+    let addedDate, modifiedDate: String
+    let pwnCount: Int
+    let breachDescription: String
+    let logoPath: String
+    let dataClasses: [String]
+    let isVerified, isFabricated, isSensitive, isRetired: Bool
+    let isSpamList: Bool
     
     enum CodingKeys: String, CodingKey {
         case name = "Name"
