@@ -7,7 +7,7 @@
 //
 
 //MARK: - Response Model
-struct Breach: Codable {
+struct BreachAPI: Codable {
     let name, title, domain, breachDate: String
     let addedDate, modifiedDate: String
     let pwnCount: Int
@@ -36,4 +36,4 @@ struct Breach: Codable {
     }
 }
 
-typealias EmailPasswordsAPIResponse = [Breach]
+typealias EmailPasswordsAPIResponse = [BreachAPI]

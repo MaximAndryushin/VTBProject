@@ -13,18 +13,27 @@ protocol HistoryBusinessLogic {
 }
 
 protocol HistoryDataStore {
-// there can be buffer i think, but how can i check what type of request this buffer????????
+    
+}
+
+protocol DataWorker {
+    func getQueries(with type: TypeOfQuery?, isAscending: Bool) -> [Query]
 }
 
 final class HistoryInteractor: HistoryBusinessLogic, HistoryDataStore {
     var presenter: HistoryPresentationLogic?
-    let worker: HistoryWorker = HistoryWorker()
+    let worker: DataWorker
+    
+    init(worker: DataWorker) {
+        self.worker = worker
+    }
     
     // MARK: - Show Queries
     
     func showQueries(request: History.ShowQueries.Request) {
+        let response: History.ShowQueries.Response
         let queries = worker.getQueries(with: request.type, isAscending: request.isAscending)
-        let response = History.ShowQueries.Response(queries: queries)
+        response = History.ShowQueries.Response(queries: queries)
         presenter?.presentQueries(response: response)
     }
 }

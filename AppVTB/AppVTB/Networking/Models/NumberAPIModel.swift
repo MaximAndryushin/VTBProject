@@ -8,11 +8,9 @@
 
 import UIKit
 
-class NumberAPIModel: Decodable {
+struct NumberAPIModel: Decodable {
     let valid: Bool
     let number: String
-    let localFormat: String
-    let internationalFormat: String
     let countryPrefix: String
     let countryCode: String
     let countryName: String

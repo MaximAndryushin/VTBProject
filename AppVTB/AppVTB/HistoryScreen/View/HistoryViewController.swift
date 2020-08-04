@@ -27,7 +27,7 @@ final class HistoryViewController: UIViewController {
         static let offset: CGFloat = 5
         static let positionOfTableX: CGFloat = 0
         static let positionOfTableY: CGFloat = 0
-        static let dropDownHeight: CGFloat = 40.0
+        static let dropDownHeight: CGFloat = 40
         static let filterOptions = ["All", "Emails", "Phone Numbers"]
         static let sortingOptions = ["Newest", "Oldest"]
 
@@ -61,7 +61,8 @@ final class HistoryViewController: UIViewController {
     
     private func setup() {
         let viewController = self
-        let interactor = HistoryInteractor()
+        let historyWorker = HistoryWorker(dataManager: DataManager.shared)
+        let interactor = HistoryInteractor(worker: historyWorker)
         let presenter = HistoryPresenter()
         let router = HistoryRouter()
         viewController.interactor = interactor
