@@ -17,7 +17,7 @@ enum History {
         }
         
         struct Response {
-            let queries: [Query] // there will be DTO after i make normal models and CoreData stuff
+            let queries: [Query]
         }
         
         struct viewModel {
@@ -26,7 +26,7 @@ enum History {
         
     }
     
-    enum Save { // I'll think about deletion of record by swipe
+    enum Save { 
         struct Request {
         }
         
@@ -46,10 +46,10 @@ struct Query: Codable {
     
     // MARK: - Properties
     
-    private var type: TypeOfQuery
-    private var name: String
-    private var date: Date
-    private var parameters: [String : String]
+    private var type: TypeOfQuery = .error
+    private var name: String = ""
+    private var date: Date = Date()
+    private var parameters: [String : String] = [:]
     
     // MARK: - Initializers
     
@@ -78,7 +78,7 @@ struct Query: Codable {
     
     func getDescription() -> String {
         var result = ""
-        //have problem with this(maybe it connected with concurrency (parameters can be in different order))
+        //have problem with this(maybe it's connected with concurrency (parameters can be in different order))
         for (param, value) in parameters {
             result.append(contentsOf: param + ": " + value + "\n")
         }
