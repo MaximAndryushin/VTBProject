@@ -22,7 +22,12 @@ extension EmailPasswordAPI: EndPointType {
     }
     
     var path: String {
-        return "/api/v3/breachedaccount/"
+        switch self {
+        case .getBreachesWith(let email):
+            return "/api/v3/breachedaccount/" + email
+        case .doSmth:
+            return "/api/v3/breachedaccount/"
+        }
     }
     
     var httpMethod: HTTPMethod {
@@ -31,9 +36,8 @@ extension EmailPasswordAPI: EndPointType {
     
     var task: HTTPTask {
         switch self {
-        case .getBreachesWith(let email):
+        case .getBreachesWith( _):
             return .requestParametersAndHeaders(bodyParameters: nil,
-                                                afterPathArguments: [email],
                                                 bodyEncoding: .urlEncoding,
                                                 urlParameters: ["truncateResponse": "false"],
                                                 additionalHeaders: headers)

@@ -37,5 +37,6 @@ final class HistoryWorker: DataWorker {
 //        }.sorted { (first, second) -> Bool in
 //            return (isAscending != (first.getDate() > second.getDate()))
 //        }
+        return []
     }
 }

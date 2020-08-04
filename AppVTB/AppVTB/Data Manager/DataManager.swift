@@ -18,7 +18,7 @@ class DataManager {
     // MARK: - Core Data stack
 
      lazy var persistentContainer: NSPersistentContainer = {
-         let container = NSPersistentContainer(name: "APPContainer")
+         let container = NSPersistentContainer(name: "AppVTB")
          container.loadPersistentStores(completionHandler: { (storeDescription, error) in
              if let error = error as NSError? {
                  fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -90,15 +90,24 @@ class DataManager {
 }
 
 
+// TO CHANGE
 // MARK: - HistoryDataManager protocol
 extension DataManager: HistoryDataManager {
     
     func getNumbersDTO() -> [NumberAPIModel] {
-        return (getPhoneNumbers()?.map{return PhoneConverter.DAOtoDTO($0)})!
+        if let models = getPhoneNumbers()?.map({return PhoneConverter.DAOtoDTO($0)}) {
+            return models
+        } else {
+            return []
+        }
     }
     
     func getEmailsDTO() -> [EmailDTO] {
-        return (getEmails()?.map{return EmailConverter.DAOtoDTO($0)})!
+        if let models = getEmails()?.map({return EmailConverter.DAOtoDTO($0)}) {
+            return models
+        } else {
+            return []
+        }
     }
     
 }
