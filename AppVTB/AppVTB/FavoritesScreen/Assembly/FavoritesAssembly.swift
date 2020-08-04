@@ -10,7 +10,8 @@ import UIKit
 
 final class FavoritesAssembly {
     
-    static func assembly(view: FavoritesViewController) {
+    static func assembly() -> UIViewController {
+        let view = FavoritesViewController()
         let dataStore = FavoritesDataStore()
         let presenter = FavoritesPresenter(dataStore: dataStore)
         
@@ -24,5 +25,6 @@ final class FavoritesAssembly {
         let router = FavoritesRouter(view: view)
         presenter.router = router
         
+        return view
     }
 }
