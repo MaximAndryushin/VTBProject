@@ -61,8 +61,8 @@ final class HistoryViewController: UIViewController {
     
     private func setup() {
         let viewController = self
-        let historyWorker = HistoryWorker(dataManager: DataManager.shared)
-        let interactor = HistoryInteractor(worker: historyWorker)
+        let historyWorker = HistoryWorker(dataManager: DataManager.shared, numberConverter: NumberConverter(), emailConverter: EmailConverter(converter: BreachConverter()))
+        let interactor = HistoryInteractor(worker: historyWorker, numberConverter: NumberToQueryConverter(), emailConverter: EmailToQueryConverter())
         let presenter = HistoryPresenter()
         let router = HistoryRouter()
         viewController.interactor = interactor

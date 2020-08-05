@@ -21,7 +21,6 @@ final class HistoryPresenter: HistoryPresentationLogic {
     
     func presentQueries(response: History.ShowQueries.Response) {
         let queries = response.queries
-        // response -> viewModel (TO CHANGE) ((DTO -> Query))
         viewController?.displayQueries(viewModel: queries)
     }
     

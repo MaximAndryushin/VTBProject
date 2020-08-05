@@ -5,45 +5,48 @@
 //  Created by Maxim Andryushin on 20.07.2020.
 //  Copyright © 2020 Maxim Andryushin. All rights reserved.
 //
+
 import Foundation
 import CoreData
 
 class DataManager {
-        
+    
     //Singltone
     static let shared = DataManager()
     
     private init() {}
     
     // MARK: - Core Data stack
-
-     lazy var persistentContainer: NSPersistentContainer = {
-         let container = NSPersistentContainer(name: "AppVTB")
-         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-             if let error = error as NSError? {
-                 fatalError("Unresolved error \(error), \(error.userInfo)")
-             }
-         })
-         return container
-     }()
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "AppVTB")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
     
     lazy var managedObjectContext: NSManagedObjectContext = {
         let context = persistentContainer.viewContext
         return context
     }()
-
-     // MARK: - Core Data Saving support
-
+    
+    
+    // MARK: - Core Data Saving support
+    
     func saveContext () {
-         if managedObjectContext.hasChanges {
-             do {
-                 try managedObjectContext.save()
-             } catch {
-                 let nserror = error as NSError
-                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-             }
-         }
-     }
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    
     
     //MARK: - Methods
     
@@ -64,6 +67,17 @@ class DataManager {
         return nil
     }
     
+}
+
+
+
+// MARK: - PhoneEmail protocol
+protocol PhoneEmailDataManager {
+    func getPhoneNumbers() -> [PhoneNumber]?
+    func getEmails() -> [Email]?
+}
+
+extension DataManager: PhoneEmailDataManager {
     func getEmails() -> [Email]? {
         let fetchRequest = Email.emailFetchRequest()
         do {
@@ -77,37 +91,19 @@ class DataManager {
         return nil
     }
     
-    func savePhoneNumber(_ numberAPIModel: NumberAPIModel) {
-        _ = PhoneConverter.DTOtoDAO(numberAPIModel)
-        self.saveContext()
-    }
-    
-    func saveEmail(_ email: EmailDTO) {
-        _ = EmailConverter.DTOtoDAO(email)
-        self.saveContext()
-    }
-
-}
-
-
-// TO CHANGE
-// MARK: - HistoryDataManager protocol
-extension DataManager: HistoryDataManager {
-    
-    func getNumbersDTO() -> [NumberAPIModel] {
-        if let models = getPhoneNumbers()?.map({return PhoneConverter.DAOtoDTO($0)}) {
-            return models
-        } else {
-            return []
+    func deleteAllInstancesOf(entity: String) {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entity)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        do {
+            try managedObjectContext.execute(deleteRequest)
+        } catch let error as NSError {
+            print(error)
         }
     }
     
-    func getEmailsDTO() -> [EmailDTO] {
-        if let models = getEmails()?.map({return EmailConverter.DAOtoDTO($0)}) {
-            return models
-        } else {
-            return []
-        }
+    func clearUserData() {
+        deleteAllInstancesOf(entity: "\(Email.self)")
+        deleteAllInstancesOf(entity: "\(PhoneNumber.self)")
+        deleteAllInstancesOf(entity: "\(Breach.self)")
     }
-    
 }

@@ -2,7 +2,7 @@
 //  PhoneNumber+CoreDataProperties.swift
 //  AppVTB
 //
-//  Created by Maxim Andryushin on 01.08.2020.
+//  Created by Maxim Andryushin on 05.08.2020.
 //  Copyright © 2020 Maxim Andryushin. All rights reserved.
 //
 //
@@ -17,13 +17,14 @@ extension PhoneNumber {
         return NSFetchRequest<PhoneNumber>(entityName: "PhoneNumber")
     }
 
-    @NSManaged public var valid: Bool
-    @NSManaged public var number: String?
-    @NSManaged public var countryCode: String?
-    @NSManaged public var countryPrefix: String?
-    @NSManaged public var countryName: String?
-    @NSManaged public var location: String?
     @NSManaged public var carrier: String?
+    @NSManaged public var countryCode: String?
+    @NSManaged public var countryName: String?
+    @NSManaged public var countryPrefix: String?
+    @NSManaged public var date: Date?
     @NSManaged public var lineType: String?
+    @NSManaged public var location: String?
+    @NSManaged public var number: String?
+    @NSManaged public var valid: Bool
 
 }

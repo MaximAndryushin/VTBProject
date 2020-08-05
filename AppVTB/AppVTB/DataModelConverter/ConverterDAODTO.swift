@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ConverterDAODTO.swift
 //  AppVTB
 //
 //  Created by Maxim Andryushin on 01.08.2020.
@@ -8,33 +8,44 @@
 
 import Foundation
 
-protocol ConverterDAODTO {
-    associatedtype DAO
-    associatedtype DTO
-    
-    static func DAOtoDTO(_ object: DAO) -> DTO
-    static func DTOtoDAO(_ object: DTO) -> DAO
+// MARK: - NumberDTO
+struct NumberDTO {
+    let valid: Bool
+    let number: String
+    let countryPrefix: String
+    let countryCode: String
+    let countryName: String
+    let location: String
+    let carrier: String
+    let lineType: String
+    let date: Date
 }
 
+// MARK: - Phone Number DTO Converter
+protocol NumberDTOConverter {
+    func phoneNumberToNumberDTO(_ number: PhoneNumber) -> NumberDTO
+    func numberDTOToPhoneNumber(_ number: NumberDTO) -> PhoneNumber
+}
 
-// MARK: - Phone Converter
-struct PhoneConverter: ConverterDAODTO {
-    static func DAOtoDTO(_ object: PhoneNumber) -> NumberAPIModel {
-        return NumberAPIModel.init(
-            valid: object.valid,
-            number: object.number!,
-            countryPrefix: object.countryPrefix!,
-            countryCode: object.countryCode!,
-            countryName: object.countryName!,
-            location: object.location!,
-            carrier: object.carrier!,
-            lineType: object.lineType!
+final class NumberConverter: NumberDTOConverter {
+    func phoneNumberToNumberDTO(_ number: PhoneNumber) -> NumberDTO {
+        return NumberDTO(
+            valid: number.valid,
+            number: number.number!,
+            countryPrefix: number.countryPrefix!,
+            countryCode: number.countryCode!,
+            countryName: number.countryName!,
+            location: number.location!,
+            carrier: number.carrier!,
+            lineType: number.lineType!,
+            date: number.date!
         )
     }
     
-    static func DTOtoDAO(_ object: NumberAPIModel) -> PhoneNumber {
+    func numberDTOToPhoneNumber(_ number: NumberDTO) -> PhoneNumber {
         return PhoneNumber()
     }
+    
 }
 
 
@@ -42,25 +53,33 @@ struct PhoneConverter: ConverterDAODTO {
 struct BreachDTO: Hashable {
     let name: String
     let domain: String
-    let addedDate: Date
-    let modifiedDate: Date
+    let addedDate: String
+    let modifiedDate: String
     let info: String
     let logoPath: String
 }
 
-struct BreachConverter: ConverterDAODTO {
-    static func DAOtoDTO(_ object: Breach) -> BreachDTO {
+
+// MARK: -Breach DTO Converter
+
+protocol BreachDTOConverter {
+    func breachToBreachDTO(_ breach: Breach) -> BreachDTO
+    func breachDTOToBreach(_ breach: BreachDTO) -> Breach
+}
+
+final class BreachConverter: BreachDTOConverter {
+    func breachToBreachDTO(_ breach: Breach) -> BreachDTO {
         return BreachDTO(
-            name: object.name!,
-            domain: object.domain!,
-            addedDate: object.addedDate!,
-            modifiedDate: object.modifiedDate!,
-            info: object.info!,
-            logoPath: object.logoPath!
+            name: breach.name!,
+            domain: breach.domain!,
+            addedDate: breach.addedDate!,
+            modifiedDate: breach.modifiedDate!,
+            info: breach.info!,
+            logoPath: breach.logoPath!
         )
     }
     
-    static func DTOtoDAO(_ object: BreachDTO) -> Breach {
+    func breachDTOToBreach(_ breach: BreachDTO) -> Breach {
         return Breach()
     }
     
@@ -79,35 +98,49 @@ struct EmailDTO {
     let domain: String
     let user: String
     let isVerified: Bool
-    let isSpamList: String
+    let isSpamList: Bool
     let isRetired: Bool
     let isFabricated: Bool
     let breaches: [BreachDTO]
+    let date: Date
 }
 
+// MARK: - Email DTO Converter
 
-// MARK: - Email Converter
-struct EmailConverter: ConverterDAODTO {
-    static func DAOtoDTO(_ object: Email) -> EmailDTO {
+protocol EmailDTOConverter {
+    func emailToEmailDTO(_ email: Email) -> EmailDTO
+    func emailDTOToEmail(_ email: EmailDTO) -> Email
+}
+
+final class EmailConverter: EmailDTOConverter {
+    
+    let breachConverter: BreachDTOConverter
+    
+    init(converter: BreachDTOConverter) {
+        self.breachConverter = converter
+    }
+    
+    func emailToEmailDTO(_ email: Email) -> EmailDTO {
         return EmailDTO(
-            email: object.email!,
-            isValid: object.isValid,
-            reason: object.reason!,
-            isDisposable: object.isDisposable,
-            role: object.role,
-            isFree: object.isFree,
-            safeToSend: object.safeToSend,
-            domain: object.domain!,
-            user: object.user!,
-            isVerified: object.isVerified,
-            isSpamList: object.isSpamList!,
-            isRetired: object.isRetired,
-            isFabricated: object.isFabricated,
-            breaches: (object.breaches?.sortedArray(using: []).map({return BreachConverter.DAOtoDTO($0 as! Breach)}))!
+            email: email.email!,
+            isValid: email.isValid,
+            reason: email.reason!,
+            isDisposable: email.isDisposable,
+            role: email.role,
+            isFree: email.isFree,
+            safeToSend: email.safeToSend,
+            domain: email.domain!,
+            user: email.user!,
+            isVerified: email.isVerified,
+            isSpamList: email.isSpamList,
+            isRetired: email.isRetired,
+            isFabricated: email.isFabricated,
+            breaches: (email.breaches?.sortedArray(using: []).map({return breachConverter.breachToBreachDTO($0 as! Breach)}))!,
+            date: email.date!
         )
     }
     
-    static func DTOtoDAO(_ object: EmailDTO) -> Email {
+    func emailDTOToEmail(_ email: EmailDTO) -> Email {
         return Email()
     }
 }

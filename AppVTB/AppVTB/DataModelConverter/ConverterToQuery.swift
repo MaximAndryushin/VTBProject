@@ -8,28 +8,29 @@
 
 import Foundation
 
-protocol QueryConverter {
-    associatedtype DTO
-    
-    static func convertToQuery(from object: DTO, date: Date) -> Query
+// MARK: - Phone To Query
+protocol NumberDTOQueryConverter {
+    func convertToQuery(from object: NumberDTO) -> Query
 }
 
-
-// MARK: - Phone To Query
-struct PhoneToQueryConverter: QueryConverter {
-    static func convertToQuery(from object: NumberAPIModel, date: Date) -> Query {
+final class NumberToQueryConverter: NumberDTOQueryConverter {
+    func convertToQuery(from object: NumberDTO) -> Query {
         let numberMirror = Mirror(reflecting: object)
         let parameters = Dictionary(uniqueKeysWithValues: numberMirror.children.map({
             return ($0.label!, "\($0.value)")
-        }).filter({ $0.0 != "number"}))
-        return Query(.number, name: object.number, date: date, parameters: parameters)
+        }).filter({ $0.0 != "number" && $0.0 != "date" }))
+        return Query(.number, name: object.number, date: object.date, parameters: parameters)
     }
 }
 
 
 // MARK: - Email To Query
-struct EmailToQueryConverter: QueryConverter {
-    static func convertToQuery(from object: EmailDTO, date: Date) -> Query {
+protocol EmailDTOQueryConverter {
+    func convertToQuery(from object: EmailDTO) -> Query
+}
+
+final class EmailToQueryConverter: EmailDTOQueryConverter {
+    func convertToQuery(from object: EmailDTO) -> Query {
         let emailMirror = Mirror(reflecting: object)
         let parameters = Dictionary<String, String>(uniqueKeysWithValues: emailMirror.children.map({
             if $0.label! == "breaches", let breaches = $0.value as? [BreachDTO] {
@@ -37,8 +38,8 @@ struct EmailToQueryConverter: QueryConverter {
             } else {
                 return ($0.label!, "\($0.value)")
             }
-        }).filter({ $0.0 != "email"}))
-        return Query(.email, name: object.email, date: date, parameters: parameters)
+        }).filter({ $0.0 != "email" && $0.0 != "date" }))
+        return Query(.email, name: object.email, date: object.date, parameters: parameters)
     }
 }
 

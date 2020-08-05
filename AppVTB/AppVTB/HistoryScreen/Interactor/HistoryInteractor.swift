@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: - CleanSwift protocols
 protocol HistoryBusinessLogic {
     func showQueries(request: History.ShowQueries.Request)
 }
@@ -16,24 +17,31 @@ protocol HistoryDataStore {
     
 }
 
+// MARK: - DataManager protocol
 protocol DataWorker {
-    func getQueries(with type: TypeOfQuery?, isAscending: Bool) -> [Query]
+    func getNumbers() -> [NumberDTO]
+    func getEmails() -> [EmailDTO]
 }
 
+// MARK: - Interactor
 final class HistoryInteractor: HistoryBusinessLogic, HistoryDataStore {
     var presenter: HistoryPresentationLogic?
-    let worker: DataWorker
+    private let worker: DataWorker
+    private let numberConverter: NumberDTOQueryConverter
+    private let emailConverter: EmailDTOQueryConverter
     
-    init(worker: DataWorker) {
+    init(worker: DataWorker, numberConverter: NumberDTOQueryConverter, emailConverter: EmailDTOQueryConverter) {
         self.worker = worker
+        self.numberConverter = numberConverter
+        self.emailConverter = emailConverter
     }
+    
     
     // MARK: - Show Queries
     
     func showQueries(request: History.ShowQueries.Request) {
-        let response: History.ShowQueries.Response
-        let queries = worker.getQueries(with: request.type, isAscending: request.isAscending)
-        response = History.ShowQueries.Response(queries: queries)
-        presenter?.presentQueries(response: response)
+        var response = worker.getNumbers().map{ return numberConverter.convertToQuery(from: $0)}
+        response.append(contentsOf: worker.getEmails().map{ return emailConverter.convertToQuery(from: $0)})
+        presenter?.presentQueries(response: History.ShowQueries.Response(queries: response))
     }
 }

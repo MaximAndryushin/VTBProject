@@ -9,8 +9,19 @@
 import UIKit
 
 struct EmailValidationAPIModel: Codable {
-    let result, reason, disposable, acceptAll: String
-    let role, free, email, user: String
-    let domain, mxRecord, mxDomain, safeToSend: String
-    let didYouMean, success, message: String
+    let result: String
+    let reason: String
+    let disposable: String
+    let acceptAll: String
+    let role: String
+    let free: String
+    let email: String
+    let user: String
+    let domain: String
+    let mxRecord: String
+    let mxDomain: String
+    let safeToSend: String
+    let didYouMean: String
+    let success: String
+    let message: String
 }

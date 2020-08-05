@@ -16,13 +16,16 @@ class FavoritesInteractor {
     
     //MARK: - Properties
     weak var presenter: FavoritesInteractorOutput?
+    private let dataManager: PhoneEmailDataManager
     
+    init(dataManager: PhoneEmailDataManager) {
+        self.dataManager = dataManager
+    }
 }
 
 extension FavoritesInteractor: FavoritesInteractorInput {
     func loadData() {
-        let dataManager = HistoryWorker()
-        let queries = dataManager.getQueries(with: nil, isAscending: true)
-        presenter?.infoLoaded(data: queries)
+        //let queries = dataManager.getQueries(with: nil, isAscending: true)
+        //presenter?.infoLoaded(data: queries)
     }
 }

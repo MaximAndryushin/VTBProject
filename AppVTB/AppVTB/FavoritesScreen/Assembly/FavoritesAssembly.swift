@@ -18,7 +18,7 @@ final class FavoritesAssembly {
         view.presenter = presenter
         presenter.view = view
         
-        let interactor = FavoritesInteractor()
+        let interactor = FavoritesInteractor(dataManager: DataManager.shared)
         interactor.presenter = presenter
         presenter.interactor = interactor
         

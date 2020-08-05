@@ -14,43 +14,43 @@ class RootViewController: UIViewController {
     
     init() {
         self.current = HistoryViewController()
-        let networkManager1 = EmailValidationNetworkManager()
-        networkManager1.getInfo(about: "m.andryushin@mail.ru") { (email, error) in
-            if let error = error {
-                print(error)
-            }
-
-            if let email = email {
-                print(email.result)
-            }
-        }
-        
-        let networkManager2 = EmailPasswordNetworkManager()
-        networkManager2.getInfo(about: "m.andryushin@mail.ru") { (email, error) in
-            if let error = error {
-                print(error)
-            }
-
-            if let email = email {
-                if email.count > 0 {
-                    print(email)
-                }
-                else {
-                    print("this email isn't found in any breaches")
-                }
-            }
-        }
-        
-        let networkManager3 = NumberNetworkManager()
-        networkManager3.getInfo(about: "79102382390") { (number, error) in
-            if let error = error {
-                print(error)
-            }
-            
-            if let number = number {
-                print(number.carrier)
-            }
-        }
+//        let networkManager1 = EmailValidationNetworkManager()
+//        networkManager1.getInfo(about: "m.andryushin@mail.ru") { (email, error) in
+//            if let error = error {
+//                print(error)
+//            }
+//
+//            if let email = email {
+//                print(email.result)
+//            }
+//        }
+//
+//        let networkManager2 = EmailPasswordNetworkManager()
+//        networkManager2.getInfo(about: "m.andryushin@mail.ru") { (email, error) in
+//            if let error = error {
+//                print(error)
+//            }
+//
+//            if let email = email {
+//                if email.count > 0 {
+//                    print(email)
+//                }
+//                else {
+//                    print("this email isn't found in any breaches")
+//                }
+//            }
+//        }
+//
+//        let networkManager3 = NumberNetworkManager()
+//        networkManager3.getInfo(about: "79102382390") { (number, error) in
+//            if let error = error {
+//                print(error)
+//            }
+//
+//            if let number = number {
+//                print(number.carrier)
+//            }
+//        }
         super.init(nibName: nil, bundle: nil)
     }
     

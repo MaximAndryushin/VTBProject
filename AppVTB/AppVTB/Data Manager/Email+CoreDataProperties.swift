@@ -2,7 +2,7 @@
 //  Email+CoreDataProperties.swift
 //  AppVTB
 //
-//  Created by Maxim Andryushin on 01.08.2020.
+//  Created by Maxim Andryushin on 05.08.2020.
 //  Copyright © 2020 Maxim Andryushin. All rights reserved.
 //
 //
@@ -17,19 +17,20 @@ extension Email {
         return NSFetchRequest<Email>(entityName: "Email")
     }
 
-    @NSManaged public var email: String?
-    @NSManaged public var isValid: Bool
-    @NSManaged public var reason: String?
-    @NSManaged public var isDisposable: Bool
-    @NSManaged public var role: Bool
-    @NSManaged public var isFree: Bool
-    @NSManaged public var safeToSend: Bool
+    @NSManaged public var date: Date?
     @NSManaged public var domain: String?
-    @NSManaged public var user: String?
-    @NSManaged public var isVerified: Bool
-    @NSManaged public var isSpamList: String?
-    @NSManaged public var isRetired: Bool
+    @NSManaged public var email: String?
+    @NSManaged public var isDisposable: Bool
     @NSManaged public var isFabricated: Bool
+    @NSManaged public var isFree: Bool
+    @NSManaged public var isRetired: Bool
+    @NSManaged public var isSpamList: Bool
+    @NSManaged public var isValid: Bool
+    @NSManaged public var isVerified: Bool
+    @NSManaged public var reason: String?
+    @NSManaged public var role: Bool
+    @NSManaged public var safeToSend: Bool
+    @NSManaged public var user: String?
     @NSManaged public var breaches: NSSet?
 
 }

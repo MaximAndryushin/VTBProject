@@ -8,13 +8,20 @@
 
 //MARK: - Response Model
 struct BreachAPI: Codable {
-    let name, title, domain, breachDate: String
-    let addedDate, modifiedDate: String
+    let name: String
+    let title: String
+    let domain: String
+    let breachDate: String
+    let addedDate: String
+    let modifiedDate: String
     let pwnCount: Int
     let breachDescription: String
     let logoPath: String
     let dataClasses: [String]
-    let isVerified, isFabricated, isSensitive, isRetired: Bool
+    let isVerified: Bool
+    let isFabricated: Bool
+    let isSensitive: Bool
+    let isRetired: Bool
     let isSpamList: Bool
     
     enum CodingKeys: String, CodingKey {
