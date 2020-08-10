@@ -19,7 +19,7 @@ final class HistoryViewController: UIViewController {
     
     // MARK: - Constants
     
-    private enum Locals {
+    enum Locals {
         static let cellID = "cell"
         static let titleHeader = "History"
         static let fontTitle: CGFloat = 34
@@ -129,7 +129,7 @@ final class HistoryViewController: UIViewController {
     func loadData() {
         let isAscending = (sortingSegmentedControl.selectedSegmentIndex == 0 ? false : true)
         let request = History.ShowQueries.Request(type: nil, isAscending: isAscending)
-        interactor?.showQueries(request: request)
+        interactor?.getQueries(request: request)
     }
     
     //MARK: - FilterReaction
@@ -141,10 +141,10 @@ final class HistoryViewController: UIViewController {
             loadData()
         case 1:
             let request = History.ShowQueries.Request(type: .email, isAscending: isAscending)
-            interactor?.showQueries(request: request)
+            interactor?.getQueries(request: request)
         case 2:
             let request = History.ShowQueries.Request(type: .number, isAscending: isAscending)
-            interactor?.showQueries(request: request)
+            interactor?.getQueries(request: request)
         default:
             break
         }
@@ -161,10 +161,10 @@ final class HistoryViewController: UIViewController {
         switch sender.selectedSegmentIndex{
         case 0:
             let request = History.ShowQueries.Request(type: type, isAscending: false)
-            interactor?.showQueries(request: request)
+            interactor?.getQueries(request: request)
         case 1:
             let request = History.ShowQueries.Request(type: type, isAscending: true)
-            interactor?.showQueries(request: request)
+            interactor?.getQueries(request: request)
         default:
             break
         }
@@ -219,6 +219,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             tableView.beginUpdates()
+            interactor?.deleteQuery(query: cellModels[indexPath.row])
             cellModels.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()

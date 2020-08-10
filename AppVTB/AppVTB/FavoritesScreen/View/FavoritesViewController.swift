@@ -10,11 +10,15 @@ import UIKit
 
 protocol FavoritesViewInput: AnyObject {
     func updateView(viewModels: [Query])
+    func showAlert();
+    func appendViewModel(viewModel: Query)
 }
 
 protocol FavoritesViewOutput {
     func loadData()
     func addButtonClicked()
+    func delete(query: Query)
+    func addNewData(_ name: String)
 }
 
 final class FavoritesViewController: UIViewController {
@@ -27,8 +31,12 @@ final class FavoritesViewController: UIViewController {
         static let titleSize: CGFloat = 26
         static let offset: CGFloat = 5
         static let cornerRadiusButton: CGFloat = 15
-        static let cellID = "favoritesCell"
-        static let cellHeight: CGFloat = 40
+        static let cellID = HistoryViewController.Locals.cellID
+        static let cellHeight: CGFloat = HistoryViewController.Locals.cellHeight
+        static let alertTitle = "Add new data"
+        static let addTitle = "Add"
+        static let cancelTitle = "Cancel"
+        static let placeholder = "Enter email or phone number"
     }
     
     //MARK: - Properties
@@ -37,11 +45,7 @@ final class FavoritesViewController: UIViewController {
     private var favoritesLabel: UILabel!
     private var tableView: UITableView!
     private var addButton: UIButton!
-    private var cellModels: [Query] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    private var cellModels: [Query] = []
     
     
     //MARK: - Life Cycle
@@ -95,7 +99,7 @@ final class FavoritesViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(FavoritesTableCell.self, forCellReuseIdentifier: Locals.cellID)
+        tableView.register(HistoryTableCell.self, forCellReuseIdentifier: Locals.cellID)
         tableView.estimatedRowHeight = Locals.cellHeight
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorInset = .zero
@@ -119,8 +123,37 @@ final class FavoritesViewController: UIViewController {
 // MARK: - FavoritesViewInput
 
 extension FavoritesViewController: FavoritesViewInput {
+    
+    
+    func appendViewModel(viewModel: Query) {
+        DispatchQueue.main.async {
+            self.cellModels.append(viewModel)
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [IndexPath(row: self.cellModels.count - 1, section: 0)], with: .automatic)
+            self.tableView.endUpdates()
+        }
+    }
+    
+    
     func updateView(viewModels: [Query]) {
         cellModels = viewModels
+        tableView.reloadData()
+    }
+    
+    func showAlert() {
+        let alertController = UIAlertController(title: Locals.alertTitle, message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: Locals.addTitle, style: .default) { (_) in
+            if let txtField = alertController.textFields?.first, let text = txtField.text, !text.isEmpty {
+                self.presenter?.addNewData(text)
+            }
+        }
+        alertController.addAction(confirmAction)
+        let cancelAction = UIAlertAction(title: Locals.cancelTitle, style: .cancel) { (_) in }
+        alertController.addAction(cancelAction)
+        alertController.addTextField { (textField) in
+            textField.placeholder = Locals.placeholder
+        }
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -134,7 +167,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Locals.cellID, for: indexPath) as? FavoritesTableCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Locals.cellID, for: indexPath) as? HistoryTableCell {
             cell.viewModel = cellModels[indexPath.row]
             return cell
         }
@@ -161,7 +194,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             tableView.beginUpdates()
-            //Add deletion from database
+            presenter?.delete(query: cellModels[indexPath.row])
             cellModels.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()

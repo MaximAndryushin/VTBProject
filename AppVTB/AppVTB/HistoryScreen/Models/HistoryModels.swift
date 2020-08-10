@@ -26,17 +26,6 @@ enum History {
         
     }
     
-    enum Save { 
-        struct Request {
-        }
-        
-        struct Response {
-        }
-        
-        struct ViewModel {
-        }
-        
-    }
 }
 
 
@@ -60,10 +49,15 @@ struct Query: Codable {
         self.parameters = parameters
     }
     
+    
     //MARK: - Gettes for CellModel
     
     func getLabelText() -> String {
-        return type.rawValue + ": " + name
+        return "\(type.rawValue) : \(name)"
+    }
+    
+    func getName() -> String {
+        return name
     }
     
     func getType() -> TypeOfQuery {
@@ -72,17 +66,20 @@ struct Query: Codable {
     
     func getDate() -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM yyyy HH:mm:ss" // don't forget to change this
+        formatter.dateFormat = "dd MMM yyyy HH:mm:ss" // TO THINK how it looks
         return formatter.string(from: date)
     }
     
     func getDescription() -> String {
         var result = ""
-        //have problem with this(maybe it's connected with concurrency (parameters can be in different order))
-        for (param, value) in parameters {
-            result.append(contentsOf: param + ": " + value + "\n")
+        for (key, value) in parameters.sorted(by: <) {
+            result.append(contentsOf: "\(key) : \(value) \n")
         }
         return result
+    }
+    
+    mutating func filterDesription(filter: (_ key: String) -> Bool) {
+        parameters = parameters.filter { return filter($0.key) }
     }
     
     var numberOfParameters: Int {

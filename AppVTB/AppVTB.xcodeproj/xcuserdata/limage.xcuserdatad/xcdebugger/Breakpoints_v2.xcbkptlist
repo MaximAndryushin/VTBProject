@@ -3,4 +3,116 @@
    uuid = "E7EC0B74-27BA-43F5-BF55-01DDE04333D9"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CFD58A44-C3F2-40FE-9A5A-D40BA5A46F49"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppVTB/RootViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "RootViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "CFD58A44-C3F2-40FE-9A5A-D40BA5A46F49 - 1959097c1171149f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppVTB.RootViewController.(current in _746E5AAA140479C1251C1462E55FD2E2).getter : __C.UIViewController"
+                  moduleName = "AppVTB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limage/Documents/VTBProject/AppVTB/AppVTB/RootViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "126">
+               </Location>
+               <Location
+                  uuid = "CFD58A44-C3F2-40FE-9A5A-D40BA5A46F49 - c3124aee017fe793"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppVTB.RootViewController.(current in _746E5AAA140479C1251C1462E55FD2E2).setter : __C.UIViewController"
+                  moduleName = "AppVTB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limage/Documents/VTBProject/AppVTB/AppVTB/RootViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "164">
+               </Location>
+               <Location
+                  uuid = "CFD58A44-C3F2-40FE-9A5A-D40BA5A46F49 - ee4ca62671fd585c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppVTB.RootViewController.(current in _746E5AAA140479C1251C1462E55FD2E2).modify : __C.UIViewController"
+                  moduleName = "AppVTB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limage/Documents/VTBProject/AppVTB/AppVTB/RootViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "18">
+               </Location>
+               <Location
+                  uuid = "CFD58A44-C3F2-40FE-9A5A-D40BA5A46F49 - 4fe2c2120a89df0d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppVTB.RootViewController.(current in _746E5AAA140479C1251C1462E55FD2E2).modify : __C.UIViewController with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "AppVTB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limage/Documents/VTBProject/AppVTB/AppVTB/RootViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "748CEB90-D50F-4E8D-AE9E-64B1478E5BB7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppVTB/FavoritesScreen/NetworkWorker/NetworkWorker.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "getNumber(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C6E8E731-7928-428E-BCE7-5C6E3F1B6551"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppVTB/Data Manager/DataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "deleteFromFavoritesNumber(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

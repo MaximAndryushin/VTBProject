@@ -2,7 +2,7 @@
 //  PhoneNumber+CoreDataProperties.swift
 //  AppVTB
 //
-//  Created by Maxim Andryushin on 05.08.2020.
+//  Created by Maxim Andryushin on 07.08.2020.
 //  Copyright © 2020 Maxim Andryushin. All rights reserved.
 //
 //
@@ -14,7 +14,7 @@ import CoreData
 extension PhoneNumber {
 
     @nonobjc public class func numberFetchRequest() -> NSFetchRequest<PhoneNumber> {
-        return NSFetchRequest<PhoneNumber>(entityName: "PhoneNumber")
+        return NSFetchRequest<PhoneNumber>(entityName: "\(PhoneNumber.self)")
     }
 
     @NSManaged public var carrier: String?
@@ -26,5 +26,6 @@ extension PhoneNumber {
     @NSManaged public var location: String?
     @NSManaged public var number: String?
     @NSManaged public var valid: Bool
+    @NSManaged public var isRenewable: Bool
 
 }

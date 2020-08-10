@@ -17,12 +17,15 @@ enum TypeOfQuery: String, Codable {
     case error = "ERROR"
 }
 
+protocol Parser {
+    func getType(from text: String) -> TypeOfQuery
+}
 
 //MARK: - Parser
 
-struct EmailNumberParser {
+final class EmailNumberParser: Parser {
     
-    static func getType(from text: String) -> TypeOfQuery {
+    func getType(from text: String) -> TypeOfQuery {
         if isEmail(text) {
             return .email
         }
@@ -34,31 +37,22 @@ struct EmailNumberParser {
         }
     }
     
-    private static func isEmail(_ text: String) -> Bool { // check that addres contain only 1 '@' and local and domain parts aren't empty
+    private func isEmail(_ text: String) -> Bool {
         if text.isEmpty {
             return false
         }
-        let index = text.firstIndex(of: "@")
-        if index == text.endIndex || index != text.lastIndex(of: "@") {
-            return false
-        }
-        return index != text.startIndex && text.index(after: index!) != text.endIndex
+        let emailRegEx = ".+@{1}.+\\..+" // Check only @ and . (because API do validation work, all I need from parser is to distinguish email from number
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: text)
     }
     
     
-    private static func isNumber(_ text: String) -> Bool { //check that phone number consist of digits
+    private func isNumber(_ text: String) -> Bool {
         if text.isEmpty {
             return false
         }
-        var index = text.startIndex
-        if text[index] == "+" {
-            index = text.index(after: index)
-        }
-        while index != text.endIndex {
-            if !text[index].isNumber || !text[index].isASCII {
-                return false
-            }
-        }
-        return true
+        let numberRegEx = "(\\+?)([0-9]+)" //Check that number consisist only from digits
+        let numberPred = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
+        return numberPred.evaluate(with: text)
     }
 }

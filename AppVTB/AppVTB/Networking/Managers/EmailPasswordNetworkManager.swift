@@ -8,13 +8,21 @@
 
 import UIKit
 
-final class EmailPasswordNetworkManager: NetworkResponseHandler {
+protocol EmailBreachNetworkManager {
+    func getInfo(about email: String, completion: @escaping (_ email: EmailPasswordsAPIResponse?, _ error: String?) -> ())
+}
+
+final class EmailPasswordNetworkManager: NetworkResponseHandler, EmailBreachNetworkManager {
         
     let router = Router<EmailPasswordAPI>()
     
     func getInfo(about email: String, completion: @escaping (_ email: EmailPasswordsAPIResponse?, _ error: String?) -> ()) {
         router.request(.getBreachesWith(email: email), modelType: EmailPasswordsAPIResponse.self) { data, error in
-            completion(data, error)
+            if let error = error, error == NetworkResponse.notFound.rawValue {
+                completion([], nil)
+            } else {
+                completion(data, error)
+            }
         }
     }
 }

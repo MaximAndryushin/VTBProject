@@ -10,11 +10,11 @@ import UIKit
 
 
 // MARK: - NumberAPIResponse to DTO
-protocol ConverterNumberNetworkModelToDTO {
+protocol NumberNetworkModelToDTOConverter {
     func convert(number: NumberAPIModel) -> NumberDTO
 }
 
-final class ConverterNumberNetworkModel: ConverterNumberNetworkModelToDTO {
+final class NumberNetworkModelConverter: NumberNetworkModelToDTOConverter {
     func convert(number: NumberAPIModel) -> NumberDTO {
         return NumberDTO(valid: number.valid,
                          number: number.number,
@@ -31,11 +31,11 @@ final class ConverterNumberNetworkModel: ConverterNumberNetworkModelToDTO {
 
 
 // MARK: - BreachesAPIResponse to DTO
-protocol ConverterBreachNetworkModelToDTO {
+protocol BreachNetworkModelToDTOConverter {
     func convert(breach: BreachAPI) -> BreachDTO
 }
 
-final class ConverterBreachNetworkModel: ConverterBreachNetworkModelToDTO {
+final class BreachNetworkModelConverter: BreachNetworkModelToDTOConverter {
     func convert(breach: BreachAPI) -> BreachDTO {
         return BreachDTO(name: breach.name,
                          domain: breach.domain,
@@ -48,15 +48,15 @@ final class ConverterBreachNetworkModel: ConverterBreachNetworkModelToDTO {
 }
 
 // MARK: - EmailAPIResponse to DTO
-protocol ConverterEmailNetworkModelToDTO {
+protocol EmailNetworkModelToDTOConverter {
     func convert(email: EmailValidationAPIModel, breaches: EmailPasswordsAPIResponse) -> EmailDTO
 }
 
-final class ConverterEmailNetworkModel: ConverterEmailNetworkModelToDTO {
+final class EmailNetworkModelConverter: EmailNetworkModelToDTOConverter {
     
-    private let breachConverter: ConverterBreachNetworkModelToDTO
+    private let breachConverter: BreachNetworkModelToDTOConverter
     
-    init(breachConverter: ConverterBreachNetworkModelToDTO) {
+    init(breachConverter: BreachNetworkModelToDTOConverter) {
         self.breachConverter = breachConverter
     }
     

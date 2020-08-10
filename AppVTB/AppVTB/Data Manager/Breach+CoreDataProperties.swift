@@ -14,7 +14,7 @@ import CoreData
 extension Breach {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Breach> {
-        return NSFetchRequest<Breach>(entityName: "Breach")
+        return NSFetchRequest<Breach>(entityName: "\(Breach.self)")
     }
 
     @NSManaged public var addedDate: String?

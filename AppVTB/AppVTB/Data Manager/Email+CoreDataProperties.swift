@@ -2,7 +2,7 @@
 //  Email+CoreDataProperties.swift
 //  AppVTB
 //
-//  Created by Maxim Andryushin on 05.08.2020.
+//  Created by Maxim Andryushin on 07.08.2020.
 //  Copyright © 2020 Maxim Andryushin. All rights reserved.
 //
 //
@@ -14,7 +14,7 @@ import CoreData
 extension Email {
 
     @nonobjc public class func emailFetchRequest() -> NSFetchRequest<Email> {
-        return NSFetchRequest<Email>(entityName: "Email")
+        return NSFetchRequest<Email>(entityName: "\(Email.self)")
     }
 
     @NSManaged public var date: Date?
@@ -31,6 +31,7 @@ extension Email {
     @NSManaged public var role: Bool
     @NSManaged public var safeToSend: Bool
     @NSManaged public var user: String?
+    @NSManaged public var isRenewable: Bool
     @NSManaged public var breaches: NSSet?
 
 }

@@ -16,6 +16,7 @@
         <attribute name="isDisposable" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isFabricated" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isFree" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isRenewable" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isRetired" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isSpamList" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isValid" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -32,6 +33,7 @@
         <attribute name="countryName" optional="YES" attributeType="String"/>
         <attribute name="countryPrefix" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isRenewable" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lineType" optional="YES" attributeType="String"/>
         <attribute name="location" optional="YES" attributeType="String"/>
         <attribute name="number" optional="YES" attributeType="String"/>
@@ -39,7 +41,7 @@
     </entity>
     <elements>
         <element name="Breach" positionX="-55.953125" positionY="118.56640625" width="128" height="148"/>
-        <element name="Email" positionX="340.1328125" positionY="14.62109375" width="128" height="268"/>
-        <element name="PhoneNumber" positionX="137.37890625" positionY="14.80078125" width="128" height="178"/>
+        <element name="Email" positionX="340.1328125" positionY="14.62109375" width="128" height="283"/>
+        <element name="PhoneNumber" positionX="137.37890625" positionY="14.80078125" width="128" height="193"/>
     </elements>
 </model>

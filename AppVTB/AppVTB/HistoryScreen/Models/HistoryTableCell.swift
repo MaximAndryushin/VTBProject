@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryTableCell: UITableViewCell {
+final class HistoryTableCell: UITableViewCell {
     
     // MARK: - Constants
     

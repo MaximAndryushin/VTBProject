@@ -13,42 +13,50 @@ class RootViewController: UIViewController {
     private var current: UIViewController
     
     init() {
-        self.current = HistoryViewController()
+        self.current = HistoryViewController()//FavoritesAssembly.assembly()
 //        let networkManager1 = EmailValidationNetworkManager()
-//        networkManager1.getInfo(about: "m.andryushin@mail.ru") { (email, error) in
-//            if let error = error {
-//                print(error)
-//            }
-//
-//            if let email = email {
-//                print(email.result)
-//            }
-//        }
-//
 //        let networkManager2 = EmailPasswordNetworkManager()
-//        networkManager2.getInfo(about: "m.andryushin@mail.ru") { (email, error) in
+//        let emailNetworkConverter: EmailNetworkModelToDTOConverter = EmailNetworkModelConverter(breachConverter: BreachNetworkModelConverter())
+//        let emailDTOToQueryConverter: EmailDTOQueryConverter = EmailToQueryConverter()
+//        let emailDTOToCoreDataConverter: EmailDTODAOConverter = EmailConverter(converter: BreachConverter())
+//
+//        networkManager1.getInfo(about: "unlimimage@yandex.ru") { (email, error) in
 //            if let error = error {
 //                print(error)
 //            }
 //
 //            if let email = email {
-//                if email.count > 0 {
-//                    print(email)
-//                }
-//                else {
-//                    print("this email isn't found in any breaches")
+//                networkManager2.getInfo(about: "unlimimage@yandex.ru") { (breaches, error) in
+//                    if let error = error {
+//                        print(error)
+//                    }
+//                    if let breaches = breaches {
+//                        let emailDTO = emailNetworkConverter.convert(email: email, breaches: breaches)
+//                        let query = emailDTOToQueryConverter.convertToQuery(from: emailDTO)
+//                        let _ = emailDTOToCoreDataConverter.emailDTOToEmail(emailDTO)
+//                        DataManager.shared.saveContext()
+//                        print(query)
+//                    }
 //                }
 //            }
 //        }
-//
+
+        
+        
 //        let networkManager3 = NumberNetworkManager()
-//        networkManager3.getInfo(about: "79102382390") { (number, error) in
+//        let numberNetworkConverter: NumberNetworkModelToDTOConverter = NumberNetworkModelConverter()
+//        let numberDTOToCoreDataConverter: NumberDTODAOConverter = NumberConverter()
+//        let numberDTOToQueryConverter: NumberDTOQueryConverter = NumberToQueryConverter()
+//        networkManager3.getInfo(about: "78005553535") { (number, error) in
 //            if let error = error {
 //                print(error)
 //            }
 //
 //            if let number = number {
-//                print(number.carrier)
+//                let numberDTO = numberNetworkConverter.convert(number: number)
+//                let query = numberDTOToQueryConverter.convertToQuery(from: numberDTO)
+//                let _ = numberDTOToCoreDataConverter.numberDTOToPhoneNumber(numberDTO)
+//                DataManager.shared.saveContext()
 //            }
 //        }
         super.init(nibName: nil, bundle: nil)

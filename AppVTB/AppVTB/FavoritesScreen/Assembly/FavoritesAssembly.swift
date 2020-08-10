@@ -12,17 +12,18 @@ final class FavoritesAssembly {
     
     static func assembly() -> UIViewController {
         let view = FavoritesViewController()
-        let dataStore = FavoritesDataStore()
-        let presenter = FavoritesPresenter(dataStore: dataStore)
+        let presenterConverter = FavoritesDataConverter(numberConverter: NumberToQueryConverter(), emailConverter: EmailToQueryConverter())
+        let presenter = FavoritesPresenter(converter: presenterConverter, parser: EmailNumberParser())
         
         view.presenter = presenter
         presenter.view = view
-        
-        let interactor = FavoritesInteractor(dataManager: DataManager.shared)
+        let emailConverter = EmailConverter(converter: BreachConverter())
+        let networkManager = NetworkWorker(emailInfoManager: EmailValidationNetworkManager(), emailBreachManager: EmailPasswordNetworkManager(), numberManager: NumberNetworkManager(), emailNetworkConverter: EmailNetworkModelConverter(breachConverter: BreachNetworkModelConverter()), numberNetworkConverter: NumberNetworkModelConverter())
+        let interactor = FavoritesInteractor(dataManager: DataManager.shared, numberConverter: NumberConverter(), emailConverter: emailConverter, networkManager: networkManager)
         interactor.presenter = presenter
         presenter.interactor = interactor
         
-        let router = FavoritesRouter(view: view)
+        let router = FavoritesRouter()
         presenter.router = router
         
         return view
