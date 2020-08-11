@@ -15,10 +15,16 @@ protocol FavoritesInteractorInput {
 }
 
 protocol FavoritesRouterInput {
+    
+}
 
+protocol FavoritesPresenterUpdateLogic {
+    var current: Query? { get }
+    func update()
 }
 
 final class FavoritesPresenter {
+    
     
     //MARK: - Properties
     
@@ -27,7 +33,7 @@ final class FavoritesPresenter {
     var router: FavoritesRouterInput?
     private let converter: FavoritesDataConverterInput
     private let parser: Parser
-
+    
     
     // MARK: - Initializer
     
@@ -78,12 +84,13 @@ extension FavoritesPresenter: FavoritesInteractorOutput {
     }
     
     
-    func showError() {
-        
+    func showError(_ error: String) {
+        view?.showError(error)
     }
     
+    
     func infoLoaded(data: [Any]) {
-        let queries = data.map { object -> Query in
+        var queries = data.map { object -> Query in
             if let email = object as? EmailDTO {
                 return converter.createViewModelFrom(email: email)
             }
@@ -92,6 +99,45 @@ extension FavoritesPresenter: FavoritesInteractorOutput {
             }
             fatalError()
         }
-        view?.updateView(viewModels: queries)
+        queries.sort{ $0.getDate() < $1.getDate() }
+        self.view?.updateView(viewModels: queries)
+        self.update()
     }
+}
+
+
+//MARK: - Update logic
+
+extension FavoritesPresenter: FavoritesPresenterUpdateLogic {
+    
+    //MARK: - Constants
+    
+    enum Locals {
+        static let tenSec: Double = 10
+        static let oneMin: Double = 60
+        static let threeMin: Double = 3 * 60
+        static let fiveMin: Double = 5 * 60
+        static let tenMin: Double = 10 * 60
+    }
+    
+    //MARK: - Properties
+    
+    var current: Query? {
+        return view?.getFirst()
+    }
+    
+    //MARK: - Methods
+    
+    func update() {
+//        if let model = current {
+//            let queue = DispatchQueue.global(qos: .utility)
+//            let interval = max(model.getRawDate().addingTimeInterval(Locals.threeMin).timeIntervalSinceNow, TimeInterval(0))
+//            queue.asyncAfter(deadline: DispatchTime.now() + interval) {
+//                if let cur = self.current, cur == model {
+//                    self.interactor?.fetchData(cur.getName(), type: cur.getType())
+//                }
+//            }
+//        }
+    }
+    
 }

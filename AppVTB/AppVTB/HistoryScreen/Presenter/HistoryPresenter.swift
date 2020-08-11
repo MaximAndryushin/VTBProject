@@ -28,7 +28,7 @@ final class HistoryPresenter: HistoryPresentationLogic {
         var queries = response.queries
         queries = queries.map { query in
             var temp = query
-            temp.filterDesription(filter: { key in return Locals.labelsViewModel.contains(key) })
+            temp.filterDesription{ key in return Locals.labelsViewModel.contains(key) }
             return temp
         }
         viewController?.displayQueries(viewModel: queries)

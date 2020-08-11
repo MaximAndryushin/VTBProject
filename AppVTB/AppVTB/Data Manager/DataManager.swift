@@ -165,18 +165,14 @@ extension DataManager: PhoneEmailFavoritesDataManager {
     
     func addToFavoritesNumber(_ numberDTO: NumberDTO) {
         var number = existsNumber(numberDTO.number)
-        if number == nil {
-            number = numberConverter.numberDTOToPhoneNumber(numberDTO)
-        }
+        numberConverter.update(&number, numberDTO: numberDTO)
         number!.isRenewable = true
         saveContext()
     }
     
     func addToFavoritesEmail(_ emailDTO: EmailDTO) {
         var email = existsEmail(emailDTO.email)
-        if email == nil {
-            email = emailConverter.emailDTOToEmail(emailDTO)
-        }
+        emailConverter.update(&email, email: emailDTO)
         email!.isRenewable = true
         saveContext()
     }

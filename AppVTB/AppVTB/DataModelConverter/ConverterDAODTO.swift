@@ -25,9 +25,26 @@ struct NumberDTO {
 protocol NumberDTODAOConverter {
     func phoneNumberToNumberDTO(_ number: PhoneNumber) -> NumberDTO
     func numberDTOToPhoneNumber(_ number: NumberDTO) -> PhoneNumber
+    func update(_ number: inout PhoneNumber?, numberDTO: NumberDTO)
 }
 
 final class NumberConverter: NumberDTODAOConverter {
+    
+    func update(_ number: inout PhoneNumber?, numberDTO: NumberDTO) {
+        if number == nil {
+            number = PhoneNumber()
+        }
+        number!.carrier = numberDTO.carrier
+        number!.countryCode = numberDTO.countryCode
+        number!.countryName = numberDTO.countryName
+        number!.countryPrefix = numberDTO.countryPrefix
+        number!.date = numberDTO.date
+        number!.lineType = numberDTO.lineType
+        number!.location = numberDTO.location
+        number!.number = numberDTO.number
+        number!.valid = numberDTO.valid
+    }
+    
     func phoneNumberToNumberDTO(_ number: PhoneNumber) -> NumberDTO {
         return NumberDTO(
             valid: number.valid,
@@ -43,17 +60,9 @@ final class NumberConverter: NumberDTODAOConverter {
     }
     
     func numberDTOToPhoneNumber(_ number: NumberDTO) -> PhoneNumber {
-        let numberModel = PhoneNumber()
-        numberModel.carrier = number.carrier
-        numberModel.countryCode = number.countryCode
-        numberModel.countryName = number.countryName
-        numberModel.countryPrefix = number.countryPrefix
-        numberModel.date = number.date
-        numberModel.lineType = number.lineType
-        numberModel.location = number.location
-        numberModel.number = number.number
-        numberModel.valid = number.valid
-        return numberModel
+        var numberModel: PhoneNumber?
+        update(&numberModel, numberDTO: number)
+        return numberModel!
     }
     
 }
@@ -128,14 +137,43 @@ struct EmailDTO {
 protocol EmailDTODAOConverter {
     func emailToEmailDTO(_ email: Email) -> EmailDTO
     func emailDTOToEmail(_ email: EmailDTO) -> Email
+    func update(_ emailModel: inout Email?, email: EmailDTO)
 }
 
 final class EmailConverter: EmailDTODAOConverter {
     
+    //MARK: - Properties
+    
     let breachConverter: BreachDTODAOConverter
+    
     
     init(converter: BreachDTODAOConverter) {
         self.breachConverter = converter
+    }
+    
+    
+    //MARK: - Methods
+    
+    func update(_ emailModel: inout Email?, email: EmailDTO) {
+        if emailModel == nil {
+            emailModel = Email()
+        }
+        emailModel!.date = email.date
+        emailModel!.user = email.user
+        emailModel!.domain = email.domain
+        emailModel!.role = email.role
+        emailModel!.safeToSend = email.safeToSend
+        emailModel!.email = email.email
+        emailModel!.isDisposable = email.isDisposable
+        emailModel!.isValid = email.isValid
+        emailModel!.isFabricated = email.isFabricated
+        emailModel!.isFree = email.isFree
+        emailModel!.isRetired = email.isRetired
+        emailModel!.isSpamList = email.isSpamList
+        emailModel!.isVerified = email.isVerified
+        emailModel!.isValid = email.isValid
+        emailModel!.reason = email.reason
+        emailModel!.breaches = NSSet(array: email.breaches.map{ return breachConverter.breachDTOToBreach($0) })
     }
     
     func emailToEmailDTO(_ email: Email) -> EmailDTO {
@@ -159,24 +197,9 @@ final class EmailConverter: EmailDTODAOConverter {
     }
     
     func emailDTOToEmail(_ email: EmailDTO) -> Email {
-        let emailModel = Email()
-        emailModel.date = email.date
-        emailModel.user = email.user
-        emailModel.domain = email.domain
-        emailModel.role = email.role
-        emailModel.safeToSend = email.safeToSend
-        emailModel.email = email.email
-        emailModel.isDisposable = email.isDisposable
-        emailModel.isValid = email.isValid
-        emailModel.isFabricated = email.isFabricated
-        emailModel.isFree = email.isFree
-        emailModel.isRetired = email.isRetired
-        emailModel.isSpamList = email.isSpamList
-        emailModel.isVerified = email.isVerified
-        emailModel.isValid = email.isValid
-        emailModel.reason = email.reason
-        emailModel.breaches = NSSet(array: email.breaches.map{ return breachConverter.breachDTOToBreach($0) })
-        return emailModel
+        var emailModel: Email?
+        update(&emailModel, email: email)
+        return emailModel!
     }
 }
 

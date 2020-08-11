@@ -12,6 +12,8 @@ protocol FavoritesViewInput: AnyObject {
     func updateView(viewModels: [Query])
     func showAlert();
     func appendViewModel(viewModel: Query)
+    func showError(_ errorMessage: String)
+    func getFirst() -> Query?
 }
 
 protocol FavoritesViewOutput {
@@ -37,11 +39,12 @@ final class FavoritesViewController: UIViewController {
         static let addTitle = "Add"
         static let cancelTitle = "Cancel"
         static let placeholder = "Enter email or phone number"
+        static let errorTitle = "ERROR"
     }
     
     //MARK: - Properties
     
-    var presenter: FavoritesViewOutput?
+    var presenter: (FavoritesViewOutput & FavoritesPresenterUpdateLogic)?
     private var favoritesLabel: UILabel!
     private var tableView: UITableView!
     private var addButton: UIButton!
@@ -125,19 +128,46 @@ final class FavoritesViewController: UIViewController {
 extension FavoritesViewController: FavoritesViewInput {
     
     
+    func getFirst() -> Query? {
+        return cellModels.first
+    }
+    
+    
+    func showError(_ errorMessage: String) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: Locals.errorTitle, message: errorMessage, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel) { (_) in })
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    private func deleteViewModel(_ name: String) {
+        let id = cellModels.firstIndex{ return $0.getName() == name }
+        if let index = id {
+            cellModels.remove(at: index)
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+            self.tableView.endUpdates()
+        }
+    }
+    
     func appendViewModel(viewModel: Query) {
         DispatchQueue.main.async {
+            self.deleteViewModel(viewModel.getName())
             self.cellModels.append(viewModel)
             self.tableView.beginUpdates()
             self.tableView.insertRows(at: [IndexPath(row: self.cellModels.count - 1, section: 0)], with: .automatic)
             self.tableView.endUpdates()
+            self.presenter?.update()
         }
     }
     
     
     func updateView(viewModels: [Query]) {
-        cellModels = viewModels
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.cellModels = viewModels
+            self.tableView.reloadData()
+        }
     }
     
     func showAlert() {

@@ -12,14 +12,14 @@ import UIKit
 // MARK: - Email API
 
 protocol EmailNetworkWorker {
-    func getEmail(_ name: String, _ completion: @escaping (EmailDTO) -> ())
+    func getEmail(_ name: String, _ completion: @escaping (EmailDTO?, String?) -> ())
 }
 
 
 // MARK: - Phone Number API
 
 protocol NumberNetworkWorker {
-    func getNumber(_ name: String, _ completion: @escaping (NumberDTO) -> ())
+    func getNumber(_ name: String, _ completion: @escaping (NumberDTO?, String?) -> ())
 }
 
 
@@ -57,20 +57,20 @@ final class NetworkWorker {
 
 extension NetworkWorker: EmailNetworkWorker {
     
-    func getEmail(_ name: String, _ completion: @escaping (EmailDTO) -> ()) {
+    func getEmail(_ name: String, _ completion: @escaping (EmailDTO?, String?) -> ()) {
         emailInfoManager.getInfo(about: name) { (email, error) in
             if let error = error {
-                print(error)
+                completion(nil, error)
             }
             
             if let email = email {
                 self.emailBreachManager.getInfo(about: name) { (breaches, error) in
                     if let error = error {
-                        print(error)
+                        completion(nil, error)
                     }
                     if let breaches = breaches {
                         let emailDTO = self.emailNetworkConverter.convert(email: email, breaches: breaches)
-                        completion(emailDTO)
+                        completion(emailDTO, nil)
                     }
                 }
             }
@@ -82,14 +82,14 @@ extension NetworkWorker: EmailNetworkWorker {
 
 extension NetworkWorker: NumberNetworkWorker {
     
-    func getNumber(_ name: String, _ completion: @escaping (NumberDTO) -> ()) {
+    func getNumber(_ name: String, _ completion: @escaping (NumberDTO?, String?) -> ()) {
         numberManager.getInfo(about: name) { (number, error) in
             if let error = error {
-                print(error)
+                completion(nil, error)
             }
             if let number = number {
                 let numberDTO = self.numberNetworkConverter.convert(number: number)
-                completion(numberDTO)
+                completion(numberDTO, nil)
             }
         }
     }

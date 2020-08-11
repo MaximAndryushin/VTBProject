@@ -31,7 +31,7 @@ enum History {
 
 //MARK: - QueryModel(model HistoryTableViewCell)
 
-struct Query: Codable {
+struct Query: Codable, Equatable {
     
     // MARK: - Properties
     
@@ -62,6 +62,10 @@ struct Query: Codable {
     
     func getType() -> TypeOfQuery {
         return type
+    }
+    
+    func getRawDate() -> Date {
+        return date
     }
     
     func getDate() -> String {

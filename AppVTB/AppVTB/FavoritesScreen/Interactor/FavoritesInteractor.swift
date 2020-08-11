@@ -10,12 +10,16 @@ import UIKit
 
 protocol FavoritesInteractorOutput: AnyObject {
     func infoLoaded(data: [Any])
-    func showError()
+    func showError(_ error: String)
     func appendToTable(object: Any)
 }
 
 class FavoritesInteractor {
     
+    //MARK: - Constants
+    enum Locals {
+        static let errorMessage = "Wrong input format \n Enter number(+79102382390)/email"
+    }
     
     //MARK: - Properties
     
@@ -43,17 +47,27 @@ extension FavoritesInteractor: FavoritesInteractorInput {
     func fetchData(_ name: String, type: TypeOfQuery) {
         switch type {
         case .email:
-            networkManager.getEmail(name) { emailDTO in
-                self.dataManager.addToFavoritesEmail(emailDTO)
-                self.presenter?.appendToTable(object: emailDTO)
+            networkManager.getEmail(name) { emailDTO, error in
+                if let error = error {
+                    self.presenter?.showError(error)
+                }
+                if let email = emailDTO {
+                    self.dataManager.addToFavoritesEmail(email)
+                    self.presenter?.appendToTable(object: email)
+                }
             }
         case .number:
-            networkManager.getNumber(name) { numberDTO in
-                self.dataManager.addToFavoritesNumber(numberDTO)
-                self.presenter?.appendToTable(object: numberDTO)
+            networkManager.getNumber(name) { numberDTO, error in
+                if let error = error {
+                    self.presenter?.showError(error)
+                }
+                if let number = numberDTO {
+                    self.dataManager.addToFavoritesNumber(number)
+                    self.presenter?.appendToTable(object: number)
+                }
             }
         default:
-            presenter?.showError()
+            presenter?.showError(Locals.errorMessage)
         }
     }
     
