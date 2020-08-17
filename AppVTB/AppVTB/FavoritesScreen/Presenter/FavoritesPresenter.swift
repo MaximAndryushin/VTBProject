@@ -15,11 +15,11 @@ protocol FavoritesInteractorInput {
 }
 
 protocol FavoritesRouterInput {
-    
+    func showDetailedView(viewModel: QueryViewModel)
 }
 
 protocol FavoritesPresenterUpdateLogic {
-    var current: Query? { get }
+    var current: QueryViewModel? { get }
     func update()
 }
 
@@ -31,13 +31,13 @@ final class FavoritesPresenter {
     weak var view: FavoritesViewInput?
     var interactor: FavoritesInteractorInput?
     var router: FavoritesRouterInput?
-    private let converter: FavoritesDataConverterInput
+    private let converter: DataConverterInput
     private let parser: Parser
     
     
     // MARK: - Initializer
     
-    init(converter: FavoritesDataConverterInput, parser: Parser) {
+    init(converter: DataConverterInput, parser: Parser) {
         self.converter = converter
         self.parser = parser
     }
@@ -49,6 +49,11 @@ final class FavoritesPresenter {
 
 extension FavoritesPresenter: FavoritesViewOutput {
     
+    func showDetailedView(viewModel: QueryViewModel) {
+        router?.showDetailedView(viewModel: viewModel)
+    }
+    
+    
     func loadData() {
         interactor?.getData()
     }
@@ -57,7 +62,7 @@ extension FavoritesPresenter: FavoritesViewOutput {
         view?.showAlert()
     }
     
-    func delete(query: Query) {
+    func delete(query: QueryViewModel) {
         interactor?.delete(name: query.getName(), type: query.getType())
     }
     
@@ -73,7 +78,7 @@ extension FavoritesPresenter: FavoritesViewOutput {
 extension FavoritesPresenter: FavoritesInteractorOutput {
     
     func appendToTable(object: Any) {
-        var viewModel: Query?
+        var viewModel: QueryViewModel?
         if let email = object as? EmailDTO {
             viewModel = converter.createViewModelFrom(email: email)
         }
@@ -90,14 +95,15 @@ extension FavoritesPresenter: FavoritesInteractorOutput {
     
     
     func infoLoaded(data: [Any]) {
-        var queries = data.map { object -> Query in
+        var queries = data.map { object -> QueryViewModel in
             if let email = object as? EmailDTO {
                 return converter.createViewModelFrom(email: email)
-            }
-            if let number = object as? NumberDTO {
+            } else if let number = object as? NumberDTO {
                 return converter.createViewModelFrom(number: number)
+            } else {
+                self.view?.showError("HMMMMMMM")
+                return QueryViewModel()
             }
-            fatalError()
         }
         queries.sort{ $0.getDate() < $1.getDate() }
         self.view?.updateView(viewModels: queries)
@@ -122,22 +128,29 @@ extension FavoritesPresenter: FavoritesPresenterUpdateLogic {
     
     //MARK: - Properties
     
-    var current: Query? {
+    var current: QueryViewModel? {
         return view?.getFirst()
     }
     
     //MARK: - Methods
     
     func update() {
-//        if let model = current {
-//            let queue = DispatchQueue.global(qos: .utility)
-//            let interval = max(model.getRawDate().addingTimeInterval(Locals.threeMin).timeIntervalSinceNow, TimeInterval(0))
-//            queue.asyncAfter(deadline: DispatchTime.now() + interval) {
-//                if let cur = self.current, cur == model {
-//                    self.interactor?.fetchData(cur.getName(), type: cur.getType())
-//                }
+        if let model = current {
+            let queue = DispatchQueue.global(qos: .utility)
+            let item = DispatchWorkItem {
+                if let cur = self.current, cur == model {
+                    self.interactor?.fetchData(cur.getName(), type: cur.getType())
+                }
+            }
+            let interval = max(model.getRawDate().addingTimeInterval(Locals.tenSec).timeIntervalSinceNow, TimeInterval(0))
+            queue.asyncAfter(deadline: DispatchTime.now() + interval, execute: item)
+            
+            
+            //to fix this shiiiiiiiit
+//            item.notify(queue: queue) {
+//                self.update()
 //            }
-//        }
+        }
     }
     
 }

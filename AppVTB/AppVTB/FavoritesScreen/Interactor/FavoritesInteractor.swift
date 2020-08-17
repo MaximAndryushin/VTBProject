@@ -25,16 +25,12 @@ class FavoritesInteractor {
     
     weak var presenter: FavoritesInteractorOutput?
     private let dataManager: PhoneEmailFavoritesDataManager
-    private let numberConverter: NumberDTODAOConverter
-    private let emailConverter: EmailDTODAOConverter
     private let networkManager: (EmailNetworkWorker & NumberNetworkWorker)
     
     //MARK: - Initializer
     
-    init(dataManager: PhoneEmailFavoritesDataManager, numberConverter: NumberDTODAOConverter, emailConverter: EmailDTODAOConverter, networkManager: NetworkWorker) {
+    init(dataManager: PhoneEmailFavoritesDataManager, networkManager: NetworkWorker) {
         self.dataManager = dataManager
-        self.numberConverter = numberConverter
-        self.emailConverter = emailConverter
         self.networkManager = networkManager
     }
 }
@@ -73,8 +69,8 @@ extension FavoritesInteractor: FavoritesInteractorInput {
     
     
     func getData() {
-        var queries: [Any] = dataManager.getFavoritesEmails()?.map{ return emailConverter.emailToEmailDTO($0) } ?? []
-        queries.append(contentsOf: dataManager.getFavoritesNumbers()?.map{ return numberConverter.phoneNumberToNumberDTO($0) } ?? [])
+        var queries: [Any] = dataManager.getFavoritesEmails() ?? []
+        queries.append(contentsOf: dataManager.getFavoritesNumbers() ?? [])
         presenter?.infoLoaded(data: queries)
     }
     

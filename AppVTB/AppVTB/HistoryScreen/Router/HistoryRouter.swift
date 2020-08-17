@@ -8,27 +8,25 @@
 
 import UIKit
 
-@objc protocol HistoryRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+protocol HistoryRoutingLogic {
+    func showDetailedView(_ name: String)
 }
 
-protocol HistoryDataPassing {
-    var dataStore: HistoryDataStore? { get }
-}
-
-final class HistoryRouter: NSObject, HistoryRoutingLogic, HistoryDataPassing {
+final class HistoryRouter {
+    
     weak var viewController: HistoryViewController?
-    var dataStore: HistoryDataStore?
+    weak var dataStore: HistoryDataStore?
+}
+
+
+extension HistoryRouter: HistoryRoutingLogic {
     
-    // MARK: Navigation
+    func showDetailedView(_ name: String) {
+        DispatchQueue.main.async {
+            let first = self.dataStore?.queries.first(where: { $0.getName() == name })
+            self.viewController?.present(DetailedViewController(viewModel: first!), animated: true, completion: nil)
+        }
+    }
     
-    //func navigateToSomewhere(source: HistoryViewController, destination: SomewhereViewController) {
-    //  source.show(destination, sender: nil)
-    //}
     
-    // MARK: Passing data
-    
-    //func passDataToSomewhere(source: HistoryDataStore, destination: inout SomewhereDataStore) {
-    //  destination.name = source.name
-    //}
 }

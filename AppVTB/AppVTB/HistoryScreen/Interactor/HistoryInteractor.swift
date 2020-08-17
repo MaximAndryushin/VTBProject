@@ -9,13 +9,15 @@
 import UIKit
 
 // MARK: - CleanSwift protocols
+
 protocol HistoryBusinessLogic {
     func getQueries(request: History.ShowQueries.Request)
-    func deleteQuery(query: Query)
+    func deleteQuery(query: QueryViewModel)
+    func updateInfo()
 }
 
-protocol HistoryDataStore {
-    var queries: [Query] { get }
+protocol HistoryDataStore: AnyObject {
+    var queries: [QueryViewModel] { get }
 }
 
 // MARK: - DataManager protocol
@@ -27,13 +29,14 @@ protocol DataWorker {
 }
 
 // MARK: - Interactor
-final class HistoryInteractor: HistoryBusinessLogic, HistoryDataStore {
+
+final class HistoryInteractor: HistoryDataStore {
     
     
     //MARK: - Properties
     
     var presenter: HistoryPresentationLogic?
-    internal var queries: [Query]
+    internal var queries: [QueryViewModel]
     private let worker: DataWorker
     private let numberConverter: NumberDTOQueryConverter
     private let emailConverter: EmailDTOQueryConverter
@@ -46,16 +49,17 @@ final class HistoryInteractor: HistoryBusinessLogic, HistoryDataStore {
         self.numberConverter = numberConverter
         self.emailConverter = emailConverter
         self.queries = []
-        initialSetup()
+        updateInfo()
     }
     
-    private func initialSetup() {
-        queries = worker.getNumbers().map{ return numberConverter.convertToQuery(from: $0)}
-        queries.append(contentsOf: worker.getEmails().map{ return emailConverter.convertToQuery(from: $0)})
+}
+
+extension HistoryInteractor: HistoryBusinessLogic {
+    
+    func updateInfo() {
+        queries = worker.getNumbers().map{ return numberConverter.convertToQuery(from: $0) }
+        queries.append(contentsOf: worker.getEmails().map{ return emailConverter.convertToQuery(from: $0)} )
     }
-    
-    
-    // MARK: - Methods
     
     func getQueries(request: History.ShowQueries.Request) {
         let response = queries.filter { (query) -> Bool in
@@ -69,7 +73,7 @@ final class HistoryInteractor: HistoryBusinessLogic, HistoryDataStore {
         presenter?.presentQueries(response: History.ShowQueries.Response(queries: response))
     }
     
-    func deleteQuery(query: Query) {
+    func deleteQuery(query: QueryViewModel) {
         queries.removeAll(where: { object in return query.getName() == object.getName() })
         if query.getType() == .email {
             worker.deleteEmail(query.getName())
@@ -77,5 +81,4 @@ final class HistoryInteractor: HistoryBusinessLogic, HistoryDataStore {
             worker.deleteNumber(query.getName())
         }
     }
-    
 }

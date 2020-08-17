@@ -9,28 +9,28 @@
 import UIKit
 
 protocol FavoritesViewInput: AnyObject {
-    func updateView(viewModels: [Query])
+    func updateView(viewModels: [QueryViewModel])
     func showAlert();
-    func appendViewModel(viewModel: Query)
+    func appendViewModel(viewModel: QueryViewModel)
     func showError(_ errorMessage: String)
-    func getFirst() -> Query?
+    func getFirst() -> QueryViewModel?
 }
 
 protocol FavoritesViewOutput {
     func loadData()
     func addButtonClicked()
-    func delete(query: Query)
+    func delete(query: QueryViewModel)
     func addNewData(_ name: String)
+    func showDetailedView(viewModel: QueryViewModel)
 }
 
 final class FavoritesViewController: UIViewController {
     
     //MARK: - Constants
     
-    enum Locals {
+    private enum Locals {
         static let title = "Current state of tracked data"
         static let buttonTitle = "Add new data to track"
-        static let titleSize: CGFloat = 26
         static let offset: CGFloat = 5
         static let cornerRadiusButton: CGFloat = 15
         static let cellID = HistoryViewController.Locals.cellID
@@ -48,7 +48,8 @@ final class FavoritesViewController: UIViewController {
     private var favoritesLabel: UILabel!
     private var tableView: UITableView!
     private var addButton: UIButton!
-    private var cellModels: [Query] = []
+    private var stackView: UIStackView!
+    private var cellModels: [QueryViewModel] = []
     
     
     //MARK: - Life Cycle
@@ -64,13 +65,12 @@ final class FavoritesViewController: UIViewController {
     }
     
     
-    //MARK: - Setup
+    //MARK: - Configure SubViews
     
     private func configureLabel() {
-        favoritesLabel = UILabel()
-        favoritesLabel.text = Locals.title
-        favoritesLabel.font = .boldSystemFont(ofSize: Locals.titleSize)
-        favoritesLabel.textAlignment = .center
+        
+        favoritesLabel = UILabel(text: Locals.title, font: Constants.titleFont, alignment: .center)
+        
         view.addSubview(favoritesLabel)
         favoritesLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -128,10 +128,9 @@ final class FavoritesViewController: UIViewController {
 extension FavoritesViewController: FavoritesViewInput {
     
     
-    func getFirst() -> Query? {
+    func getFirst() -> QueryViewModel? {
         return cellModels.first
     }
-    
     
     func showError(_ errorMessage: String) {
         DispatchQueue.main.async {
@@ -151,7 +150,7 @@ extension FavoritesViewController: FavoritesViewInput {
         }
     }
     
-    func appendViewModel(viewModel: Query) {
+    func appendViewModel(viewModel: QueryViewModel) {
         DispatchQueue.main.async {
             self.deleteViewModel(viewModel.getName())
             self.cellModels.append(viewModel)
@@ -163,11 +162,9 @@ extension FavoritesViewController: FavoritesViewInput {
     }
     
     
-    func updateView(viewModels: [Query]) {
-        DispatchQueue.main.async {
-            self.cellModels = viewModels
-            self.tableView.reloadData()
-        }
+    func updateView(viewModels: [QueryViewModel]) {
+        self.cellModels = viewModels
+        self.tableView.reloadData()
     }
     
     func showAlert() {
@@ -207,6 +204,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        presenter?.showDetailedView(viewModel: cellModels[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

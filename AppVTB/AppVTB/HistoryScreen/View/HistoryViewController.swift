@@ -8,29 +8,24 @@
 
 import UIKit
 
-protocol HistoryDisplayLogic: class {
-    func displayQueries(viewModel: [Query])
+protocol HistoryDisplayLogic: AnyObject {
+    func displayQueries(viewModel: [QueryViewModel])
 }
 
 final class HistoryViewController: UIViewController {
     
     var interactor: HistoryBusinessLogic?
-    var router: (NSObjectProtocol & HistoryRoutingLogic & HistoryDataPassing)?
+    var router: HistoryRoutingLogic?
     
     // MARK: - Constants
     
     enum Locals {
         static let cellID = "cell"
         static let titleHeader = "History"
-        static let fontTitle: CGFloat = 34
         static let cellHeight: CGFloat = 50
         static let offset: CGFloat = 5
-        static let positionOfTableX: CGFloat = 0
-        static let positionOfTableY: CGFloat = 0
-        static let dropDownHeight: CGFloat = 40
         static let filterOptions = ["All", "Emails", "Phone Numbers"]
         static let sortingOptions = ["Newest", "Oldest"]
-
     }
     
     
@@ -39,7 +34,7 @@ final class HistoryViewController: UIViewController {
     private var tableView: UITableView!
     private var filterSegmentedControl: UISegmentedControl!
     private var sortingSegmentedControl: UISegmentedControl!
-    private var cellModels: [Query] = [] {
+    private var cellModels: [QueryViewModel] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -57,11 +52,11 @@ final class HistoryViewController: UIViewController {
         setup()
     }
     
-    // MARK: - Setup
+    // MARK: - Setup relations (Clean Swift Architecture)
     
     private func setup() {
         let viewController = self
-        let historyWorker = HistoryWorker(dataManager: DataManager.shared, numberConverter: NumberConverter(), emailConverter: EmailConverter(converter: BreachConverter()))
+        let historyWorker = HistoryWorker(dataManager: DataManager.shared)
         let interactor = HistoryInteractor(worker: historyWorker, numberConverter: NumberToQueryConverter(), emailConverter: EmailToQueryConverter())
         let presenter = HistoryPresenter()
         let router = HistoryRouter()
@@ -72,6 +67,8 @@ final class HistoryViewController: UIViewController {
         router.viewController = viewController
         router.dataStore = interactor
     }
+    
+    // MARK: - Configure SubViews
     
     private func configureTableView() {
         tableView = UITableView()
@@ -115,11 +112,18 @@ final class HistoryViewController: UIViewController {
         
         filterSegmentedControl = configureSegmentedControl(items: Locals.filterOptions, action: #selector(indexOfFilterChanged(_:)))
         sortingSegmentedControl = configureSegmentedControl(items: Locals.sortingOptions, action: #selector(indexOfSortingChanged(_:)))
+        
         NSLayoutConstraint.activate([
             filterSegmentedControl.topAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.topAnchor),
             sortingSegmentedControl.topAnchor.constraint(equalTo: filterSegmentedControl.bottomAnchor)
         ])
+        
         configureTableView()
+        loadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        interactor?.updateInfo()
         loadData()
     }
     
@@ -127,7 +131,7 @@ final class HistoryViewController: UIViewController {
     // MARK: - loadData
     
     func loadData() {
-        let isAscending = (sortingSegmentedControl.selectedSegmentIndex == 0 ? false : true)
+        let isAscending = sortingSegmentedControl.selectedSegmentIndex != 0
         let request = History.ShowQueries.Request(type: nil, isAscending: isAscending)
         interactor?.getQueries(request: request)
     }
@@ -135,7 +139,7 @@ final class HistoryViewController: UIViewController {
     //MARK: - FilterReaction
     
     @objc private func indexOfFilterChanged(_ sender: UISegmentedControl) {
-        let isAscending = (sortingSegmentedControl.selectedSegmentIndex == 0 ? false : true)
+        let isAscending = sortingSegmentedControl.selectedSegmentIndex != 0
         switch sender.selectedSegmentIndex {
         case 0:
             loadData()
@@ -158,7 +162,7 @@ final class HistoryViewController: UIViewController {
         if filterSegmentedControl.selectedSegmentIndex > 0 {
             type = (filterSegmentedControl.selectedSegmentIndex == 1 ? .email : .number)
         }
-        switch sender.selectedSegmentIndex{
+        switch sender.selectedSegmentIndex {
         case 0:
             let request = History.ShowQueries.Request(type: type, isAscending: false)
             interactor?.getQueries(request: request)
@@ -177,7 +181,7 @@ final class HistoryViewController: UIViewController {
 
 extension HistoryViewController: HistoryDisplayLogic {
     
-    func displayQueries(viewModel: [Query]) {
+    func displayQueries(viewModel: [QueryViewModel]) {
         cellModels = viewModel
     }
 }
@@ -202,6 +206,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        router?.showDetailedView(cellModels[indexPath.row].getName())
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

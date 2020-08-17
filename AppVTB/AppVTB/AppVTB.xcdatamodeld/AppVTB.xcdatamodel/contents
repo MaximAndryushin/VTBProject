@@ -4,7 +4,7 @@
         <attribute name="addedDate" optional="YES" attributeType="String"/>
         <attribute name="domain" optional="YES" attributeType="String"/>
         <attribute name="info" optional="YES" attributeType="String"/>
-        <attribute name="logoPath" optional="YES" attributeType="String"/>
+        <attribute name="logo" optional="YES" attributeType="Binary"/>
         <attribute name="modifiedDate" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="emails" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Email" inverseName="breaches" inverseEntity="Email"/>

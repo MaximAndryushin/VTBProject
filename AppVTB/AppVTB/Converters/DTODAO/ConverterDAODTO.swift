@@ -9,6 +9,7 @@
 import Foundation
 
 // MARK: - NumberDTO
+
 struct NumberDTO {
     let valid: Bool
     let number: String
@@ -22,6 +23,7 @@ struct NumberDTO {
 }
 
 // MARK: - Phone Number DTO Converter
+
 protocol NumberDTODAOConverter {
     func phoneNumberToNumberDTO(_ number: PhoneNumber) -> NumberDTO
     func numberDTOToPhoneNumber(_ number: NumberDTO) -> PhoneNumber
@@ -69,13 +71,14 @@ final class NumberConverter: NumberDTODAOConverter {
 
 
 //MARK: - Breach DTO
-struct BreachDTO: Hashable {
+
+struct BreachDTO: Hashable, Codable {
     let name: String
     let domain: String
     let addedDate: String
     let modifiedDate: String
     let info: String
-    let logoPath: String
+    let logo: Data
 }
 
 
@@ -94,7 +97,7 @@ final class BreachConverter: BreachDTODAOConverter {
             addedDate: breach.addedDate!,
             modifiedDate: breach.modifiedDate!,
             info: breach.info!,
-            logoPath: breach.logoPath!
+            logo: breach.logo!
         )
     }
     
@@ -103,7 +106,7 @@ final class BreachConverter: BreachDTODAOConverter {
         breachModel.addedDate = breach.addedDate
         breachModel.domain = breach.domain
         breachModel.info = breach.info
-        breachModel.logoPath = breach.logoPath
+        breachModel.logo = breach.logo
         breachModel.modifiedDate = breach.modifiedDate
         breachModel.name = breach.name
         return breachModel

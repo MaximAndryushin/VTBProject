@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol FavoritesDataConverterInput {
-    func createViewModelFrom(number: NumberDTO) -> Query
-    func createViewModelFrom(email: EmailDTO) -> Query
+protocol DataConverterInput {
+    func createViewModelFrom(number: NumberDTO) -> QueryViewModel
+    func createViewModelFrom(email: EmailDTO) -> QueryViewModel
 }
 
-final class FavoritesDataConverter {
+final class DataToViewModelConverter {
     private let numberConverter: NumberDTOQueryConverter
     private let emailConverter: EmailDTOQueryConverter
     
@@ -24,13 +24,13 @@ final class FavoritesDataConverter {
 }
 
 
-extension FavoritesDataConverter: FavoritesDataConverterInput {
+extension DataToViewModelConverter: DataConverterInput {
     
-    func createViewModelFrom(number: NumberDTO) -> Query {
+    func createViewModelFrom(number: NumberDTO) -> QueryViewModel {
         return numberConverter.convertToQuery(from: number)
     }
     
-    func createViewModelFrom(email: EmailDTO) -> Query {
+    func createViewModelFrom(email: EmailDTO) -> QueryViewModel {
         return emailConverter.convertToQuery(from: email)
     }
     

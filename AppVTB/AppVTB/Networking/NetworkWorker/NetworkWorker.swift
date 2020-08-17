@@ -55,6 +55,9 @@ final class NetworkWorker {
     }
 }
 
+
+// MARK: - EmailNetworkWorker
+
 extension NetworkWorker: EmailNetworkWorker {
     
     func getEmail(_ name: String, _ completion: @escaping (EmailDTO?, String?) -> ()) {
@@ -79,6 +82,9 @@ extension NetworkWorker: EmailNetworkWorker {
     
     
 }
+
+
+// MARK: - NumberNetworkWorker
 
 extension NetworkWorker: NumberNetworkWorker {
     

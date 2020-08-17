@@ -2,7 +2,7 @@
 //  Breach+CoreDataProperties.swift
 //  AppVTB
 //
-//  Created by Maxim Andryushin on 05.08.2020.
+//  Created by Maxim Andryushin on 17.08.2020.
 //  Copyright © 2020 Maxim Andryushin. All rights reserved.
 //
 //
@@ -14,13 +14,13 @@ import CoreData
 extension Breach {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Breach> {
-        return NSFetchRequest<Breach>(entityName: "\(Breach.self)")
+        return NSFetchRequest<Breach>(entityName: "Breach")
     }
 
     @NSManaged public var addedDate: String?
     @NSManaged public var domain: String?
     @NSManaged public var info: String?
-    @NSManaged public var logoPath: String?
+    @NSManaged public var logo: Data?
     @NSManaged public var modifiedDate: String?
     @NSManaged public var name: String?
     @NSManaged public var emails: NSSet?

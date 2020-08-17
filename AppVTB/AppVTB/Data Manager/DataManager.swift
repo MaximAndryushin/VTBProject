@@ -63,6 +63,7 @@ class DataManager {
         return NSEntityDescription.entity(forEntityName: name, in: self.managedObjectContext)!
     }
     
+
     func deleteAllInstancesOf(entity: String) {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: entity)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -80,20 +81,20 @@ class DataManager {
 // MARK: - PhoneEmail protocol
 
 protocol PhoneEmailDataManager {
-    func getPhoneNumbers() -> [PhoneNumber]?
-    func getEmails() -> [Email]?
+    func getPhoneNumbers() -> [NumberDTO]?
+    func getEmails() -> [EmailDTO]?
     func deleteNumber(_ name: String)
     func deleteEmail(_ name: String)
 }
 
 extension DataManager: PhoneEmailDataManager {
     
-    func getPhoneNumbers() -> [PhoneNumber]? {
+    func getPhoneNumbers() -> [NumberDTO]? {
         let fetchRequest = PhoneNumber.numberFetchRequest()
         do {
             let results = try managedObjectContext.fetch(fetchRequest)
             if !results.isEmpty {
-                return results
+                return results.map { numberConverter.phoneNumberToNumberDTO($0) }
             }
         } catch {
             print(error)
@@ -101,12 +102,12 @@ extension DataManager: PhoneEmailDataManager {
         return nil
     }
     
-    func getEmails() -> [Email]? {
+    func getEmails() -> [EmailDTO]? {
         let fetchRequest = Email.emailFetchRequest()
         do {
             let results = try managedObjectContext.fetch(fetchRequest)
             if !results.isEmpty {
-                return results
+                return results.map { emailConverter.emailToEmailDTO($0) }
             }
         } catch {
             print(error)
@@ -116,7 +117,7 @@ extension DataManager: PhoneEmailDataManager {
     
     func deleteNumber(_ name: String) {
         let request = PhoneNumber.fetchRequest()
-        request.predicate = NSPredicate(format: "number == %@", name)
+        request.predicate = NSPredicate(format: "number == %@", name) // to think
         do {
             let results = try managedObjectContext.fetch(request)
             if !results.isEmpty {
@@ -153,8 +154,8 @@ extension DataManager: PhoneEmailDataManager {
 //MARK: - PhoneEmailFavoritesProtocol
 
 protocol PhoneEmailFavoritesDataManager {
-    func getFavoritesNumbers() -> [PhoneNumber]?
-    func getFavoritesEmails() -> [Email]?
+    func getFavoritesNumbers() -> [NumberDTO]?
+    func getFavoritesEmails() -> [EmailDTO]?
     func addToFavoritesNumber(_ numberDTO: NumberDTO)
     func addToFavoritesEmail(_ emailDTO: EmailDTO)
     func deleteFromFavoritesNumber(_ name: String)
@@ -178,13 +179,13 @@ extension DataManager: PhoneEmailFavoritesDataManager {
     }
     
     
-    func getFavoritesNumbers() -> [PhoneNumber]? {
+    func getFavoritesNumbers() -> [NumberDTO]? {
         let fetchRequest = PhoneNumber.numberFetchRequest()
         fetchRequest.predicate = NSPredicate(format: "isRenewable == true")
         do {
             let results = try managedObjectContext.fetch(fetchRequest)
             if !results.isEmpty {
-                return results
+                return results.map { numberConverter.phoneNumberToNumberDTO($0) }
             }
         } catch {
             print(error)
@@ -192,13 +193,13 @@ extension DataManager: PhoneEmailFavoritesDataManager {
         return nil
     }
     
-    func getFavoritesEmails() -> [Email]? {
+    func getFavoritesEmails() -> [EmailDTO]? {
         let fetchRequest = Email.emailFetchRequest()
         fetchRequest.predicate = NSPredicate(format: "isRenewable == true")
         do {
             let results = try managedObjectContext.fetch(fetchRequest)
             if !results.isEmpty {
-                return results
+                return results.map { emailConverter.emailToEmailDTO($0) }
             }
         } catch {
             print(error)
@@ -218,6 +219,29 @@ extension DataManager: PhoneEmailFavoritesDataManager {
         saveContext()
     }
     
+}
+
+
+//MARK: - Save Only Logic
+
+protocol SaveDataManager {
+    func saveNumber(_ numberDTO: NumberDTO)
+    func saveEmail(_ emailDTO: EmailDTO)
+}
+
+extension DataManager: SaveDataManager {
+    
+    func saveNumber(_ numberDTO: NumberDTO) {
+        var number = existsNumber(numberDTO.number)
+        numberConverter.update(&number, numberDTO: numberDTO)
+        saveContext()
+    }
+    
+    func saveEmail(_ emailDTO: EmailDTO) {
+        var email = existsEmail(emailDTO.email)
+        emailConverter.update(&email, email: emailDTO)
+        saveContext()
+    }
 }
 
 
@@ -258,6 +282,5 @@ extension DataManager: ExistsData {
         }
         return nil
     }
-    
     
 }
