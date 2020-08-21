@@ -25,6 +25,7 @@ final class CheckViewController: UIViewController {
         static let minFontSize: CGFloat = 16
         static let font = UIFont.systemFont(ofSize: 20)
         static let errorTitle = "ERROR"
+        
     }
     
     
@@ -70,7 +71,7 @@ final class CheckViewController: UIViewController {
     }
 
     private func configureLabel() {
-        checkLabel = UILabel(text: Locals.title, font: Constants.titleFont, alignment: .center)
+        checkLabel = UILabel(text: NSAttributedString(string: Locals.title), font: Constants.titleFont, alignment: .center)
         
         stackView.addArrangedSubview(checkLabel)
     }
@@ -155,6 +156,5 @@ extension CheckViewController: CheckViewInput {
             self.present(alertController, animated: true, completion: nil)
         }
     }
-    
     
 }

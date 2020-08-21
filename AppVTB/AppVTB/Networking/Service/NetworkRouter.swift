@@ -39,10 +39,14 @@ class Router<EndPoint: EndPointType>: NetworkResponseHandler, NetworkRouter {
                             return
                         }
                         do {
-                            let decoder = JSONDecoder()
-                            decoder.keyDecodingStrategy = .convertFromSnakeCase //IMPORTANT
-                            let response = try decoder.decode(modelType.self, from: responseData)
-                            completion(response, nil)
+                            if modelType == Data.self {
+                                completion(responseData as? M, nil)
+                            } else {
+                                let decoder = JSONDecoder()
+                                decoder.keyDecodingStrategy = .convertFromSnakeCase //IMPORTANT
+                                let response = try decoder.decode(modelType.self, from: responseData)
+                                completion(response, nil)
+                            }
                         } catch {
                             completion(nil, NetworkResponse.unableToDecode.rawValue)
                         }
@@ -64,7 +68,7 @@ class Router<EndPoint: EndPointType>: NetworkResponseHandler, NetworkRouter {
     
     fileprivate func buildRequest(from route: EndPoint) throws -> URLRequest {
         
-        var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path), cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
+        var request = URLRequest(url: route.path.count == 0 ? route.baseURL : route.baseURL.appendingPathComponent(route.path), cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
         
         request.httpMethod = route.httpMethod.rawValue
         do {

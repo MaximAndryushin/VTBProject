@@ -69,7 +69,7 @@ final class FavoritesViewController: UIViewController {
     
     private func configureLabel() {
         
-        favoritesLabel = UILabel(text: Locals.title, font: Constants.titleFont, alignment: .center)
+        favoritesLabel = UILabel(text: NSAttributedString(string: Locals.title), font: Constants.titleFont, alignment: .center)
         
         view.addSubview(favoritesLabel)
         favoritesLabel.translatesAutoresizingMaskIntoConstraints = false

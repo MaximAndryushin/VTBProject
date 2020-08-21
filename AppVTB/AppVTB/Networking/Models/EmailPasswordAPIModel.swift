@@ -6,6 +6,8 @@
 //  Copyright © 2020 Maxim Andryushin. All rights reserved.
 //
 
+import Foundation
+
 //MARK: - Response Model
 struct BreachAPI: Codable {
     let name: String
@@ -44,3 +46,4 @@ struct BreachAPI: Codable {
 }
 
 typealias EmailPasswordsAPIResponse = [BreachAPI]
+typealias EmailAPIResponse = [(BreachAPI, Data?)]

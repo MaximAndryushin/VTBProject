@@ -30,6 +30,9 @@
 		525676C324E572D000C0F1FA /* CheckRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525676C224E572D000C0F1FA /* CheckRouter.swift */; };
 		525676C624E5769D00C0F1FA /* QueryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525676C524E5769D00C0F1FA /* QueryViewModel.swift */; };
 		525676C924E57B2200C0F1FA /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525676C824E57B2200C0F1FA /* DetailedViewController.swift */; };
+		52646FE624ED617300D3AA9C /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52646FE524ED617300D3AA9C /* SplashScreen.swift */; };
+		52646FE824ED61DF00D3AA9C /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52646FE724ED61DF00D3AA9C /* SplashPresenter.swift */; };
+		52646FEA24ED631000D3AA9C /* SplashAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52646FE924ED631000D3AA9C /* SplashAnimator.swift */; };
 		5277A52524D43593006032F3 /* NumberAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A52424D43593006032F3 /* NumberAPIModel.swift */; };
 		5277A52724D435CA006032F3 /* EmailValidationAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A52624D435CA006032F3 /* EmailValidationAPIModel.swift */; };
 		5277A52924D43836006032F3 /* EmailPasswordAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A52824D43836006032F3 /* EmailPasswordAPIModel.swift */; };
@@ -96,6 +99,9 @@
 		525676C224E572D000C0F1FA /* CheckRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRouter.swift; sourceTree = "<group>"; };
 		525676C524E5769D00C0F1FA /* QueryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryViewModel.swift; sourceTree = "<group>"; };
 		525676C824E57B2200C0F1FA /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
+		52646FE524ED617300D3AA9C /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		52646FE724ED61DF00D3AA9C /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
+		52646FE924ED631000D3AA9C /* SplashAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashAnimator.swift; sourceTree = "<group>"; };
 		5277A52424D43593006032F3 /* NumberAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAPIModel.swift; sourceTree = "<group>"; };
 		5277A52624D435CA006032F3 /* EmailValidationAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationAPIModel.swift; sourceTree = "<group>"; };
 		5277A52824D43836006032F3 /* EmailPasswordAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPasswordAPIModel.swift; sourceTree = "<group>"; };
@@ -207,6 +213,7 @@
 		5255C87D24C3C9B4008E43ED /* AppVTB */ = {
 			isa = PBXGroup;
 			children = (
+				52646FE424ED615900D3AA9C /* SplashScreen */,
 				5231F93524EAAF1D0098B285 /* Extensions */,
 				525676C724E57A7600C0F1FA /* DetailedScreen */,
 				525676C424E5765C00C0F1FA /* ViewModel */,
@@ -330,6 +337,16 @@
 				525676C824E57B2200C0F1FA /* DetailedViewController.swift */,
 			);
 			path = DetailedScreen;
+			sourceTree = "<group>";
+		};
+		52646FE424ED615900D3AA9C /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				52646FE524ED617300D3AA9C /* SplashScreen.swift */,
+				52646FE724ED61DF00D3AA9C /* SplashPresenter.swift */,
+				52646FE924ED631000D3AA9C /* SplashAnimator.swift */,
+			);
+			path = SplashScreen;
 			sourceTree = "<group>";
 		};
 		5277A52224D4356F006032F3 /* Networking */ = {
@@ -631,6 +648,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52646FE624ED617300D3AA9C /* SplashScreen.swift in Sources */,
 				5255C8AE24C3CE83008E43ED /* HistoryInteractor.swift in Sources */,
 				5255C8B024C3CEB9008E43ED /* HistoryRouter.swift in Sources */,
 				5277A54524D43F93006032F3 /* APIKeys.swift in Sources */,
@@ -663,6 +681,8 @@
 				5277A55624D831ED006032F3 /* Email+CoreDataClass.swift in Sources */,
 				5277A52724D435CA006032F3 /* EmailValidationAPIModel.swift in Sources */,
 				525676C124E56CCD00C0F1FA /* CheckInteractor.swift in Sources */,
+				52646FEA24ED631000D3AA9C /* SplashAnimator.swift in Sources */,
+				52646FE824ED61DF00D3AA9C /* SplashPresenter.swift in Sources */,
 				5255C8B224C3CEDE008E43ED /* HistoryWorker.swift in Sources */,
 				5255C8A824C3CE0D008E43ED /* HistoryModels.swift in Sources */,
 				5231F93E24EABF8C0098B285 /* IconNetworkManager.swift in Sources */,

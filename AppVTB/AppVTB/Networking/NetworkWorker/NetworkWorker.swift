@@ -40,18 +40,20 @@ final class NetworkWorker {
     private let emailInfoManager: EmailValidatorNetworkManager
     private let emailBreachManager: EmailBreachNetworkManager
     private let numberManager: PhoneNumberNetworkManager
+    private let iconManager: ImageDownloadManagerInput
     private let emailNetworkConverter: EmailNetworkModelToDTOConverter
     private let numberNetworkConverter: NumberNetworkModelToDTOConverter
     
     
-    //MARK: - Initializer
+    // MARK: - Initializer
     
-    init(emailInfoManager: EmailValidatorNetworkManager, emailBreachManager: EmailBreachNetworkManager, numberManager: PhoneNumberNetworkManager, emailNetworkConverter: EmailNetworkModelToDTOConverter, numberNetworkConverter: NumberNetworkModelToDTOConverter) {
+    init(emailInfoManager: EmailValidatorNetworkManager, emailBreachManager: EmailBreachNetworkManager, numberManager: PhoneNumberNetworkManager, emailNetworkConverter: EmailNetworkModelToDTOConverter, numberNetworkConverter: NumberNetworkModelToDTOConverter, iconManager: ImageDownloadManagerInput) {
         self.emailInfoManager = emailInfoManager
         self.emailBreachManager = emailBreachManager
         self.numberManager = numberManager
         self.emailNetworkConverter = emailNetworkConverter
         self.numberNetworkConverter = numberNetworkConverter
+        self.iconManager = iconManager
     }
 }
 
@@ -72,15 +74,35 @@ extension NetworkWorker: EmailNetworkWorker {
                         completion(nil, error)
                     }
                     if let breaches = breaches {
-                        let emailDTO = self.emailNetworkConverter.convert(email: email, breaches: breaches)
-                        completion(emailDTO, nil)
+                        self.getIcons(email, breaches) { emailDTO, error in
+                            completion(emailDTO, nil)
+                        }
                     }
                 }
             }
         }
     }
     
-    
+    private func getIcons(_ email: EmailValidationAPIModel, _ breaches: [BreachAPI], _ completion: @escaping (EmailDTO?, String?) -> ()) {
+        var arrayOfBreachesAndIcons = [(BreachAPI, Data?)]()
+        let group = DispatchGroup()
+        for breach in breaches {
+            group.enter()
+            self.iconManager.getIcon(name: breach.logoPath, completion: { (logo, error) in
+                if let _ = error {
+                    arrayOfBreachesAndIcons.append((breach, nil))
+                } else {
+                    arrayOfBreachesAndIcons.append((breach, logo))
+                }
+                group.leave()
+            })
+        }
+        group.notify(queue: .main) {
+            let emailDTO = self.emailNetworkConverter.convert(email: email, breaches: arrayOfBreachesAndIcons)
+            completion(emailDTO, nil)
+        }
+        
+    }
 }
 
 

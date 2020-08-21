@@ -33,11 +33,11 @@ final class NumberNetworkModelConverter: NumberNetworkModelToDTOConverter {
 // MARK: - BreachesAPIResponse to DTO
 
 protocol BreachNetworkModelToDTOConverter {
-    func convert(breach: BreachAPI, logo: Data) -> BreachDTO
+    func convert(breach: BreachAPI, logo: Data?) -> BreachDTO
 }
 
 final class BreachNetworkModelConverter: BreachNetworkModelToDTOConverter {
-    func convert(breach: BreachAPI, logo: Data) -> BreachDTO {
+    func convert(breach: BreachAPI, logo: Data?) -> BreachDTO {
         return BreachDTO(name: breach.name,
                          domain: breach.domain,
                          addedDate: breach.addedDate,
@@ -50,7 +50,7 @@ final class BreachNetworkModelConverter: BreachNetworkModelToDTOConverter {
 
 // MARK: - EmailAPIResponse to DTO
 protocol EmailNetworkModelToDTOConverter {
-    func convert(email: EmailValidationAPIModel, breaches: EmailPasswordsAPIResponse, logos: [Data]) -> EmailDTO
+    func convert(email: EmailValidationAPIModel, breaches: EmailAPIResponse) -> EmailDTO
 }
 
 final class EmailNetworkModelConverter: EmailNetworkModelToDTOConverter {
@@ -61,12 +61,12 @@ final class EmailNetworkModelConverter: EmailNetworkModelToDTOConverter {
         self.breachConverter = breachConverter
     }
     
-    func convert(email: EmailValidationAPIModel, breaches: EmailPasswordsAPIResponse, logos: [Data]) -> EmailDTO {
+    func convert(email: EmailValidationAPIModel, breaches: EmailAPIResponse) -> EmailDTO {
         var verified = true
         var spamList = false
         var retired = false
         var fabricated = false
-        for breach in breaches {
+        for (breach, _) in breaches {
             verified = verified && breach.isVerified
             spamList = spamList || breach.isSpamList
             retired = retired || breach.isRetired
@@ -85,7 +85,7 @@ final class EmailNetworkModelConverter: EmailNetworkModelToDTOConverter {
                         isSpamList: spamList,
                         isRetired: retired,
                         isFabricated: fabricated,
-                        breaches: breaches.map{ return breachConverter.convert(breach: $0, logo: logos[0]) },
+                        breaches: breaches.map{ return breachConverter.convert(breach: $0.0, logo: $0.1) },
                         date: Date(timeIntervalSinceNow: 0)
         )
     }

@@ -12,7 +12,7 @@ protocol ImageDownloadManagerInput {
     func getIcon(name: String, completion: @escaping (_ icon: Data?, _ error: String?) -> ())
 }
 
-final class mageDownloadManager: NetworkResponseHandler, ImageDownloadManagerInput {
+final class ImageDownloadManager: NetworkResponseHandler, ImageDownloadManagerInput {
     
     let router = Router<ImageDownload>()
 

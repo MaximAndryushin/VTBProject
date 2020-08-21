@@ -78,7 +78,7 @@ struct BreachDTO: Hashable, Codable {
     let addedDate: String
     let modifiedDate: String
     let info: String
-    let logo: Data
+    let logo: Data?
 }
 
 
@@ -97,7 +97,7 @@ final class BreachConverter: BreachDTODAOConverter {
             addedDate: breach.addedDate!,
             modifiedDate: breach.modifiedDate!,
             info: breach.info!,
-            logo: breach.logo!
+            logo: breach.logo
         )
     }
     

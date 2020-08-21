@@ -12,9 +12,9 @@ import UIKit
 //MARK: - Fabric Method
 
 extension UILabel {
-    convenience init(text: String, font: UIFont, alignment: NSTextAlignment = .natural) {
+    convenience init(text: NSAttributedString, font: UIFont, alignment: NSTextAlignment = .natural) {
         self.init()
-        self.text = text
+        self.attributedText = text
         self.textAlignment = alignment
         self.font = font
         self.lineBreakMode = .byWordWrapping

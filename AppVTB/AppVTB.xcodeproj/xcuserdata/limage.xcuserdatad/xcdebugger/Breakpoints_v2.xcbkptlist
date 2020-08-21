@@ -20,5 +20,101 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CE89E927-68C7-4C71-B1FB-AB363676453F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppVTB/CheckScreen/Interactor/CheckInteractor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "fetchData(name:type:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CE89E927-68C7-4C71-B1FB-AB363676453F - f0093d29fa9c5f0a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppVTB.CheckInteractor.fetchData(name: Swift.String, type: AppVTB.TypeOfQuery) -&gt; ()"
+                  moduleName = "AppVTB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limage/Documents/VTBProject/AppVTB/AppVTB/CheckScreen/Interactor/CheckInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "106">
+               </Location>
+               <Location
+                  uuid = "CE89E927-68C7-4C71-B1FB-AB363676453F - 78428272ee33fd8b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;AppVTB.EmailDTO&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; () in AppVTB.CheckInteractor.fetchData(name: Swift.String, type: AppVTB.TypeOfQuery) -&gt; ()"
+                  moduleName = "AppVTB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limage/Documents/VTBProject/AppVTB/AppVTB/CheckScreen/Interactor/CheckInteractor.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "253">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "09E75E60-92E6-4975-B271-686285129289"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppVTB/Networking/Managers/IconNetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "getIcon(name:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "09E75E60-92E6-4975-B271-686285129289 - 9e27cf4fea767b7a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AppVTB.ImageDownloadManager.getIcon(name: Swift.String, completion: (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "AppVTB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limage/Documents/VTBProject/AppVTB/AppVTB/Networking/Managers/IconNetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "09E75E60-92E6-4975-B271-686285129289 - d16553928353490a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; () in AppVTB.ImageDownloadManager.getIcon(name: Swift.String, completion: (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "AppVTB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/limage/Documents/VTBProject/AppVTB/AppVTB/Networking/Managers/IconNetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "53">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -17,7 +17,7 @@ final class FavoritesAssembly {
         
         view.presenter = presenter
         presenter.view = view
-        let networkManager = NetworkWorker(emailInfoManager: EmailValidationNetworkManager(), emailBreachManager: EmailPasswordNetworkManager(), numberManager: NumberNetworkManager(), emailNetworkConverter: EmailNetworkModelConverter(breachConverter: BreachNetworkModelConverter()), numberNetworkConverter: NumberNetworkModelConverter())
+        let networkManager = NetworkWorker(emailInfoManager: EmailValidationNetworkManager(), emailBreachManager: EmailPasswordNetworkManager(), numberManager: NumberNetworkManager(), emailNetworkConverter: EmailNetworkModelConverter(breachConverter: BreachNetworkModelConverter()), numberNetworkConverter: NumberNetworkModelConverter(), iconManager: ImageDownloadManager())
         let interactor = FavoritesInteractor(dataManager: DataManager.shared, networkManager: networkManager)
         interactor.presenter = presenter
         presenter.interactor = interactor

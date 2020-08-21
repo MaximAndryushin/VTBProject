@@ -12,17 +12,32 @@ typealias BreachViewModel = BreachDTO
 
 extension BreachViewModel {
     
-    func description() -> String {
-        var result = ""
+    func description() -> NSAttributedString {
+        let result = NSMutableAttributedString()
         for (key, value) in Mirror(reflecting: self).children {
-            if key != "info" {
-                result.append("\(key!): \(value)\n")
+            if key == "info" {
+                result.append(NSAttributedString(string: "\(key!): \((value as! String).htmlToString)\n"))
             }
-            else {
-                result.append("\(key!): \((value as! String).htmlToString)\n")
+            else if key != "logo" {
+                result.append(NSAttributedString(string: "\(key!): \(value)\n"))
+            } else if let value = value as? Data, let image = UIImage(data: value) {
+                let logo = NSTextAttachment()
+                logo.image = image
+                logo.bounds = CGRect(x: 0, y: 0, width: min(image.size.width * image.size.height / Constants.logoHeight, Constants.logoWidth), height: Constants.logoHeight)
+                result.append(NSAttributedString(string: "\(key!): "))
+                result.append(NSAttributedString(attachment: logo))
+                result.append(NSAttributedString(string: "\n"))
             }
         }
         return result
+    }
+    
+    var icon: UIImage? {
+        if let icon = self.logo {
+            return UIImage(data: icon)
+        } else {
+            return nil
+        }
     }
 }
 
@@ -99,16 +114,17 @@ struct QueryViewModel: Codable, Equatable {
 extension QueryViewModel {
     func toLabels() -> [UILabel] {
         var labels = [UILabel]()
-        labels.append(UILabel(text: getLabelText(), font: Constants.titleFont, alignment: .center))
-        labels.append(UILabel(text: getDate(), font: Constants.titleFont, alignment: .center))
-        labels.append(UILabel(text: getDescription(), font: Constants.systemFont))
+        labels.append(UILabel(text: NSAttributedString(string: getLabelText()), font: Constants.titleFont, alignment: .center))
+        labels.append(UILabel(text: NSAttributedString(string: getDate()), font: Constants.titleFont, alignment: .center))
+        labels.append(UILabel(text: NSAttributedString(string: getDescription()), font: Constants.systemFont))
         
         if !breaches.isEmpty {
-            labels.append(UILabel(text: "Breaches:", font: Constants.titleFont, alignment: .center))
+            labels.append(UILabel(text: NSAttributedString(string: "Breaches:"), font: Constants.titleFont, alignment: .center))
         }
         
         for breach in getBreaches() {
-            labels.append(UILabel(text: breach.description(), font: Constants.systemFont))
+            let label = UILabel(text: breach.description(), font: Constants.systemFont)
+            labels.append(label)
         }
         return labels
     }

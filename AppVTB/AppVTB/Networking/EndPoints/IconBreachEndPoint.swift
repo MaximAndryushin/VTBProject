@@ -15,19 +15,16 @@ public enum ImageDownload {
 
 extension ImageDownload: EndPointType {
     var baseURL: URL {
-        guard let url = URL(string: "https://haveibeenpwned.com") else {
-            fatalError("baseURL can't be configured")
+        switch self {
+        case .getIcon(let name) :
+            return URL(string: name) ?? URL(string: "https://ru.wikipedia.org/wiki/%D0%9E%D1%88%D0%B8%D0%B1%D0%BA%D0%B0_404")!
+        case .doSmth:
+            return URL(string: "https://ru.wikipedia.org/wiki/%D0%9E%D1%88%D0%B8%D0%B1%D0%BA%D0%B0_404")!
         }
-        return url
     }
     
     var path: String {
-        switch self {
-        case .getIcon(let name):
-            return "/Content/Images/PwnedLogos/\(name)"
-        case .doSmth:
-            return ""
-        }
+       return String()
     }
     
     var httpMethod: HTTPMethod {
