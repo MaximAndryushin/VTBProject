@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5231F93424EA9EEB0098B285 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5231F93324EA9EEB0098B285 /* UILabel+.swift */; };
+		5231F93824EAAF720098B285 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5231F93724EAAF720098B285 /* String+.swift */; };
+		5231F93C24EABE4A0098B285 /* IconBreachEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5231F93B24EABE4A0098B285 /* IconBreachEndPoint.swift */; };
+		5231F93E24EABF8C0098B285 /* IconNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5231F93D24EABF8C0098B285 /* IconNetworkManager.swift */; };
+		52375A4D24E5679F00A7D089 /* CheckPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52375A4C24E5679F00A7D089 /* CheckPresenter.swift */; };
 		5255C87F24C3C9B4008E43ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255C87E24C3C9B4008E43ED /* AppDelegate.swift */; };
-		5255C88324C3C9B4008E43ED /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255C88224C3C9B4008E43ED /* RootViewController.swift */; };
 		5255C88924C3C9B4008E43ED /* AppVTB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5255C88724C3C9B4008E43ED /* AppVTB.xcdatamodeld */; };
 		5255C88B24C3C9B5008E43ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5255C88A24C3C9B5008E43ED /* Assets.xcassets */; };
 		5255C88E24C3C9B5008E43ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5255C88C24C3C9B5008E43ED /* LaunchScreen.storyboard */; };
@@ -22,6 +26,13 @@
 		5255C8AE24C3CE83008E43ED /* HistoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255C8AD24C3CE83008E43ED /* HistoryInteractor.swift */; };
 		5255C8B024C3CEB9008E43ED /* HistoryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255C8AF24C3CEB9008E43ED /* HistoryRouter.swift */; };
 		5255C8B224C3CEDE008E43ED /* HistoryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5255C8B124C3CEDE008E43ED /* HistoryWorker.swift */; };
+		525676C124E56CCD00C0F1FA /* CheckInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525676C024E56CCD00C0F1FA /* CheckInteractor.swift */; };
+		525676C324E572D000C0F1FA /* CheckRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525676C224E572D000C0F1FA /* CheckRouter.swift */; };
+		525676C624E5769D00C0F1FA /* QueryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525676C524E5769D00C0F1FA /* QueryViewModel.swift */; };
+		525676C924E57B2200C0F1FA /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525676C824E57B2200C0F1FA /* DetailedViewController.swift */; };
+		52646FE624ED617300D3AA9C /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52646FE524ED617300D3AA9C /* SplashScreen.swift */; };
+		52646FE824ED61DF00D3AA9C /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52646FE724ED61DF00D3AA9C /* SplashPresenter.swift */; };
+		52646FEA24ED631000D3AA9C /* SplashAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52646FE924ED631000D3AA9C /* SplashAnimator.swift */; };
 		5277A52524D43593006032F3 /* NumberAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A52424D43593006032F3 /* NumberAPIModel.swift */; };
 		5277A52724D435CA006032F3 /* EmailValidationAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A52624D435CA006032F3 /* EmailValidationAPIModel.swift */; };
 		5277A52924D43836006032F3 /* EmailPasswordAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A52824D43836006032F3 /* EmailPasswordAPIModel.swift */; };
@@ -41,19 +52,35 @@
 		5277A54924D44016006032F3 /* EmailValidationEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A54824D44016006032F3 /* EmailValidationEndPoint.swift */; };
 		5277A54B24D4405C006032F3 /* EmailPasswordEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A54A24D4405C006032F3 /* EmailPasswordEndPoint.swift */; };
 		5277A55224D831ED006032F3 /* Breach+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A54C24D831ED006032F3 /* Breach+CoreDataClass.swift */; };
-		5277A55324D831ED006032F3 /* Breach+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A54D24D831ED006032F3 /* Breach+CoreDataProperties.swift */; };
 		5277A55424D831ED006032F3 /* PhoneNumber+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A54E24D831ED006032F3 /* PhoneNumber+CoreDataClass.swift */; };
-		5277A55524D831ED006032F3 /* PhoneNumber+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A54F24D831ED006032F3 /* PhoneNumber+CoreDataProperties.swift */; };
 		5277A55624D831ED006032F3 /* Email+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A55024D831ED006032F3 /* Email+CoreDataClass.swift */; };
-		5277A55724D831ED006032F3 /* Email+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A55124D831ED006032F3 /* Email+CoreDataProperties.swift */; };
 		5277A55B24D84663006032F3 /* ConverterDAODTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A55A24D84663006032F3 /* ConverterDAODTO.swift */; };
 		5277A55D24D84BAA006032F3 /* ConverterToQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A55C24D84BAA006032F3 /* ConverterToQuery.swift */; };
+		5277A58524D9B432006032F3 /* FavoritesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A57824D9B432006032F3 /* FavoritesAssembly.swift */; };
+		5277A58624D9B432006032F3 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A57A24D9B432006032F3 /* FavoritesPresenter.swift */; };
+		5277A58824D9B432006032F3 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A57E24D9B432006032F3 /* FavoritesViewController.swift */; };
+		5277A58A24D9B432006032F3 /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A58124D9B432006032F3 /* FavoritesInteractor.swift */; };
+		5277A58B24D9B432006032F3 /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A58324D9B432006032F3 /* FavoritesRouter.swift */; };
+		5277A5AD24DAEACC006032F3 /* ConverterNetworkModelDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A5AC24DAEACC006032F3 /* ConverterNetworkModelDTO.swift */; };
+		5277A5B124DAFAF4006032F3 /* Breach+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A5B024DAFAF4006032F3 /* Breach+CoreDataProperties.swift */; };
+		5277A5B624DD7530006032F3 /* PhoneNumber+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A5B424DD7530006032F3 /* PhoneNumber+CoreDataProperties.swift */; };
+		5277A5B724DD7530006032F3 /* Email+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A5B524DD7530006032F3 /* Email+CoreDataProperties.swift */; };
+		5277A5BF24DD9B86006032F3 /* NetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A5BE24DD9B86006032F3 /* NetworkWorker.swift */; };
+		5277A5C224E139BE006032F3 /* DataToViewModelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A5C124E139BE006032F3 /* DataToViewModelConverter.swift */; };
+		52B17D9E24E4342100FC8653 /* CheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B17D9D24E4342100FC8653 /* CheckViewController.swift */; };
+		52B17DA024E4387B00FC8653 /* CheckAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B17D9F24E4387B00FC8653 /* CheckAssembly.swift */; };
+		52B17DA324E43B3300FC8653 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B17DA224E43B3300FC8653 /* Constants.swift */; };
+		52B4683624E30AD00077C938 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B4683524E30AD00077C938 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5231F93324EA9EEB0098B285 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		5231F93724EAAF720098B285 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		5231F93B24EABE4A0098B285 /* IconBreachEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconBreachEndPoint.swift; sourceTree = "<group>"; };
+		5231F93D24EABF8C0098B285 /* IconNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconNetworkManager.swift; sourceTree = "<group>"; };
+		52375A4C24E5679F00A7D089 /* CheckPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPresenter.swift; sourceTree = "<group>"; };
 		5255C87B24C3C9B4008E43ED /* AppVTB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppVTB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5255C87E24C3C9B4008E43ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5255C88224C3C9B4008E43ED /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		5255C88824C3C9B4008E43ED /* AppVTB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppVTB.xcdatamodel; sourceTree = "<group>"; };
 		5255C88A24C3C9B5008E43ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5255C88D24C3C9B5008E43ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,6 +95,13 @@
 		5255C8AD24C3CE83008E43ED /* HistoryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryInteractor.swift; sourceTree = "<group>"; };
 		5255C8AF24C3CEB9008E43ED /* HistoryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRouter.swift; sourceTree = "<group>"; };
 		5255C8B124C3CEDE008E43ED /* HistoryWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryWorker.swift; sourceTree = "<group>"; };
+		525676C024E56CCD00C0F1FA /* CheckInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInteractor.swift; sourceTree = "<group>"; };
+		525676C224E572D000C0F1FA /* CheckRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRouter.swift; sourceTree = "<group>"; };
+		525676C524E5769D00C0F1FA /* QueryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryViewModel.swift; sourceTree = "<group>"; };
+		525676C824E57B2200C0F1FA /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
+		52646FE524ED617300D3AA9C /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		52646FE724ED61DF00D3AA9C /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
+		52646FE924ED631000D3AA9C /* SplashAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashAnimator.swift; sourceTree = "<group>"; };
 		5277A52424D43593006032F3 /* NumberAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAPIModel.swift; sourceTree = "<group>"; };
 		5277A52624D435CA006032F3 /* EmailValidationAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationAPIModel.swift; sourceTree = "<group>"; };
 		5277A52824D43836006032F3 /* EmailPasswordAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPasswordAPIModel.swift; sourceTree = "<group>"; };
@@ -86,14 +120,26 @@
 		5277A54624D43FE1006032F3 /* NumberEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberEndPoint.swift; sourceTree = "<group>"; };
 		5277A54824D44016006032F3 /* EmailValidationEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationEndPoint.swift; sourceTree = "<group>"; };
 		5277A54A24D4405C006032F3 /* EmailPasswordEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPasswordEndPoint.swift; sourceTree = "<group>"; };
-		5277A54C24D831ED006032F3 /* Breach+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Breach+CoreDataClass.swift"; path = "AppVTB/Data Manager/Entities/Breach+CoreDataClass.swift"; sourceTree = "<group>"; };
-		5277A54D24D831ED006032F3 /* Breach+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Breach+CoreDataProperties.swift"; path = "AppVTB/Data Manager/Entities/Breach+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		5277A54E24D831ED006032F3 /* PhoneNumber+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PhoneNumber+CoreDataClass.swift"; path = "AppVTB/Data Manager/Entities/PhoneNumber+CoreDataClass.swift"; sourceTree = "<group>"; };
-		5277A54F24D831ED006032F3 /* PhoneNumber+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PhoneNumber+CoreDataProperties.swift"; path = "AppVTB/Data Manager/Entities/PhoneNumber+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		5277A55024D831ED006032F3 /* Email+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Email+CoreDataClass.swift"; path = "AppVTB/Data Manager/Entities/Email+CoreDataClass.swift"; sourceTree = "<group>"; };
-		5277A55124D831ED006032F3 /* Email+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Email+CoreDataProperties.swift"; path = "AppVTB/Data Manager/Entities/Email+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5277A54C24D831ED006032F3 /* Breach+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breach+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5277A54E24D831ED006032F3 /* PhoneNumber+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhoneNumber+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5277A55024D831ED006032F3 /* Email+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Email+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5277A55A24D84663006032F3 /* ConverterDAODTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterDAODTO.swift; sourceTree = "<group>"; };
 		5277A55C24D84BAA006032F3 /* ConverterToQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterToQuery.swift; sourceTree = "<group>"; };
+		5277A57824D9B432006032F3 /* FavoritesAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesAssembly.swift; sourceTree = "<group>"; };
+		5277A57A24D9B432006032F3 /* FavoritesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
+		5277A57E24D9B432006032F3 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		5277A58124D9B432006032F3 /* FavoritesInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
+		5277A58324D9B432006032F3 /* FavoritesRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesRouter.swift; sourceTree = "<group>"; };
+		5277A5AC24DAEACC006032F3 /* ConverterNetworkModelDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterNetworkModelDTO.swift; sourceTree = "<group>"; };
+		5277A5B024DAFAF4006032F3 /* Breach+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breach+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5277A5B424DD7530006032F3 /* PhoneNumber+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhoneNumber+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5277A5B524DD7530006032F3 /* Email+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Email+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5277A5BE24DD9B86006032F3 /* NetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorker.swift; sourceTree = "<group>"; };
+		5277A5C124E139BE006032F3 /* DataToViewModelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataToViewModelConverter.swift; sourceTree = "<group>"; };
+		52B17D9D24E4342100FC8653 /* CheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckViewController.swift; sourceTree = "<group>"; };
+		52B17D9F24E4387B00FC8653 /* CheckAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAssembly.swift; sourceTree = "<group>"; };
+		52B17DA224E43B3300FC8653 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		52B4683524E30AD00077C938 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,15 +153,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5231F93224EA9ED40098B285 /* UILabel+ */ = {
+			isa = PBXGroup;
+			children = (
+				5231F93324EA9EEB0098B285 /* UILabel+.swift */,
+			);
+			path = "UILabel+";
+			sourceTree = "<group>";
+		};
+		5231F93524EAAF1D0098B285 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5231F93624EAAF2A0098B285 /* HTMLToString */,
+				5231F93224EA9ED40098B285 /* UILabel+ */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5231F93624EAAF2A0098B285 /* HTMLToString */ = {
+			isa = PBXGroup;
+			children = (
+				5231F93724EAAF720098B285 /* String+.swift */,
+			);
+			path = HTMLToString;
+			sourceTree = "<group>";
+		};
+		52375A4E24E568DA00A7D089 /* DTODAO */ = {
+			isa = PBXGroup;
+			children = (
+				5277A55A24D84663006032F3 /* ConverterDAODTO.swift */,
+			);
+			path = DTODAO;
+			sourceTree = "<group>";
+		};
+		52375A4F24E5694D00A7D089 /* NetworkModelToDTO */ = {
+			isa = PBXGroup;
+			children = (
+				5277A5AC24DAEACC006032F3 /* ConverterNetworkModelDTO.swift */,
+			);
+			path = NetworkModelToDTO;
+			sourceTree = "<group>";
+		};
 		5255C87224C3C9B4008E43ED = {
 			isa = PBXGroup;
 			children = (
-				5277A54C24D831ED006032F3 /* Breach+CoreDataClass.swift */,
-				5277A54D24D831ED006032F3 /* Breach+CoreDataProperties.swift */,
-				5277A54E24D831ED006032F3 /* PhoneNumber+CoreDataClass.swift */,
-				5277A54F24D831ED006032F3 /* PhoneNumber+CoreDataProperties.swift */,
-				5277A55024D831ED006032F3 /* Email+CoreDataClass.swift */,
-				5277A55124D831ED006032F3 /* Email+CoreDataProperties.swift */,
 				5255C87D24C3C9B4008E43ED /* AppVTB */,
 				5255C87C24C3C9B4008E43ED /* Products */,
 			);
@@ -132,14 +213,21 @@
 		5255C87D24C3C9B4008E43ED /* AppVTB */ = {
 			isa = PBXGroup;
 			children = (
-				5277A55924D844F5006032F3 /* DataModelConverter */,
+				52646FE424ED615900D3AA9C /* SplashScreen */,
+				5231F93524EAAF1D0098B285 /* Extensions */,
+				525676C724E57A7600C0F1FA /* DetailedScreen */,
+				525676C424E5765C00C0F1FA /* ViewModel */,
+				52B17DA124E43B1700FC8653 /* Constants */,
+				52B17D9724E432F800FC8653 /* CheckScreen */,
+				52B4683424E30AA80077C938 /* TabBarController */,
+				5277A55924D844F5006032F3 /* Converters */,
 				5277A52224D4356F006032F3 /* Networking */,
 				5255C89824C3C9F6008E43ED /* CompatibleSafeAreLayoutGuide */,
 				5255C89724C3C9E9008E43ED /* EmailNumberParser */,
+				5277A57424D9B432006032F3 /* FavoritesScreen */,
 				5255C89624C3C9DB008E43ED /* HistoryScreen */,
 				5255C89524C3C9C5008E43ED /* Data Manager */,
 				5255C87E24C3C9B4008E43ED /* AppDelegate.swift */,
-				5255C88224C3C9B4008E43ED /* RootViewController.swift */,
 				5255C88A24C3C9B5008E43ED /* Assets.xcassets */,
 				5255C88C24C3C9B5008E43ED /* LaunchScreen.storyboard */,
 				5255C88F24C3C9B5008E43ED /* Info.plist */,
@@ -151,6 +239,7 @@
 		5255C89524C3C9C5008E43ED /* Data Manager */ = {
 			isa = PBXGroup;
 			children = (
+				5277A55E24D9A044006032F3 /* Entities */,
 				5255C89D24C3CD56008E43ED /* DataManager.swift */,
 			);
 			path = "Data Manager";
@@ -234,9 +323,36 @@
 			path = Worker;
 			sourceTree = "<group>";
 		};
+		525676C424E5765C00C0F1FA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				525676C524E5769D00C0F1FA /* QueryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		525676C724E57A7600C0F1FA /* DetailedScreen */ = {
+			isa = PBXGroup;
+			children = (
+				525676C824E57B2200C0F1FA /* DetailedViewController.swift */,
+			);
+			path = DetailedScreen;
+			sourceTree = "<group>";
+		};
+		52646FE424ED615900D3AA9C /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				52646FE524ED617300D3AA9C /* SplashScreen.swift */,
+				52646FE724ED61DF00D3AA9C /* SplashPresenter.swift */,
+				52646FE924ED631000D3AA9C /* SplashAnimator.swift */,
+			);
+			path = SplashScreen;
+			sourceTree = "<group>";
+		};
 		5277A52224D4356F006032F3 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				5277A5BD24DD9B6E006032F3 /* NetworkWorker */,
 				5277A54324D43D92006032F3 /* EndPoints */,
 				5277A53A24D43BB0006032F3 /* Managers */,
 				5277A53124D43930006032F3 /* Service */,
@@ -284,6 +400,7 @@
 				5277A53D24D43C72006032F3 /* NumberNetworkManager.swift */,
 				5277A53F24D43CA2006032F3 /* EmailValidationNetworkManager.swift */,
 				5277A54124D43D25006032F3 /* EmailPasswordNetworkManager.swift */,
+				5231F93D24EABF8C0098B285 /* IconNetworkManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -295,17 +412,170 @@
 				5277A54624D43FE1006032F3 /* NumberEndPoint.swift */,
 				5277A54824D44016006032F3 /* EmailValidationEndPoint.swift */,
 				5277A54A24D4405C006032F3 /* EmailPasswordEndPoint.swift */,
+				5231F93B24EABE4A0098B285 /* IconBreachEndPoint.swift */,
 			);
 			path = EndPoints;
 			sourceTree = "<group>";
 		};
-		5277A55924D844F5006032F3 /* DataModelConverter */ = {
+		5277A55924D844F5006032F3 /* Converters */ = {
 			isa = PBXGroup;
 			children = (
-				5277A55A24D84663006032F3 /* ConverterDAODTO.swift */,
-				5277A55C24D84BAA006032F3 /* ConverterToQuery.swift */,
+				52375A4F24E5694D00A7D089 /* NetworkModelToDTO */,
+				52375A4E24E568DA00A7D089 /* DTODAO */,
+				5277A5C024E139A9006032F3 /* DataToViewModelConverter */,
 			);
-			path = DataModelConverter;
+			path = Converters;
+			sourceTree = "<group>";
+		};
+		5277A55E24D9A044006032F3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				5277A5B424DD7530006032F3 /* PhoneNumber+CoreDataProperties.swift */,
+				5277A5B524DD7530006032F3 /* Email+CoreDataProperties.swift */,
+				5277A5B024DAFAF4006032F3 /* Breach+CoreDataProperties.swift */,
+				5277A54C24D831ED006032F3 /* Breach+CoreDataClass.swift */,
+				5277A54E24D831ED006032F3 /* PhoneNumber+CoreDataClass.swift */,
+				5277A55024D831ED006032F3 /* Email+CoreDataClass.swift */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		5277A57424D9B432006032F3 /* FavoritesScreen */ = {
+			isa = PBXGroup;
+			children = (
+				5277A57724D9B432006032F3 /* Assembly */,
+				5277A57924D9B432006032F3 /* Presenter */,
+				5277A57D24D9B432006032F3 /* View */,
+				5277A58024D9B432006032F3 /* Interactor */,
+				5277A58224D9B432006032F3 /* Router */,
+			);
+			name = FavoritesScreen;
+			path = AppVTB/FavoritesScreen;
+			sourceTree = SOURCE_ROOT;
+		};
+		5277A57724D9B432006032F3 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				5277A57824D9B432006032F3 /* FavoritesAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		5277A57924D9B432006032F3 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				5277A57A24D9B432006032F3 /* FavoritesPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		5277A57D24D9B432006032F3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5277A57E24D9B432006032F3 /* FavoritesViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5277A58024D9B432006032F3 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				5277A58124D9B432006032F3 /* FavoritesInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		5277A58224D9B432006032F3 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				5277A58324D9B432006032F3 /* FavoritesRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		5277A5BD24DD9B6E006032F3 /* NetworkWorker */ = {
+			isa = PBXGroup;
+			children = (
+				5277A5BE24DD9B86006032F3 /* NetworkWorker.swift */,
+			);
+			path = NetworkWorker;
+			sourceTree = "<group>";
+		};
+		5277A5C024E139A9006032F3 /* DataToViewModelConverter */ = {
+			isa = PBXGroup;
+			children = (
+				5277A55C24D84BAA006032F3 /* ConverterToQuery.swift */,
+				5277A5C124E139BE006032F3 /* DataToViewModelConverter.swift */,
+			);
+			path = DataToViewModelConverter;
+			sourceTree = "<group>";
+		};
+		52B17D9724E432F800FC8653 /* CheckScreen */ = {
+			isa = PBXGroup;
+			children = (
+				52B17D9C24E433FA00FC8653 /* Assembly */,
+				52B17D9B24E433CD00FC8653 /* Router */,
+				52B17D9A24E433BF00FC8653 /* Interactor */,
+				52B17D9924E433B100FC8653 /* Presenter */,
+				52B17D9824E4330B00FC8653 /* View */,
+			);
+			path = CheckScreen;
+			sourceTree = "<group>";
+		};
+		52B17D9824E4330B00FC8653 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52B17D9D24E4342100FC8653 /* CheckViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		52B17D9924E433B100FC8653 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				52375A4C24E5679F00A7D089 /* CheckPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		52B17D9A24E433BF00FC8653 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				525676C024E56CCD00C0F1FA /* CheckInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		52B17D9B24E433CD00FC8653 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				525676C224E572D000C0F1FA /* CheckRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		52B17D9C24E433FA00FC8653 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				52B17D9F24E4387B00FC8653 /* CheckAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		52B17DA124E43B1700FC8653 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				52B17DA224E43B3300FC8653 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		52B4683424E30AA80077C938 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				52B4683524E30AD00077C938 /* TabBarController.swift */,
+			);
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,43 +648,66 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52646FE624ED617300D3AA9C /* SplashScreen.swift in Sources */,
 				5255C8AE24C3CE83008E43ED /* HistoryInteractor.swift in Sources */,
-				5277A55524D831ED006032F3 /* PhoneNumber+CoreDataProperties.swift in Sources */,
 				5255C8B024C3CEB9008E43ED /* HistoryRouter.swift in Sources */,
 				5277A54524D43F93006032F3 /* APIKeys.swift in Sources */,
+				52B4683624E30AD00077C938 /* TabBarController.swift in Sources */,
+				52B17DA024E4387B00FC8653 /* CheckAssembly.swift in Sources */,
+				5277A5AD24DAEACC006032F3 /* ConverterNetworkModelDTO.swift in Sources */,
 				5277A53524D43965006032F3 /* HTTPMethod.swift in Sources */,
 				5277A53924D43A1A006032F3 /* NetworkRouter.swift in Sources */,
+				5277A58824D9B432006032F3 /* FavoritesViewController.swift in Sources */,
+				5277A58524D9B432006032F3 /* FavoritesAssembly.swift in Sources */,
 				5255C8AA24C3CE2A008E43ED /* HistoryTableCell.swift in Sources */,
-				5277A55324D831ED006032F3 /* Breach+CoreDataProperties.swift in Sources */,
 				5255C89C24C3CAAC008E43ED /* EmailNumberParser.swift in Sources */,
 				5277A53E24D43C72006032F3 /* NumberNetworkManager.swift in Sources */,
 				5255C89E24C3CD56008E43ED /* DataManager.swift in Sources */,
+				5277A5BF24DD9B86006032F3 /* NetworkWorker.swift in Sources */,
 				5255C88924C3C9B4008E43ED /* AppVTB.xcdatamodeld in Sources */,
-				5255C88324C3C9B4008E43ED /* RootViewController.swift in Sources */,
+				5277A5B724DD7530006032F3 /* Email+CoreDataProperties.swift in Sources */,
+				5277A5C224E139BE006032F3 /* DataToViewModelConverter.swift in Sources */,
+				5231F93424EA9EEB0098B285 /* UILabel+.swift in Sources */,
 				5277A52C24D438CB006032F3 /* ParameterEncoding.swift in Sources */,
 				5277A53324D4394D006032F3 /* EndPointType.swift in Sources */,
+				5277A58A24D9B432006032F3 /* FavoritesInteractor.swift in Sources */,
 				5277A52E24D438F4006032F3 /* URLParameterEncoder.swift in Sources */,
 				5277A54224D43D25006032F3 /* EmailPasswordNetworkManager.swift in Sources */,
 				5277A55B24D84663006032F3 /* ConverterDAODTO.swift in Sources */,
+				5277A58624D9B432006032F3 /* FavoritesPresenter.swift in Sources */,
 				5277A53C24D43C3E006032F3 /* NetworkManager.swift in Sources */,
 				5255C8AC24C3CE67008E43ED /* HistoryPresenter.swift in Sources */,
 				5277A54B24D4405C006032F3 /* EmailPasswordEndPoint.swift in Sources */,
 				5277A55624D831ED006032F3 /* Email+CoreDataClass.swift in Sources */,
 				5277A52724D435CA006032F3 /* EmailValidationAPIModel.swift in Sources */,
+				525676C124E56CCD00C0F1FA /* CheckInteractor.swift in Sources */,
+				52646FEA24ED631000D3AA9C /* SplashAnimator.swift in Sources */,
+				52646FE824ED61DF00D3AA9C /* SplashPresenter.swift in Sources */,
 				5255C8B224C3CEDE008E43ED /* HistoryWorker.swift in Sources */,
 				5255C8A824C3CE0D008E43ED /* HistoryModels.swift in Sources */,
+				5231F93E24EABF8C0098B285 /* IconNetworkManager.swift in Sources */,
 				5277A54924D44016006032F3 /* EmailValidationEndPoint.swift in Sources */,
+				525676C324E572D000C0F1FA /* CheckRouter.swift in Sources */,
 				5277A54024D43CA2006032F3 /* EmailValidationNetworkManager.swift in Sources */,
+				52B17DA324E43B3300FC8653 /* Constants.swift in Sources */,
 				5255C87F24C3C9B4008E43ED /* AppDelegate.swift in Sources */,
 				5277A52924D43836006032F3 /* EmailPasswordAPIModel.swift in Sources */,
+				525676C624E5769D00C0F1FA /* QueryViewModel.swift in Sources */,
 				5277A52524D43593006032F3 /* NumberAPIModel.swift in Sources */,
 				5277A53724D439DE006032F3 /* HTTPTask.swift in Sources */,
+				5231F93824EAAF720098B285 /* String+.swift in Sources */,
 				5277A54724D43FE1006032F3 /* NumberEndPoint.swift in Sources */,
 				5277A55424D831ED006032F3 /* PhoneNumber+CoreDataClass.swift in Sources */,
 				5255C8A624C3CDE4008E43ED /* HistoryViewController.swift in Sources */,
-				5277A55724D831ED006032F3 /* Email+CoreDataProperties.swift in Sources */,
+				52B17D9E24E4342100FC8653 /* CheckViewController.swift in Sources */,
+				5277A58B24D9B432006032F3 /* FavoritesRouter.swift in Sources */,
+				525676C924E57B2200C0F1FA /* DetailedViewController.swift in Sources */,
 				5255C89A24C3CA86008E43ED /* LayoutGuideProvider.swift in Sources */,
+				5277A5B124DAFAF4006032F3 /* Breach+CoreDataProperties.swift in Sources */,
+				5277A5B624DD7530006032F3 /* PhoneNumber+CoreDataProperties.swift in Sources */,
 				5277A55224D831ED006032F3 /* Breach+CoreDataClass.swift in Sources */,
+				5231F93C24EABE4A0098B285 /* IconBreachEndPoint.swift in Sources */,
+				52375A4D24E5679F00A7D089 /* CheckPresenter.swift in Sources */,
 				5277A53024D43915006032F3 /* JSONParameterEncoder.swift in Sources */,
 				5277A55D24D84BAA006032F3 /* ConverterToQuery.swift in Sources */,
 			);

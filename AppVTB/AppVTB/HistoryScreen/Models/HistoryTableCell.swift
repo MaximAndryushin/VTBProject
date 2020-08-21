@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryTableCell: UITableViewCell {
+final class HistoryTableCell: UITableViewCell {
     
     // MARK: - Constants
     
@@ -26,7 +26,7 @@ class HistoryTableCell: UITableViewCell {
     private var stackTitle: UIStackView!
     private var descriptionLabel: UILabel!
     
-    var viewModel: Query? {
+    var viewModel: QueryViewModel? {
         didSet {
             if let viewModel = viewModel {
                 updateContent(with: viewModel)
@@ -88,7 +88,7 @@ class HistoryTableCell: UITableViewCell {
         
     }
     
-    private func updateContent(with viewModel: Query) {
+    private func updateContent(with viewModel: QueryViewModel) {
         nameLabel.text = viewModel.getLabelText()
         dateLabel.text = viewModel.getDate()
         descriptionLabel.text = viewModel.getDescription()

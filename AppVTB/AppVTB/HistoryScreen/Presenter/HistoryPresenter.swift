@@ -14,14 +14,23 @@ protocol HistoryPresentationLogic {
 
 final class HistoryPresenter: HistoryPresentationLogic {
     
+    //MARK: - Constants
+    private enum Locals {
+        static let labelsViewModel = ["valid", "isValid", "countryName", "breaches"]
+    }
+    
     weak var viewController: HistoryDisplayLogic?
     
     
     // MARK: - presentQueries
     
     func presentQueries(response: History.ShowQueries.Response) {
-        let queries = response.queries
-        // response -> viewModel (TO CHANGE) ((DTO -> Query))
+        var queries = response.queries
+        queries = queries.map { query in
+            var temp = query
+            temp.filterDesription{ key in return Locals.labelsViewModel.contains(key) }
+            return temp
+        }
         viewController?.displayQueries(viewModel: queries)
     }
     

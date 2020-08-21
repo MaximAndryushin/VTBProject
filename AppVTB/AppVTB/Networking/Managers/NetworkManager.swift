@@ -17,6 +17,8 @@ public enum NetworkResponse: String {
     case noData = "Response returned with no data to decode."
     case unableToDecode = "We could not decode the response."
     case notFound = "Not found"
+    case serverError = "Server Error"
+    case clientError = "Other Client Error"
 }
 
 public enum Result<String> {
@@ -32,10 +34,11 @@ extension NetworkResponseHandler {
     func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String> {
         switch response.statusCode {
         case 200...299: return .success
+        case 400: return .failure(NetworkResponse.badRequest.rawValue)
+        case 401...403: return .failure(NetworkResponse.authenticationError.rawValue)
         case 404: return .failure(NetworkResponse.notFound.rawValue)
-        case 401...500: return .failure(NetworkResponse.authenticationError.rawValue)
-        case 501...599: return .failure(NetworkResponse.badRequest.rawValue)
-        case 600: return .failure(NetworkResponse.outdated.rawValue)
+        case 405..<500: return .failure(NetworkResponse.clientError.rawValue)
+        case 500...599: return .failure(NetworkResponse.serverError.rawValue)
         default: return .failure(NetworkResponse.failed.rawValue)
         }
     }

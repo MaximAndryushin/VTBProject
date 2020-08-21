@@ -12,24 +12,52 @@ public typealias NetworkRouterCompletion = (_ data: Data?,_ response: URLRespons
 
 protocol NetworkRouter: class {
     associatedtype EndPoint: EndPointType
-    func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion)
+    func request<M:Decodable>(_ route: EndPoint, modelType: M.Type, completion: @escaping (_ model: M?, _ error: String?) -> ())
     func cancel()
 }
 
-class Router<EndPoint: EndPointType>: NetworkRouter {
-    
+class Router<EndPoint: EndPointType>: NetworkResponseHandler, NetworkRouter {
     
     private var task: URLSessionTask?
     
-    func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion) {
+    func request<M: Decodable>(_ route: EndPoint, modelType: M.Type, completion: @escaping (_ model: M?, _ error: String?) -> ()) {
         let session = URLSession.shared
         do {
             let request = try buildRequest(from: route)
             task = session.dataTask(with: request, completionHandler: { data, response, error in
-                completion(data, response, error)
+                
+                if error != nil {
+                    completion(nil, "Please check your network connection.")
+                }
+                
+                if let response = response as? HTTPURLResponse {
+                    let result = self.handleNetworkResponse(response)
+                    switch result {
+                    case .success:
+                        guard let responseData = data else {
+                            completion(nil, NetworkResponse.noData.rawValue)
+                            return
+                        }
+                        do {
+                            if modelType == Data.self {
+                                completion(responseData as? M, nil)
+                            } else {
+                                let decoder = JSONDecoder()
+                                decoder.keyDecodingStrategy = .convertFromSnakeCase //IMPORTANT
+                                let response = try decoder.decode(modelType.self, from: responseData)
+                                completion(response, nil)
+                            }
+                        } catch {
+                            completion(nil, NetworkResponse.unableToDecode.rawValue)
+                        }
+                    case .failure(let networkFailureError):
+                        completion(nil, networkFailureError)
+                    }
+                }
             })
+            
         } catch {
-            completion(nil, nil, error)
+            completion(nil, "\(error)")
         }
         task?.resume()
     }
@@ -40,7 +68,7 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
     
     fileprivate func buildRequest(from route: EndPoint) throws -> URLRequest {
         
-        var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path), cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
+        var request = URLRequest(url: route.path.count == 0 ? route.baseURL : route.baseURL.appendingPathComponent(route.path), cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10.0)
         
         request.httpMethod = route.httpMethod.rawValue
         do {
@@ -53,14 +81,7 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
                 
                 try self.configureParameters(bodyParameters: bodyParameters, bodyEncoding: bodyEncoding, urlParameters: urlParameters, request: &request)
                 
-            case .requestParametersAndHeaders(let bodyParameters, let afterPathArguments, let bodyEncoding, let urlParameters, let additionalHeaders):
-                
-                
-                //one of used api have that interface: baseURL/path/(query)?parameters i.e. query item placed in path part
-                for value in afterPathArguments {
-                    let currentURL = request.url
-                    request.url? = currentURL.flatMap({URL(string: $0.absoluteString + "\(value)".addingPercentEncoding(withAllowedCharacters: .urlUserAllowed)!)})!
-                }
+            case .requestParametersAndHeaders(let bodyParameters, let bodyEncoding, let urlParameters, let additionalHeaders):
                 
                 self.addAdditionalHeaders(additionalHeaders, request: &request)
                 try self.configureParameters(bodyParameters: bodyParameters, bodyEncoding: bodyEncoding, urlParameters: urlParameters, request: &request)
