@@ -8,6 +8,7 @@
 import UIKit
 
 enum History {
+    
     // MARK: - Use cases
     
     enum ShowQueries {

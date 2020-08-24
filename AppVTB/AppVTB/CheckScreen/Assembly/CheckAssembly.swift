@@ -23,8 +23,7 @@ final class CheckAssembly {
         interactor.presenter = presenter
         presenter.interactor = interactor
 
-        let router = CheckRouter()
-        router.view = view
+        let router = CheckRouter(view: view)
         
         presenter.router = router
         

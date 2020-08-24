@@ -10,7 +10,11 @@ import UIKit
 
 final class CheckRouter {
     
-    weak var view: UIViewController?
+    unowned let view: UIViewController
+    
+    init(view: UIViewController) {
+        self.view = view
+    }
     
 }
 
@@ -18,7 +22,7 @@ extension CheckRouter: CheckRouterInput {
     
     func showDetails(_ viewModel: QueryViewModel) {
         DispatchQueue.main.async {
-            self.view?.present(DetailedViewController(viewModel: viewModel), animated: true, completion: nil)
+            self.view.present(DetailedViewController(viewModel: viewModel), animated: true, completion: nil)
         }
     }
 }

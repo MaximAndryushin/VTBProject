@@ -6,8 +6,6 @@
 //  Copyright (c) 2020 Maxim Andryushin. All rights reserved.
 
 
-import UIKit
-
 protocol HistoryPresentationLogic {
     func presentQueries(response: History.ShowQueries.Response)
 }
@@ -15,6 +13,7 @@ protocol HistoryPresentationLogic {
 final class HistoryPresenter: HistoryPresentationLogic {
     
     //MARK: - Constants
+    
     private enum Locals {
         static let labelsViewModel = ["valid", "isValid", "countryName", "breaches"]
     }

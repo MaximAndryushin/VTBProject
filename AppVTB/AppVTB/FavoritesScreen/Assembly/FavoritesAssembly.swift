@@ -22,9 +22,8 @@ final class FavoritesAssembly {
         interactor.presenter = presenter
         presenter.interactor = interactor
         
-        let router = FavoritesRouter()
+        let router = FavoritesRouter(view: view)
         presenter.router = router
-        router.view = view
         return view
     }
 }

@@ -10,13 +10,18 @@ import UIKit
 
 final class FavoritesRouter {
     
-    weak var view: UIViewController?
+    unowned let view: UIViewController
+    
+    init(view: UIViewController) {
+        self.view = view
+    }
+    
 }
 
 extension FavoritesRouter: FavoritesRouterInput {
     func showDetailedView(viewModel: QueryViewModel) {
         DispatchQueue.main.async {
-            self.view?.present(DetailedViewController(viewModel: viewModel), animated: true, completion: nil)
+            self.view.present(DetailedViewController(viewModel: viewModel), animated: true, completion: nil)
         }
     }
     

@@ -32,12 +32,12 @@ final class FavoritesPresenter {
     var interactor: FavoritesInteractorInput?
     var router: FavoritesRouterInput?
     private let converter: DataConverterInput
-    private let parser: Parser
+    private let parser: ParserInput
     
     
     // MARK: - Initializer
     
-    init(converter: DataConverterInput, parser: Parser) {
+    init(converter: DataConverterInput, parser: ParserInput) {
         self.converter = converter
         self.parser = parser
     }
@@ -63,7 +63,7 @@ extension FavoritesPresenter: FavoritesViewOutput {
     }
     
     func delete(query: QueryViewModel) {
-        interactor?.delete(name: query.getName(), type: query.getType())
+        interactor?.delete(name: query.name, type: query.type)
     }
     
     func addNewData(_ name: String) {
@@ -101,11 +101,11 @@ extension FavoritesPresenter: FavoritesInteractorOutput {
             } else if let number = object as? NumberDTO {
                 return converter.createViewModelFrom(number: number)
             } else {
-                self.view?.showError("HMMMMMMM")
+                self.view?.showError("STRANGE SHIT")
                 return QueryViewModel()
             }
         }
-        queries.sort{ $0.getDate() < $1.getDate() }
+        queries.sort{ $0.date < $1.date }
         self.view?.updateView(viewModels: queries)
         self.update()
     }
@@ -118,12 +118,13 @@ extension FavoritesPresenter: FavoritesPresenterUpdateLogic {
     
     //MARK: - Constants
     
-    enum Locals {
+    private enum Locals {
         static let tenSec: Double = 10
         static let oneMin: Double = 60
         static let threeMin: Double = 3 * 60
         static let fiveMin: Double = 5 * 60
         static let tenMin: Double = 10 * 60
+        static let tolerance: Double = 2
     }
     
     //MARK: - Properties
@@ -135,22 +136,17 @@ extension FavoritesPresenter: FavoritesPresenterUpdateLogic {
     //MARK: - Methods
     
     func update() {
-        if let model = current {
-            let queue = DispatchQueue.global(qos: .utility)
-            let item = DispatchWorkItem {
-                if let cur = self.current, cur == model {
-                    self.interactor?.fetchData(cur.getName(), type: cur.getType())
+        let timer = Timer.scheduledTimer(withTimeInterval: Locals.tenSec, repeats: true ) { timer in
+            let date = Date()
+            while(true) {
+                if let cur = self.current, cur.date.timeIntervalSince(date) > Locals.tenSec {
+                    self.interactor?.fetchData(cur.name, type: cur.type)
+                } else {
+                    break
                 }
             }
-            let interval = max(model.getRawDate().addingTimeInterval(Locals.tenSec).timeIntervalSinceNow, TimeInterval(0))
-            queue.asyncAfter(deadline: DispatchTime.now() + interval, execute: item)
-            
-            
-            //to fix this shiiiiiiiit
-//            item.notify(queue: queue) {
-//                self.update()
-//            }
         }
+        timer.tolerance = Locals.tolerance
     }
     
 }

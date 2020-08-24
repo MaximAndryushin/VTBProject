@@ -35,13 +35,13 @@ final class CheckPresenter {
     weak var view: CheckViewInput?
     var interactor: CheckInteractorInput?
     var router: CheckRouterInput?
-    private var parser: Parser
+    private var parser: ParserInput
     private var converter: DataConverterInput
     
     
     //MARK: - Initializers
     
-    init(parser: Parser, converter: DataConverterInput) {
+    init(parser: ParserInput, converter: DataConverterInput) {
         self.parser = parser
         self.converter = converter
     }

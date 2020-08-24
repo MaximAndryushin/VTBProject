@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 protocol FavoritesInteractorOutput: AnyObject {
     func infoLoaded(data: [Any])
     func showError(_ error: String)
@@ -24,12 +25,12 @@ class FavoritesInteractor {
     //MARK: - Properties
     
     weak var presenter: FavoritesInteractorOutput?
-    private let dataManager: PhoneEmailFavoritesDataManager
-    private let networkManager: (EmailNetworkWorker & NumberNetworkWorker)
+    private let dataManager: PhoneEmailFavoritesDataManagerInput
+    private let networkManager: (EmailNetworkWorkerInput & NumberNetworkWorkerInput)
     
     //MARK: - Initializer
     
-    init(dataManager: PhoneEmailFavoritesDataManager, networkManager: NetworkWorker) {
+    init(dataManager: PhoneEmailFavoritesDataManagerInput, networkManager: (EmailNetworkWorkerInput & NumberNetworkWorkerInput)) {
         self.dataManager = dataManager
         self.networkManager = networkManager
     }

@@ -17,7 +17,7 @@ extension ImageDownload: EndPointType {
     var baseURL: URL {
         switch self {
         case .getIcon(let name) :
-            return URL(string: name) ?? URL(string: "https://ru.wikipedia.org/wiki/%D0%9E%D1%88%D0%B8%D0%B1%D0%BA%D0%B0_404")!
+            return URL(string: name)!
         case .doSmth:
             return URL(string: "https://ru.wikipedia.org/wiki/%D0%9E%D1%88%D0%B8%D0%B1%D0%BA%D0%B0_404")!
         }

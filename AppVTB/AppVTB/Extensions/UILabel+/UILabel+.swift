@@ -9,8 +9,7 @@
 import UIKit
 
 
-//MARK: - Fabric Method
-
+//usefull for this project
 extension UILabel {
     convenience init(text: NSAttributedString, font: UIFont, alignment: NSTextAlignment = .natural) {
         self.init()

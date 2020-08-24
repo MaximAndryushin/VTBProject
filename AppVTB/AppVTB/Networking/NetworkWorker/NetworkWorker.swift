@@ -11,14 +11,14 @@ import UIKit
 
 // MARK: - Email API
 
-protocol EmailNetworkWorker {
+protocol EmailNetworkWorkerInput {
     func getEmail(_ name: String, _ completion: @escaping (EmailDTO?, String?) -> ())
 }
 
 
 // MARK: - Phone Number API
 
-protocol NumberNetworkWorker {
+protocol NumberNetworkWorkerInput {
     func getNumber(_ name: String, _ completion: @escaping (NumberDTO?, String?) -> ())
 }
 
@@ -37,17 +37,17 @@ final class NetworkWorker {
     
     // MARK: - Properties
     
-    private let emailInfoManager: EmailValidatorNetworkManager
-    private let emailBreachManager: EmailBreachNetworkManager
-    private let numberManager: PhoneNumberNetworkManager
+    private let emailInfoManager: EmailValidationNetworkManagerInput
+    private let emailBreachManager: EmailBreachNetworkManagerInput
+    private let numberManager: PhoneNumberNetworkManagerInput
     private let iconManager: ImageDownloadManagerInput
-    private let emailNetworkConverter: EmailNetworkModelToDTOConverter
-    private let numberNetworkConverter: NumberNetworkModelToDTOConverter
+    private let emailNetworkConverter: EmailNetworkModelToDTOConverterInput
+    private let numberNetworkConverter: NumberNetworkModelTODTOConverterInput
     
     
     // MARK: - Initializer
     
-    init(emailInfoManager: EmailValidatorNetworkManager, emailBreachManager: EmailBreachNetworkManager, numberManager: PhoneNumberNetworkManager, emailNetworkConverter: EmailNetworkModelToDTOConverter, numberNetworkConverter: NumberNetworkModelToDTOConverter, iconManager: ImageDownloadManagerInput) {
+    init(emailInfoManager: EmailValidationNetworkManagerInput, emailBreachManager: EmailBreachNetworkManagerInput, numberManager: PhoneNumberNetworkManagerInput, emailNetworkConverter: EmailNetworkModelToDTOConverterInput, numberNetworkConverter: NumberNetworkModelTODTOConverterInput, iconManager: ImageDownloadManagerInput) {
         self.emailInfoManager = emailInfoManager
         self.emailBreachManager = emailBreachManager
         self.numberManager = numberManager
@@ -60,7 +60,7 @@ final class NetworkWorker {
 
 // MARK: - EmailNetworkWorker
 
-extension NetworkWorker: EmailNetworkWorker {
+extension NetworkWorker: EmailNetworkWorkerInput {
     
     func getEmail(_ name: String, _ completion: @escaping (EmailDTO?, String?) -> ()) {
         emailInfoManager.getInfo(about: name) { (email, error) in
@@ -108,7 +108,7 @@ extension NetworkWorker: EmailNetworkWorker {
 
 // MARK: - NumberNetworkWorker
 
-extension NetworkWorker: NumberNetworkWorker {
+extension NetworkWorker: NumberNetworkWorkerInput {
     
     func getNumber(_ name: String, _ completion: @escaping (NumberDTO?, String?) -> ()) {
         numberManager.getInfo(about: name) { (number, error) in

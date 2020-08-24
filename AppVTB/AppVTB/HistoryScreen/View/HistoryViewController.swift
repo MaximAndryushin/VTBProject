@@ -31,9 +31,23 @@ final class HistoryViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var tableView: UITableView!
-    private var filterSegmentedControl: UISegmentedControl!
-    private var sortingSegmentedControl: UISegmentedControl!
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(HistoryTableCell.self, forCellReuseIdentifier: Locals.cellID)
+        tableView.estimatedRowHeight = Locals.cellHeight
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorInset = .zero
+        return tableView
+    }()
+    
+    private lazy var filterSegmentedControl: UISegmentedControl = {
+        return configureSegmentedControl(items: Locals.filterOptions, action: #selector(indexOfFilterChanged(_:)))
+    }()
+    
+    private lazy var sortingSegmentedControl: UISegmentedControl = {
+        return configureSegmentedControl(items: Locals.sortingOptions, action: #selector(indexOfSortingChanged(_:)))
+    }()
+    
     private var cellModels: [QueryViewModel] = [] {
         didSet {
             tableView.reloadData()
@@ -59,26 +73,20 @@ final class HistoryViewController: UIViewController {
         let historyWorker = HistoryWorker(dataManager: DataManager.shared)
         let interactor = HistoryInteractor(worker: historyWorker, numberConverter: NumberToQueryConverter(), emailConverter: EmailToQueryConverter())
         let presenter = HistoryPresenter()
-        let router = HistoryRouter()
+        let router = HistoryRouter(view: viewController)
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
         presenter.viewController = viewController
-        router.viewController = viewController
         router.dataStore = interactor
     }
     
     // MARK: - Configure SubViews
     
     private func configureTableView() {
-        tableView = UITableView()
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(HistoryTableCell.self, forCellReuseIdentifier: Locals.cellID)
-        tableView.estimatedRowHeight = Locals.cellHeight
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.separatorInset = .zero
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -109,9 +117,6 @@ final class HistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        filterSegmentedControl = configureSegmentedControl(items: Locals.filterOptions, action: #selector(indexOfFilterChanged(_:)))
-        sortingSegmentedControl = configureSegmentedControl(items: Locals.sortingOptions, action: #selector(indexOfSortingChanged(_:)))
         
         NSLayoutConstraint.activate([
             filterSegmentedControl.topAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.topAnchor),
@@ -206,7 +211,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        router?.showDetailedView(cellModels[indexPath.row].getName())
+        router?.showDetailedView(cellModels[indexPath.row].name)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

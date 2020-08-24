@@ -24,18 +24,20 @@ final class CheckInteractor {
     //MARK: - Properties
     
     weak var presenter: CheckInteractorOutput?
-    private let dataManager: SaveDataManager
-    private let networkManager: (EmailNetworkWorker & NumberNetworkWorker)
+    private let dataManager: SaveDataManagerInput
+    private let networkManager: (EmailNetworkWorkerInput & NumberNetworkWorkerInput)
     
     
     //MARK: - Initializer
     
-    init(dataManager: SaveDataManager, networkManager: (EmailNetworkWorker & NumberNetworkWorker)) {
+    init(dataManager: SaveDataManagerInput, networkManager: (EmailNetworkWorkerInput & NumberNetworkWorkerInput)) {
         self.dataManager = dataManager
         self.networkManager = networkManager
     }
 }
 
+
+// MARK: - Check Interactor Input
 
 extension CheckInteractor: CheckInteractorInput {
     

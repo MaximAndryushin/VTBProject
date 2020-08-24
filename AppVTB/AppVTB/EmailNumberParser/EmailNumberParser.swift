@@ -17,13 +17,13 @@ enum TypeOfQuery: String, Codable {
     case error = "ERROR"
 }
 
-protocol Parser {
+protocol ParserInput {
     func getType(from text: String) -> TypeOfQuery
 }
 
 //MARK: - Parser
 
-final class EmailNumberParser: Parser {
+final class EmailNumberParser: ParserInput {
     
     func getType(from text: String) -> TypeOfQuery {
         if isEmail(text) {
@@ -51,7 +51,7 @@ final class EmailNumberParser: Parser {
         if text.isEmpty {
             return false
         }
-        let numberRegEx = "(\\+?)([0-9]+)" //Check that number consisist only from digits
+        let numberRegEx = "(\\+?)([0-9]+)" // Check that number consisist only from digits
         let numberPred = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
         return numberPred.evaluate(with: text)
     }

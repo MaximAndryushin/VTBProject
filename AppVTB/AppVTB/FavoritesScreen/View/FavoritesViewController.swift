@@ -44,12 +44,32 @@ final class FavoritesViewController: UIViewController {
     
     //MARK: - Properties
     
-    var presenter: (FavoritesViewOutput & FavoritesPresenterUpdateLogic)?
-    private var favoritesLabel: UILabel!
-    private var tableView: UITableView!
-    private var addButton: UIButton!
-    private var stackView: UIStackView!
-    private var cellModels: [QueryViewModel] = []
+    var presenter: FavoritesViewOutput?
+    private lazy var favoritesLabel: UILabel = {
+        return UILabel(text: NSAttributedString(string: Locals.title), font: Constants.titleFont, alignment: .center)
+    }()
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(HistoryTableCell.self, forCellReuseIdentifier: Locals.cellID)
+        tableView.estimatedRowHeight = Locals.cellHeight
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorInset = .zero
+        return tableView
+    }()
+    
+    private lazy var addButton: UIButton = {
+        let addButton = UIButton()
+        addButton.setTitle(Locals.buttonTitle, for: .normal)
+        addButton.backgroundColor = .black
+        addButton.setTitleColor(.white , for: .normal)
+        addButton.contentHorizontalAlignment = .center
+        addButton.layer.cornerRadius = Locals.cornerRadiusButton
+        addButton.addTarget(self, action: #selector(addNewData), for: .touchUpInside)
+        return addButton
+    }()
+    
+    private lazy var cellModels: [QueryViewModel] = []
     
     
     //MARK: - Life Cycle
@@ -68,11 +88,9 @@ final class FavoritesViewController: UIViewController {
     //MARK: - Configure SubViews
     
     private func configureLabel() {
-        
-        favoritesLabel = UILabel(text: NSAttributedString(string: Locals.title), font: Constants.titleFont, alignment: .center)
-        
         view.addSubview(favoritesLabel)
         favoritesLabel.translatesAutoresizingMaskIntoConstraints = false
+         
         NSLayoutConstraint.activate([
             favoritesLabel.topAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.topAnchor),
             favoritesLabel.leadingAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.leadingAnchor),
@@ -81,15 +99,9 @@ final class FavoritesViewController: UIViewController {
     }
     
     private func configureButton() {
-        addButton = UIButton()
-        addButton.setTitle(Locals.buttonTitle, for: .normal)
-        addButton.backgroundColor = .black
-        addButton.setTitleColor(.white , for: .normal)
-        addButton.contentHorizontalAlignment = .center
-        addButton.layer.cornerRadius = Locals.cornerRadiusButton
-        addButton.addTarget(self, action: #selector(addNewData), for: .touchUpInside)
         view.addSubview(addButton)
         addButton.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             addButton.topAnchor.constraint(equalTo: favoritesLabel.bottomAnchor, constant: Locals.offset),
             addButton.leadingAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.leadingAnchor, constant: Locals.offset),
@@ -98,14 +110,9 @@ final class FavoritesViewController: UIViewController {
     }
     
     private func configureTableView() {
-        tableView = UITableView()
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(HistoryTableCell.self, forCellReuseIdentifier: Locals.cellID)
-        tableView.estimatedRowHeight = Locals.cellHeight
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.separatorInset = .zero
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -141,7 +148,7 @@ extension FavoritesViewController: FavoritesViewInput {
     }
     
     private func deleteViewModel(_ name: String) {
-        let id = cellModels.firstIndex{ return $0.getName() == name }
+        let id = cellModels.firstIndex{ return $0.name == name }
         if let index = id {
             cellModels.remove(at: index)
             self.tableView.beginUpdates()
@@ -152,12 +159,11 @@ extension FavoritesViewController: FavoritesViewInput {
     
     func appendViewModel(viewModel: QueryViewModel) {
         DispatchQueue.main.async {
-            self.deleteViewModel(viewModel.getName())
+            self.deleteViewModel(viewModel.name)
             self.cellModels.append(viewModel)
             self.tableView.beginUpdates()
             self.tableView.insertRows(at: [IndexPath(row: self.cellModels.count - 1, section: 0)], with: .automatic)
             self.tableView.endUpdates()
-            self.presenter?.update()
         }
     }
     

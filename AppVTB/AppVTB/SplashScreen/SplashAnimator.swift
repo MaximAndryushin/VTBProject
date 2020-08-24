@@ -18,7 +18,7 @@ final class SplashAnimator {
     // MARK: - Constants
     
     private enum Locals {
-        static let scaleFactor: CGFloat = 1.0
+        static let scaleFactor: CGFloat = 1.2
         static let bigLogo = UIImage(named: "bigLogo")
         
     }
@@ -62,7 +62,7 @@ extension SplashAnimator: SplashAnimatorDescription {
         foregroundSplashWindow.isHidden = false
         
         UIView.animate(withDuration: 0.3, animations: {
-            self.foregroundSplashViewController.logoImageView.transform = CGAffineTransform(scaleX: 1, y: 0.5)
+            self.foregroundSplashViewController.logoImageView.transform = CGAffineTransform(scaleX: Locals.scaleFactor, y: Locals.scaleFactor)
         })
         
         

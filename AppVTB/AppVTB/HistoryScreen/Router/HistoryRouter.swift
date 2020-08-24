@@ -14,8 +14,12 @@ protocol HistoryRoutingLogic {
 
 final class HistoryRouter {
     
-    weak var viewController: HistoryViewController?
+    unowned let view: UIViewController
     weak var dataStore: HistoryDataStore?
+    
+    init(view: UIViewController) {
+        self.view = view
+    }
 }
 
 
@@ -23,8 +27,9 @@ extension HistoryRouter: HistoryRoutingLogic {
     
     func showDetailedView(_ name: String) {
         DispatchQueue.main.async {
-            let first = self.dataStore?.queries.first(where: { $0.getName() == name })
-            self.viewController?.present(DetailedViewController(viewModel: first!), animated: true, completion: nil)
+            if let first = self.dataStore?.queries.first(where: { $0.name == name }) {
+                self.view.present(DetailedViewController(viewModel: first), animated: true, completion: nil)
+            }
         }
     }
     

@@ -6,18 +6,16 @@
 //  Copyright (c) 2020 Maxim Andryushin. All rights reserved.
 
 
-import UIKit
-
 final class HistoryWorker: DataWorker {
     
     //MARK: - Properties
     
-    private let manager: PhoneEmailDataManager
+    private let manager: NumberEmailDataManagerInput
     
     
     //MARK: - Initializer
     
-    init(dataManager: PhoneEmailDataManager) {
+    init(dataManager: NumberEmailDataManagerInput) {
         self.manager = dataManager
     }
     

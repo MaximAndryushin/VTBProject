@@ -10,11 +10,11 @@ import UIKit
 
 
 // MARK: - NumberAPIResponse to DTO
-protocol NumberNetworkModelToDTOConverter {
+protocol NumberNetworkModelTODTOConverterInput {
     func convert(number: NumberAPIModel) -> NumberDTO
 }
 
-final class NumberNetworkModelConverter: NumberNetworkModelToDTOConverter {
+final class NumberNetworkModelConverter: NumberNetworkModelTODTOConverterInput {
     func convert(number: NumberAPIModel) -> NumberDTO {
         return NumberDTO(valid: number.valid,
                          number: number.number,
@@ -32,11 +32,11 @@ final class NumberNetworkModelConverter: NumberNetworkModelToDTOConverter {
 
 // MARK: - BreachesAPIResponse to DTO
 
-protocol BreachNetworkModelToDTOConverter {
+protocol BreachNetworkModelTODTOConverterInput {
     func convert(breach: BreachAPI, logo: Data?) -> BreachDTO
 }
 
-final class BreachNetworkModelConverter: BreachNetworkModelToDTOConverter {
+final class BreachNetworkModelConverter: BreachNetworkModelTODTOConverterInput {
     func convert(breach: BreachAPI, logo: Data?) -> BreachDTO {
         return BreachDTO(name: breach.name,
                          domain: breach.domain,
@@ -49,15 +49,15 @@ final class BreachNetworkModelConverter: BreachNetworkModelToDTOConverter {
 }
 
 // MARK: - EmailAPIResponse to DTO
-protocol EmailNetworkModelToDTOConverter {
+protocol EmailNetworkModelToDTOConverterInput {
     func convert(email: EmailValidationAPIModel, breaches: EmailAPIResponse) -> EmailDTO
 }
 
-final class EmailNetworkModelConverter: EmailNetworkModelToDTOConverter {
+final class EmailNetworkModelConverter: EmailNetworkModelToDTOConverterInput {
     
-    private let breachConverter: BreachNetworkModelToDTOConverter
+    private let breachConverter: BreachNetworkModelTODTOConverterInput
     
-    init(breachConverter: BreachNetworkModelToDTOConverter) {
+    init(breachConverter: BreachNetworkModelTODTOConverterInput) {
         self.breachConverter = breachConverter
     }
     
@@ -86,7 +86,7 @@ final class EmailNetworkModelConverter: EmailNetworkModelToDTOConverter {
                         isRetired: retired,
                         isFabricated: fabricated,
                         breaches: breaches.map{ return breachConverter.convert(breach: $0.0, logo: $0.1) },
-                        date: Date(timeIntervalSinceNow: 0)
+                        date: Date()
         )
     }
 }

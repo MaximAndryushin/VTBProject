@@ -21,10 +21,25 @@ final class HistoryTableCell: UITableViewCell {
     
     // MARK: - Properties
     
-    private var nameLabel: UILabel!
-    private var dateLabel: UILabel!
-    private var stackTitle: UIStackView!
-    private var descriptionLabel: UILabel!
+    private lazy var nameLabel: UILabel = {
+        return configureLabel(font: Locals.sizeOfLabelFont, color: Locals.colorOfLabelText)
+    }()
+    
+    private lazy var dateLabel: UILabel = {
+        return configureLabel(font: Locals.sizeOfDescriptionFont, color: Locals.colorOfLabelText)
+    }()
+    
+    private lazy var stackTitle: UIStackView = {
+        let stackTitle = UIStackView()
+        stackTitle.alignment = .center
+        stackTitle.axis = .horizontal
+        stackTitle.distribution = .equalCentering
+        return stackTitle
+    }()
+    
+    private lazy var descriptionLabel: UILabel = {
+        return configureLabel(font: Locals.sizeOfDescriptionFont, color: Locals.colorOfDescriptionText)
+    }()
     
     var viewModel: QueryViewModel? {
         didSet {
@@ -40,18 +55,14 @@ final class HistoryTableCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        nameLabel = configureLabel(font: Locals.sizeOfLabelFont, color: Locals.colorOfLabelText)
-        dateLabel = configureLabel(font: Locals.sizeOfDescriptionFont, color: Locals.colorOfLabelText)
-        descriptionLabel = configureLabel(font: Locals.sizeOfDescriptionFont, color: Locals.colorOfDescriptionText)
-        stackTitle = UIStackView()
         addSubview(stackTitle)
         addSubview(descriptionLabel)
         stackTitle.addArrangedSubview(nameLabel)
         stackTitle.addArrangedSubview(dateLabel)
-        stackTitle.alignment = .center
-        stackTitle.axis = .horizontal
-        stackTitle.distribution = .equalCentering
+        
         stackTitle.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             stackTitle.topAnchor.constraint(equalTo: self.topAnchor),
             stackTitle.trailingAnchor.constraint(equalTo: self.trailingAnchor),
@@ -71,8 +82,6 @@ final class HistoryTableCell: UITableViewCell {
         label.numberOfLines = 0
         label.preferredMaxLayoutWidth = self.bounds.width
         self.addSubview(label)
-
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }
     
@@ -89,9 +98,9 @@ final class HistoryTableCell: UITableViewCell {
     }
     
     private func updateContent(with viewModel: QueryViewModel) {
-        nameLabel.text = viewModel.getLabelText()
-        dateLabel.text = viewModel.getDate()
-        descriptionLabel.text = viewModel.getDescription()
+        nameLabel.text = viewModel.labelText
+        dateLabel.text = viewModel.formattedDate
+        descriptionLabel.text = viewModel.descriptionOfProperties
     }
     
 }

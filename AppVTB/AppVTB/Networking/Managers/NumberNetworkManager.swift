@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol PhoneNumberNetworkManager {
+protocol PhoneNumberNetworkManagerInput {
     func getInfo(about number: String, completion: @escaping (_ number: NumberAPIModel?, _ error: String?) -> ())
 }
 
-final class NumberNetworkManager: NetworkResponseHandler, PhoneNumberNetworkManager {
+final class NumberNetworkManager: NetworkResponseHandler, PhoneNumberNetworkManagerInput {
     
     let router = Router<NumberApi>()
     

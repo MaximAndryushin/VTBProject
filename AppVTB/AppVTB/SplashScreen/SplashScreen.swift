@@ -14,13 +14,19 @@ final class SplashViewController: UIViewController {
     
     private enum Locals {
         static let logo = UIImage(named: "logo")
+        static let logoWidth: CGFloat = 280
+        static let logoHeight: CGFloat = 320
     }
     
     
     // MARK: - Properties
     
     var logoIsHidden = false
-    var logoImageView: UIImageView!
+    lazy var logoImageView: UIImageView = {
+        let logoImageView = UIImageView(image: Locals.logo)
+        logoImageView.isHidden = logoIsHidden
+        return logoImageView
+    }()
     
     
     // MARK: - Life Cycle
@@ -33,15 +39,13 @@ final class SplashViewController: UIViewController {
     
     
     private func configureLogo() {
-        logoImageView = UIImageView(image: Locals.logo)
-        logoImageView.isHidden = logoIsHidden
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logoImageView)
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.topAnchor),
-            logoImageView.bottomAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.bottomAnchor),
-            logoImageView.leadingAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.leadingAnchor),
-            logoImageView.trailingAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.trailingAnchor)
+            logoImageView.widthAnchor.constraint(equalToConstant: Locals.logoWidth),
+            logoImageView.heightAnchor.constraint(equalToConstant: Locals.logoHeight),
+            logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     

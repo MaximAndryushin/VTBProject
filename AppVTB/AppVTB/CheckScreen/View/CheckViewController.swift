@@ -32,52 +32,28 @@ final class CheckViewController: UIViewController {
     //MARK: - Properties
     
     var presenter: CheckViewOutput?
-    private var stackView: UIStackView!
-    private var checkButton: UIButton!
-    private var checkLabel: UILabel!
-    private var checkTextField: UITextField!
     
-    
-    //MARK: - Life Cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        
-        configureStackView()
-        configureLabel()
-        configureTextField()
-        configureButton()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        pulsate()
-        flash()
-    }
-    
-    private func configureStackView() {
-        stackView = UIStackView()
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .equalCentering
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stackView)
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.topAnchor, constant: Locals.offset),
-            stackView.leadingAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.bottomAnchor, constant: -Locals.offset)
-        ])
-    }
-
-    private func configureLabel() {
-        checkLabel = UILabel(text: NSAttributedString(string: Locals.title), font: Constants.titleFont, alignment: .center)
-        
-        stackView.addArrangedSubview(checkLabel)
-    }
+        return stackView
+    }()
     
-    private func configureTextField() {
-        checkTextField = UITextField()
+    private lazy var checkButton: UIButton = {
+        let checkButton = UIButton()
+        checkButton.setImage(UIImage(named: "approved"), for: .normal)
+        checkButton.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
+        return checkButton
+    }()
+    
+    private lazy var checkLabel: UILabel = {
+        return UILabel(text: NSAttributedString(string: Locals.title), font: Constants.titleFont, alignment: .center)
+    }()
+    
+    private lazy var checkTextField: UITextField = {
+        let checkTextField = UITextField()
         checkTextField.placeholder = Locals.placeholder
         checkTextField.borderStyle = .roundedRect
         checkTextField.returnKeyType = .done
@@ -92,22 +68,46 @@ final class CheckViewController: UIViewController {
         checkTextField.font = Locals.font
         checkTextField.translatesAutoresizingMaskIntoConstraints = false
         checkTextField.heightAnchor.constraint(equalToConstant: Locals.heightTextField).isActive = true
-        stackView.addArrangedSubview(checkTextField)
+        return checkTextField
+    }()
+    
+    
+    //MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        
+        configureStackView()
     }
     
-    private func configureButton() {
-        checkButton = UIButton()
-        
-        checkButton.setImage(UIImage(named: "approved"), for: .normal)
-        checkButton.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
+    override func viewDidAppear(_ animated: Bool) {
+        pulsate()
+        flash()
+    }
+    
+    private func configureStackView() {
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(checkLabel)
+        stackView.addArrangedSubview(checkTextField)
         stackView.addArrangedSubview(checkButton)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.topAnchor, constant: Locals.offset),
+            stackView.leadingAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.compatibleSafeAreaLayoutGuide.bottomAnchor, constant: -Locals.offset)
+        ])
     }
     
     @objc private func clickButton() {
         presenter?.check(checkTextField.text)
         checkTextField.text = nil
     }
+    
+    
+    // MARK: - Button Animations
     
     private func pulsate() {
         let pulse = CASpringAnimation(keyPath: "transform.scale")

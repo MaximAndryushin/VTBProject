@@ -26,7 +26,7 @@ class Router<EndPoint: EndPointType>: NetworkResponseHandler, NetworkRouter {
             let request = try buildRequest(from: route)
             task = session.dataTask(with: request, completionHandler: { data, response, error in
                 
-                if error != nil {
+                if let _ = error {
                     completion(nil, "Please check your network connection.")
                 }
                 
