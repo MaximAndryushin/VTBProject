@@ -19,7 +19,7 @@ protocol FavoritesRouterInput {
 }
 
 protocol FavoritesPresenterUpdateLogic {
-    var current: QueryViewModel? { get }
+    var current: [QueryViewModel] { get }
     func update()
 }
 
@@ -129,8 +129,8 @@ extension FavoritesPresenter: FavoritesPresenterUpdateLogic {
     
     //MARK: - Properties
     
-    var current: QueryViewModel? {
-        return view?.getFirst()
+    var current: [QueryViewModel] {
+        return view?.getModels() ?? []
     }
     
     //MARK: - Methods
@@ -138,14 +138,13 @@ extension FavoritesPresenter: FavoritesPresenterUpdateLogic {
     func update() {
         let timer = Timer.scheduledTimer(withTimeInterval: Locals.tenSec, repeats: true ) { timer in
             let date = Date()
-            while(true) {
-                if let cur = self.current, cur.date.timeIntervalSince(date) > Locals.tenSec {
-                    self.interactor?.fetchData(cur.name, type: cur.type)
-                } else {
-                    break
+            for model in self.current {
+                if date.timeIntervalSince(model.date) > Locals.tenSec {
+                    self.interactor?.fetchData(model.name, type: model.type)
                 }
             }
         }
+        RunLoop.current.add(timer, forMode: .common)
         timer.tolerance = Locals.tolerance
     }
     

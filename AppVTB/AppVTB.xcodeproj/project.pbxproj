@@ -164,6 +164,7 @@
 		5231F93524EAAF1D0098B285 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5255C89824C3C9F6008E43ED /* CompatibleSafeAreLayoutGuide */,
 				5231F93624EAAF2A0098B285 /* HTMLToString */,
 				5231F93224EA9ED40098B285 /* UILabel+ */,
 			);
@@ -213,19 +214,14 @@
 		5255C87D24C3C9B4008E43ED /* AppVTB */ = {
 			isa = PBXGroup;
 			children = (
-				52646FE424ED615900D3AA9C /* SplashScreen */,
+				5273BBF824F554A10034D418 /* Screens */,
 				5231F93524EAAF1D0098B285 /* Extensions */,
-				525676C724E57A7600C0F1FA /* DetailedScreen */,
 				525676C424E5765C00C0F1FA /* ViewModel */,
 				52B17DA124E43B1700FC8653 /* Constants */,
-				52B17D9724E432F800FC8653 /* CheckScreen */,
 				52B4683424E30AA80077C938 /* TabBarController */,
 				5277A55924D844F5006032F3 /* Converters */,
 				5277A52224D4356F006032F3 /* Networking */,
-				5255C89824C3C9F6008E43ED /* CompatibleSafeAreLayoutGuide */,
 				5255C89724C3C9E9008E43ED /* EmailNumberParser */,
-				5277A57424D9B432006032F3 /* FavoritesScreen */,
-				5255C89624C3C9DB008E43ED /* HistoryScreen */,
 				5255C89524C3C9C5008E43ED /* Data Manager */,
 				5255C87E24C3C9B4008E43ED /* AppDelegate.swift */,
 				5255C88A24C3C9B5008E43ED /* Assets.xcassets */,
@@ -349,6 +345,18 @@
 			path = SplashScreen;
 			sourceTree = "<group>";
 		};
+		5273BBF824F554A10034D418 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				5255C89624C3C9DB008E43ED /* HistoryScreen */,
+				5277A57424D9B432006032F3 /* FavoritesScreen */,
+				52B17D9724E432F800FC8653 /* CheckScreen */,
+				525676C724E57A7600C0F1FA /* DetailedScreen */,
+				52646FE424ED615900D3AA9C /* SplashScreen */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		5277A52224D4356F006032F3 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,7 +458,7 @@
 				5277A58224D9B432006032F3 /* Router */,
 			);
 			name = FavoritesScreen;
-			path = AppVTB/FavoritesScreen;
+			path = AppVTB/Screens/FavoritesScreen;
 			sourceTree = SOURCE_ROOT;
 		};
 		5277A57724D9B432006032F3 /* Assembly */ = {

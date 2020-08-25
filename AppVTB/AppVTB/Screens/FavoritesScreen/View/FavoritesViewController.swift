@@ -13,7 +13,7 @@ protocol FavoritesViewInput: AnyObject {
     func showAlert();
     func appendViewModel(viewModel: QueryViewModel)
     func showError(_ errorMessage: String)
-    func getFirst() -> QueryViewModel?
+    func getModels() -> [QueryViewModel]
 }
 
 protocol FavoritesViewOutput {
@@ -134,10 +134,10 @@ final class FavoritesViewController: UIViewController {
 
 extension FavoritesViewController: FavoritesViewInput {
     
-    
-    func getFirst() -> QueryViewModel? {
-        return cellModels.first
+    func getModels() -> [QueryViewModel] {
+        return cellModels
     }
+    
     
     func showError(_ errorMessage: String) {
         DispatchQueue.main.async {

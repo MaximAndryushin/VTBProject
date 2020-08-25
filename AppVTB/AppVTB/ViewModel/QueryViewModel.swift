@@ -96,7 +96,7 @@ struct QueryViewModel: Codable, Equatable {
     
     var formattedDate: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM yyyy HH:mm:ss" // TO THINK how it looks
+        formatter.dateFormat = "dd MMM yyyy HH:mm:ss" 
         return formatter.string(from: date)
     }
     
