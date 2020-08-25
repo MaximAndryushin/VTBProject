@@ -83,7 +83,7 @@ extension SplashAnimator: SplashAnimatorDescription {
         // This mask provides hole in window with shape of logo image
         let mask = CALayer()
         mask.frame = foregroundSplashViewController.logoImageView.frame
-        mask.contents = Locals.bigLogo!.cgImage
+        mask.contents = Locals.bigLogo?.cgImage
         mainWindow.layer.mask = mask
         
         // Fading logo image

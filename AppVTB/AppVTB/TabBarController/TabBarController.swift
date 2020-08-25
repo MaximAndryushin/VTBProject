@@ -15,10 +15,10 @@ final class TabBarController: UITabBarController {
     
     private enum Locals {
         static let historyScreen = "History"
-        static let historyImage = "history"
+        static let historyImage = UIImage(named: "history")
         static let favoritesScreen = "Favorites"
-        static let favoritesImage = "favorite"
-        static let checkImage = "check"
+        static let favoritesImage = UIImage(named: "favorite")
+        static let checkImage = UIImage(named: "check")
         static let checkScreen = "Check"
         static let position = ["History" : 0, "Check" : 1, "Favorites": 2]
     }
@@ -42,13 +42,13 @@ final class TabBarController: UITabBarController {
     private func configureTabBarItems() {
         
         var firstViewController: UIViewController = HistoryViewController()
-        configureController(viewController: &firstViewController, image: UIImage(named: Locals.historyImage)!, tag: Locals.position[Locals.historyScreen]!, title: Locals.historyScreen)
+        configureController(viewController: &firstViewController, image: Locals.historyImage ?? UIImage(), tag: Locals.position[Locals.historyScreen] ?? 0, title: Locals.historyScreen)
 
         var secondViewController = CheckAssembly.assembly()
-        configureController(viewController: &secondViewController, image: UIImage(named: Locals.checkImage)!, tag: Locals.position[Locals.checkScreen]!, title: Locals.checkScreen)
+        configureController(viewController: &secondViewController, image: Locals.checkImage ?? UIImage(), tag: Locals.position[Locals.checkScreen] ?? 1, title: Locals.checkScreen)
         
         var thirdViewController = FavoritesAssembly.assembly()
-        configureController(viewController: &thirdViewController, image: UIImage(named: Locals.favoritesImage)!, tag: Locals.position[Locals.favoritesScreen]!, title: Locals.favoritesScreen)
+        configureController(viewController: &thirdViewController, image: Locals.favoritesImage ?? UIImage(), tag: Locals.position[Locals.favoritesScreen] ?? 2, title: Locals.favoritesScreen)
 
         let tabBarList = [firstViewController, secondViewController, thirdViewController]
 

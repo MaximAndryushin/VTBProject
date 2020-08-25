@@ -85,7 +85,7 @@ extension FavoritesPresenter: FavoritesInteractorOutput {
         if let number = object as? NumberDTO {
             viewModel = converter.createViewModelFrom(number: number)
         }
-        view?.appendViewModel(viewModel: viewModel!)
+        view?.appendViewModel(viewModel: viewModel ?? QueryViewModel())
     }
     
     

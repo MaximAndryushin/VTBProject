@@ -64,7 +64,7 @@ final class NumberConverter: NumberDTODAOConverterInput {
     func numberDTOToPhoneNumber(_ number: NumberDTO) -> PhoneNumber {
         var numberModel: PhoneNumber?
         update(&numberModel, numberDTO: number)
-        return numberModel!
+        return numberModel ?? PhoneNumber()
     }
     
 }
@@ -194,15 +194,15 @@ final class EmailConverter: EmailDTODAOConverterInput {
             isSpamList: email.isSpamList,
             isRetired: email.isRetired,
             isFabricated: email.isFabricated,
-            breaches: email.breaches?.sortedArray(using: []).map{ return breachConverter.breachToBreachDTO($0 as! Breach) } ?? [],
-            date: email.date!
+            breaches: email.breaches?.sortedArray(using: []).map{ return breachConverter.breachToBreachDTO($0 as? Breach ?? Breach()) } ?? [],
+            date: email.date ?? Date()
         )
     }
     
     func emailDTOToEmail(_ email: EmailDTO) -> Email {
         var emailModel: Email?
         update(&emailModel, email: email)
-        return emailModel!
+        return emailModel ?? Email()
     }
 }
 

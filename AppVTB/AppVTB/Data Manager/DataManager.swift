@@ -60,7 +60,7 @@ class DataManager {
     //MARK: - Methods
     
     func entityForName(_ name: String) -> NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: name, in: self.managedObjectContext)!
+        return NSEntityDescription.entity(forEntityName: name, in: self.managedObjectContext) ?? NSEntityDescription()
     }
     
 
@@ -120,9 +120,9 @@ extension DataManager: NumberEmailDataManagerInput {
         request.predicate = NSPredicate(format: "number == %@", name) 
         do {
             let results = try managedObjectContext.fetch(request)
-            if !results.isEmpty {
-                results.forEach { managedObjectContext.delete($0 as! NSManagedObject) }
-            }
+            
+            results.forEach { managedObjectContext.delete($0 as? NSManagedObject ?? NSManagedObject()) }
+            
         } catch {
             print(error)
         }
@@ -134,9 +134,9 @@ extension DataManager: NumberEmailDataManagerInput {
         request.predicate = NSPredicate(format: "email == %@", name)
         do {
             let results = try managedObjectContext.fetch(request)
-            if !results.isEmpty {
-                results.forEach { managedObjectContext.delete($0 as! NSManagedObject) }
-            }
+            
+            results.forEach { managedObjectContext.delete($0 as? NSManagedObject ?? NSManagedObject()) }
+            
         } catch {
             print(error)
         }
@@ -167,14 +167,14 @@ extension DataManager: PhoneEmailFavoritesDataManagerInput {
     func addToFavoritesNumber(_ numberDTO: NumberDTO) {
         var number = existsNumber(numberDTO.number)
         numberConverter.update(&number, numberDTO: numberDTO)
-        number!.isRenewable = true
+        number?.isRenewable = true
         saveContext()
     }
     
     func addToFavoritesEmail(_ emailDTO: EmailDTO) {
         var email = existsEmail(emailDTO.email)
         emailConverter.update(&email, email: emailDTO)
-        email!.isRenewable = true
+        email?.isRenewable = true
         saveContext()
     }
     
@@ -209,13 +209,13 @@ extension DataManager: PhoneEmailFavoritesDataManagerInput {
     
     func deleteFromFavoritesNumber(_ name: String) {
         let number = existsNumber(name)
-        number!.isRenewable = false
+        number?.isRenewable = false
         saveContext()
     }
     
     func deleteFromFavoritesEmail(_ name: String) {
         let email = existsEmail(name)
-        email!.isRenewable = false
+        email?.isRenewable = false
         saveContext()
     }
     
