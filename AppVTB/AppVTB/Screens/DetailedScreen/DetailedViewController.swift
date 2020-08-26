@@ -25,7 +25,7 @@ final class DetailedViewController: UIViewController {
     
     //MARK: - Properties
     
-    private var viewModel: QueryViewModel!
+    private var viewModel: QueryViewModel = QueryViewModel()
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
