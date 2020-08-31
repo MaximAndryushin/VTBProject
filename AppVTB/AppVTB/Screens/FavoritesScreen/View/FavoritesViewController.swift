@@ -45,6 +45,7 @@ final class FavoritesViewController: UIViewController {
     //MARK: - Properties
     
     var presenter: FavoritesViewOutput?
+    
     private lazy var favoritesLabel: UILabel = {
         return UILabel(text: NSAttributedString(string: Locals.title), font: Constants.titleFont, alignment: .center)
     }()
@@ -140,11 +141,9 @@ extension FavoritesViewController: FavoritesViewInput {
     
     
     func showError(_ errorMessage: String) {
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(title: Locals.errorTitle, message: errorMessage, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .cancel) { (_) in })
-            self.present(alertController, animated: true, completion: nil)
-        }
+        let alertController = UIAlertController(title: Locals.errorTitle, message: errorMessage, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) { (_) in })
+        self.present(alertController, animated: true, completion: nil)
     }
     
     private func deleteViewModel(_ name: String) {

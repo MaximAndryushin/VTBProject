@@ -13,7 +13,7 @@ final class TabBarController: UITabBarController {
     
     //MARK: - Constants
     
-    private enum Locals {
+    enum Locals {
         static let historyScreen = "History"
         static let historyImage = UIImage(named: "history")
         static let favoritesScreen = "Favorites"

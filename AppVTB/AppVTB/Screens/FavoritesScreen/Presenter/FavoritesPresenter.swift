@@ -90,7 +90,12 @@ extension FavoritesPresenter: FavoritesInteractorOutput {
     
     
     func showError(_ error: String) {
-        view?.showError(error)
+        // Check if presented View Controller is FavoritesVC
+        DispatchQueue.main.async {
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate, let tabBarVC = appDelegate.window?.rootViewController as? TabBarController, let _ = tabBarVC.selectedViewController as? FavoritesViewController {
+                self.view?.showError(error)
+            }
+        }
     }
     
     

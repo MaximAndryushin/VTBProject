@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5220FED924FD4F4C002731EF /* AppVTBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5220FED824FD4F4C002731EF /* AppVTBTests.swift */; };
 		5231F93424EA9EEB0098B285 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5231F93324EA9EEB0098B285 /* UILabel+.swift */; };
 		5231F93824EAAF720098B285 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5231F93724EAAF720098B285 /* String+.swift */; };
 		5231F93C24EABE4A0098B285 /* IconBreachEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5231F93B24EABE4A0098B285 /* IconBreachEndPoint.swift */; };
@@ -73,7 +74,20 @@
 		52CE35BC24EFD7F800BE60C0 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CE35BB24EFD7F800BE60C0 /* APIKeys.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5220FEDB24FD4F4C002731EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5255C87324C3C9B4008E43ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5255C87A24C3C9B4008E43ED;
+			remoteInfo = AppVTB;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		5220FED624FD4F4C002731EF /* AppVTBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppVTBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5220FED824FD4F4C002731EF /* AppVTBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVTBTests.swift; sourceTree = "<group>"; };
+		5220FEDA24FD4F4C002731EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5231F93324EA9EEB0098B285 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		5231F93724EAAF720098B285 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		5231F93B24EABE4A0098B285 /* IconBreachEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconBreachEndPoint.swift; sourceTree = "<group>"; };
@@ -143,6 +157,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5220FED324FD4F4C002731EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5255C87824C3C9B4008E43ED /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -153,6 +174,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5220FED724FD4F4C002731EF /* AppVTBTests */ = {
+			isa = PBXGroup;
+			children = (
+				5220FED824FD4F4C002731EF /* AppVTBTests.swift */,
+				5220FEDA24FD4F4C002731EF /* Info.plist */,
+			);
+			path = AppVTBTests;
+			sourceTree = "<group>";
+		};
 		5231F93224EA9ED40098B285 /* UILabel+ */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				5255C87D24C3C9B4008E43ED /* AppVTB */,
+				5220FED724FD4F4C002731EF /* AppVTBTests */,
 				5255C87C24C3C9B4008E43ED /* Products */,
 			);
 			sourceTree = "<group>";
@@ -207,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				5255C87B24C3C9B4008E43ED /* AppVTB.app */,
+				5220FED624FD4F4C002731EF /* AppVTBTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -589,6 +621,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5220FED524FD4F4C002731EF /* AppVTBTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5220FEDF24FD4F4C002731EF /* Build configuration list for PBXNativeTarget "AppVTBTests" */;
+			buildPhases = (
+				5220FED224FD4F4C002731EF /* Sources */,
+				5220FED324FD4F4C002731EF /* Frameworks */,
+				5220FED424FD4F4C002731EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5220FEDC24FD4F4C002731EF /* PBXTargetDependency */,
+			);
+			name = AppVTBTests;
+			productName = AppVTBTests;
+			productReference = 5220FED624FD4F4C002731EF /* AppVTBTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		5255C87A24C3C9B4008E43ED /* AppVTB */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5255C89224C3C9B5008E43ED /* Build configuration list for PBXNativeTarget "AppVTB" */;
@@ -616,6 +666,10 @@
 				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = "Maxim Andryushin";
 				TargetAttributes = {
+					5220FED524FD4F4C002731EF = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = 5255C87A24C3C9B4008E43ED;
+					};
 					5255C87A24C3C9B4008E43ED = {
 						CreatedOnToolsVersion = 11.6;
 					};
@@ -635,11 +689,19 @@
 			projectRoot = "";
 			targets = (
 				5255C87A24C3C9B4008E43ED /* AppVTB */,
+				5220FED524FD4F4C002731EF /* AppVTBTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5220FED424FD4F4C002731EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5255C87924C3C9B4008E43ED /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -652,6 +714,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5220FED224FD4F4C002731EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5220FED924FD4F4C002731EF /* AppVTBTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5255C87724C3C9B4008E43ED /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -723,6 +793,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5220FEDC24FD4F4C002731EF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5255C87A24C3C9B4008E43ED /* AppVTB */;
+			targetProxy = 5220FEDB24FD4F4C002731EF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		5255C88C24C3C9B5008E43ED /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -735,6 +813,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5220FEDD24FD4F4C002731EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = AppVTBTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.AppVTBTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppVTB.app/AppVTB";
+			};
+			name = Debug;
+		};
+		5220FEDE24FD4F4C002731EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = AppVTBTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.AppVTBTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppVTB.app/AppVTB";
+			};
+			name = Release;
+		};
 		5255C89024C3C9B5008E43ED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -886,6 +1004,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5220FEDF24FD4F4C002731EF /* Build configuration list for PBXNativeTarget "AppVTBTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5220FEDD24FD4F4C002731EF /* Debug */,
+				5220FEDE24FD4F4C002731EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5255C87624C3C9B4008E43ED /* Build configuration list for PBXProject "AppVTB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

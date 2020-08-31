@@ -45,7 +45,7 @@ final class DetailedViewController: UIViewController {
         button.backgroundColor = .red
         button.setTitle("X", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        //button.setImage(UIImage(named: "clost"), for: .normal)
+        //button.setImage(UIImage(named: "close"), for: .normal)
         button.layer.cornerRadius = min(button.intrinsicContentSize.height, button.intrinsicContentSize.width) / 2
         button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
