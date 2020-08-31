@@ -8,7 +8,9 @@
 
 import Foundation
 
+
 //MARK: - Response Model
+
 struct BreachAPI: Codable {
     let name: String
     let title: String

@@ -16,7 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-
+        
+        // MARK: - Splash Screen Stuff
+        
         splashPresenter?.present()
         
         let delay: TimeInterval = 2
@@ -25,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self?.splashPresenter = nil
             }
         }
+        
+        
+        // MARK: - TAB BAR
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = TabBarController()

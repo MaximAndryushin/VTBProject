@@ -17,10 +17,10 @@ class DataManager {
     
     //MARK: - Properties
     
-    private let numberConverter: NumberDTODAOConverter
-    private let emailConverter: EmailDTODAOConverter
+    private let numberConverter: NumberDTODAOConverterInput
+    private let emailConverter: EmailDTODAOConverterInput
     
-    private init(numberConverter: NumberDTODAOConverter, emailConverter: EmailDTODAOConverter) {
+    private init(numberConverter: NumberDTODAOConverterInput, emailConverter: EmailDTODAOConverterInput) {
         self.numberConverter = numberConverter
         self.emailConverter = emailConverter
     }
@@ -60,7 +60,7 @@ class DataManager {
     //MARK: - Methods
     
     func entityForName(_ name: String) -> NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: name, in: self.managedObjectContext)!
+        return NSEntityDescription.entity(forEntityName: name, in: self.managedObjectContext) ?? NSEntityDescription()
     }
     
 
@@ -78,16 +78,16 @@ class DataManager {
 
 
 
-// MARK: - PhoneEmail protocol
+// MARK: - PhoneEmail get/delete
 
-protocol PhoneEmailDataManager {
+protocol NumberEmailDataManagerInput {
     func getPhoneNumbers() -> [NumberDTO]?
     func getEmails() -> [EmailDTO]?
     func deleteNumber(_ name: String)
     func deleteEmail(_ name: String)
 }
 
-extension DataManager: PhoneEmailDataManager {
+extension DataManager: NumberEmailDataManagerInput {
     
     func getPhoneNumbers() -> [NumberDTO]? {
         let fetchRequest = PhoneNumber.numberFetchRequest()
@@ -117,12 +117,12 @@ extension DataManager: PhoneEmailDataManager {
     
     func deleteNumber(_ name: String) {
         let request = PhoneNumber.fetchRequest()
-        request.predicate = NSPredicate(format: "number == %@", name) // to think
+        request.predicate = NSPredicate(format: "number == %@", name) 
         do {
             let results = try managedObjectContext.fetch(request)
-            if !results.isEmpty {
-                results.forEach { managedObjectContext.delete($0 as! NSManagedObject) }
-            }
+            
+            results.forEach { managedObjectContext.delete($0 as? NSManagedObject ?? NSManagedObject()) }
+            
         } catch {
             print(error)
         }
@@ -134,9 +134,9 @@ extension DataManager: PhoneEmailDataManager {
         request.predicate = NSPredicate(format: "email == %@", name)
         do {
             let results = try managedObjectContext.fetch(request)
-            if !results.isEmpty {
-                results.forEach { managedObjectContext.delete($0 as! NSManagedObject) }
-            }
+            
+            results.forEach { managedObjectContext.delete($0 as? NSManagedObject ?? NSManagedObject()) }
+            
         } catch {
             print(error)
         }
@@ -151,9 +151,9 @@ extension DataManager: PhoneEmailDataManager {
 }
 
 
-//MARK: - PhoneEmailFavoritesProtocol
+//MARK: - PhoneEmail FavoritesScreen
 
-protocol PhoneEmailFavoritesDataManager {
+protocol PhoneEmailFavoritesDataManagerInput {
     func getFavoritesNumbers() -> [NumberDTO]?
     func getFavoritesEmails() -> [EmailDTO]?
     func addToFavoritesNumber(_ numberDTO: NumberDTO)
@@ -162,19 +162,19 @@ protocol PhoneEmailFavoritesDataManager {
     func deleteFromFavoritesEmail(_ name: String)
 }
 
-extension DataManager: PhoneEmailFavoritesDataManager {
+extension DataManager: PhoneEmailFavoritesDataManagerInput {
     
     func addToFavoritesNumber(_ numberDTO: NumberDTO) {
         var number = existsNumber(numberDTO.number)
         numberConverter.update(&number, numberDTO: numberDTO)
-        number!.isRenewable = true
+        number?.isRenewable = true
         saveContext()
     }
     
     func addToFavoritesEmail(_ emailDTO: EmailDTO) {
         var email = existsEmail(emailDTO.email)
         emailConverter.update(&email, email: emailDTO)
-        email!.isRenewable = true
+        email?.isRenewable = true
         saveContext()
     }
     
@@ -209,13 +209,13 @@ extension DataManager: PhoneEmailFavoritesDataManager {
     
     func deleteFromFavoritesNumber(_ name: String) {
         let number = existsNumber(name)
-        number!.isRenewable = false
+        number?.isRenewable = false
         saveContext()
     }
     
     func deleteFromFavoritesEmail(_ name: String) {
         let email = existsEmail(name)
-        email!.isRenewable = false
+        email?.isRenewable = false
         saveContext()
     }
     
@@ -224,12 +224,12 @@ extension DataManager: PhoneEmailFavoritesDataManager {
 
 //MARK: - Save Only Logic
 
-protocol SaveDataManager {
+protocol SaveDataManagerInput {
     func saveNumber(_ numberDTO: NumberDTO)
     func saveEmail(_ emailDTO: EmailDTO)
 }
 
-extension DataManager: SaveDataManager {
+extension DataManager: SaveDataManagerInput {
     
     func saveNumber(_ numberDTO: NumberDTO) {
         var number = existsNumber(numberDTO.number)
@@ -245,16 +245,14 @@ extension DataManager: SaveDataManager {
 }
 
 
-//MARK: - Has number/email protocol
+//MARK: - Has number/email
 
-protocol ExistsData {
+protocol DataExistenceChecker {
     func existsNumber(_ number: String) -> PhoneNumber?
     func existsEmail(_ email: String) -> Email?
 }
 
-extension DataManager: ExistsData {
-    
-    
+extension DataManager: DataExistenceChecker {
     func existsNumber(_ number: String) -> PhoneNumber? {
         let request = PhoneNumber.fetchRequest()
         request.predicate = NSPredicate(format: "number == %@", number)

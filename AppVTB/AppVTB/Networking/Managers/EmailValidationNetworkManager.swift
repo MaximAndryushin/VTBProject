@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol EmailValidatorNetworkManager {
+protocol EmailValidationNetworkManagerInput {
     func getInfo(about email: String, completion: @escaping (_ email: EmailValidationAPIModel?, _ error: String?) -> ())
 }
 
-final class EmailValidationNetworkManager: NetworkResponseHandler, EmailValidatorNetworkManager {
+final class EmailValidationNetworkManager: NetworkResponseHandler, EmailValidationNetworkManagerInput {
         
     let router = Router<EmailValidationAPI>()
     

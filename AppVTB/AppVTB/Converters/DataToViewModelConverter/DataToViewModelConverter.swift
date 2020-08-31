@@ -14,10 +14,10 @@ protocol DataConverterInput {
 }
 
 final class DataToViewModelConverter {
-    private let numberConverter: NumberDTOQueryConverter
-    private let emailConverter: EmailDTOQueryConverter
+    private let numberConverter: NumberDTOToViewModelConverterInput
+    private let emailConverter: EmailDTOToViewModelConverterInput
     
-    init(numberConverter: NumberDTOQueryConverter, emailConverter: EmailDTOQueryConverter) {
+    init(numberConverter: NumberDTOToViewModelConverterInput, emailConverter: EmailDTOToViewModelConverterInput) {
         self.numberConverter = numberConverter
         self.emailConverter = emailConverter
     }

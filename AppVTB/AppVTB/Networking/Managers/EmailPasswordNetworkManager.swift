@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol EmailBreachNetworkManager {
+protocol EmailBreachNetworkManagerInput {
     func getInfo(about email: String, completion: @escaping (_ email: EmailPasswordsAPIResponse?, _ error: String?) -> ())
 }
 
-final class EmailPasswordNetworkManager: NetworkResponseHandler, EmailBreachNetworkManager {
+final class EmailPasswordNetworkManager: NetworkResponseHandler, EmailBreachNetworkManagerInput {
         
     let router = Router<EmailPasswordAPI>()
     

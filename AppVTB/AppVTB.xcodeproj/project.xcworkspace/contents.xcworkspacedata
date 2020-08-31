@@ -1,62 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <Group
-      location = "group:../AppVTB/FavoritesScreen"
-      name = "FavoritesScreen">
-      <Group
-         location = "group:Entity"
-         name = "Entity">
-         <FileRef
-            location = "group:FavoritesEntity.swift">
-         </FileRef>
-      </Group>
-      <Group
-         location = "group:Assembly"
-         name = "Assembly">
-         <FileRef
-            location = "group:FavoritesAssembly.swift">
-         </FileRef>
-      </Group>
-      <Group
-         location = "group:Presenter"
-         name = "Presenter">
-         <FileRef
-            location = "group:FavoritesPresenter.swift">
-         </FileRef>
-      </Group>
-      <Group
-         location = "group:DataStore"
-         name = "DataStore">
-         <FileRef
-            location = "group:FavoritesDataStore.swift">
-         </FileRef>
-      </Group>
-      <Group
-         location = "group:View"
-         name = "View">
-         <FileRef
-            location = "group:FavoritesViewController.swift">
-         </FileRef>
-         <FileRef
-            location = "group:FavoritesTableViewCell.swift">
-         </FileRef>
-      </Group>
-      <Group
-         location = "group:Interactor"
-         name = "Interactor">
-         <FileRef
-            location = "group:FavoritesInteractor.swift">
-         </FileRef>
-      </Group>
-      <Group
-         location = "group:Router"
-         name = "Router">
-         <FileRef
-            location = "group:FavoritesRouter.swift">
-         </FileRef>
-      </Group>
-   </Group>
    <FileRef
       location = "self:">
    </FileRef>
