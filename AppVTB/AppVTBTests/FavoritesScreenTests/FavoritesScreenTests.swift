@@ -1,18 +1,18 @@
 //
-//  AppVTBTests.swift
+//  FavoritesScreenTests.swift
 //  AppVTBTests
 //
-//  Created by Maxim Andryushin on 31.08.2020.
+//  Created by Maxim Andryushin on 02.09.2020.
 //  Copyright © 2020 Maxim Andryushin. All rights reserved.
 //
 
 import XCTest
 @testable import AppVTB
 
-class AppVTBTests: XCTestCase {
+final class FavoritesScreenTests: XCTestCase {
     
     private var view: UIViewController?
-
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
         view = FavoritesAssembly.assembly()
@@ -23,21 +23,23 @@ class AppVTBTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func testExample() throws {
-        
+    func testView() throws {
         //1. Assemble
         
-        
+
         //2. Activate
         
         
         //3. Assert
-        print(type(of: view))
+        
+        
+        
     }
 
     func testPerformanceExample() throws {
-        measure {
-            print(type(of: view))
+        // This is an example of a performance test case.
+        self.measure {
+            // Put the code you want to measure the time of here.
         }
     }
 

@@ -15,11 +15,13 @@ protocol FavoritesInteractorOutput: AnyObject {
     func appendToTable(object: Any)
 }
 
-class FavoritesInteractor {
+final class FavoritesInteractor {
+    
     
     //MARK: - Constants
+    
     enum Locals {
-        static let errorMessage = "Wrong input format \n Enter number(+79102382390)/email"
+        static let errorMessage = "Wrong input format\n Enter number(+79102382390)/email"
     }
     
     //MARK: - Properties
