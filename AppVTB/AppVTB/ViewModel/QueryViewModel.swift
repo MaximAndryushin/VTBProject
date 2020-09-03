@@ -121,8 +121,12 @@ struct QueryViewModel: Codable, Equatable {
     }
 }
 
-extension QueryViewModel {
-    func toLabels() -> [UILabel] {
+protocol PropertiesToLabelsProtocol {
+    var labels: [UILabel] { get }
+}
+
+extension QueryViewModel: PropertiesToLabelsProtocol{
+    var labels: [UILabel] {
         var labels = [UILabel]()
         labels.append(UILabel(text: NSAttributedString(string: labelText), font: Constants.titleFont, alignment: .center))
         labels.append(UILabel(text: NSAttributedString(string: formattedDate), font: Constants.titleFont, alignment: .center))

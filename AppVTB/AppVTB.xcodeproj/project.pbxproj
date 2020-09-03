@@ -68,6 +68,13 @@
 		5277A5B724DD7530006032F3 /* Email+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A5B524DD7530006032F3 /* Email+CoreDataProperties.swift */; };
 		5277A5BF24DD9B86006032F3 /* NetworkWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A5BE24DD9B86006032F3 /* NetworkWorker.swift */; };
 		5277A5C224E139BE006032F3 /* DataToViewModelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5277A5C124E139BE006032F3 /* DataToViewModelConverter.swift */; };
+		52A8E13025010EA900321550 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8E12F25010EA900321550 /* ParserTests.swift */; };
+		52A8E1332501132700321550 /* EmailDAODTOConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8E1322501132700321550 /* EmailDAODTOConverterTests.swift */; };
+		52A8E1352501196E00321550 /* NumberDTODAOConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8E1342501196E00321550 /* NumberDTODAOConverterTests.swift */; };
+		52A8E13925011F5700321550 /* NumberNetworkResponseToDTOConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8E13825011F5600321550 /* NumberNetworkResponseToDTOConverterTests.swift */; };
+		52A8E13B25013EA300321550 /* EmailNetworkResponseToDTOConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8E13A25013EA300321550 /* EmailNetworkResponseToDTOConverterTests.swift */; };
+		52A8E13E250141F600321550 /* EmailDTOToViewModelConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8E13D250141F600321550 /* EmailDTOToViewModelConverterTests.swift */; };
+		52A8E1402501449900321550 /* NumberDTOToViewModelConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8E13F2501449900321550 /* NumberDTOToViewModelConverterTests.swift */; };
 		52B17D9E24E4342100FC8653 /* CheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B17D9D24E4342100FC8653 /* CheckViewController.swift */; };
 		52B17DA024E4387B00FC8653 /* CheckAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B17D9F24E4387B00FC8653 /* CheckAssembly.swift */; };
 		52B17DA324E43B3300FC8653 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B17DA224E43B3300FC8653 /* Constants.swift */; };
@@ -151,6 +158,13 @@
 		5277A5B524DD7530006032F3 /* Email+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Email+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5277A5BE24DD9B86006032F3 /* NetworkWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWorker.swift; sourceTree = "<group>"; };
 		5277A5C124E139BE006032F3 /* DataToViewModelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataToViewModelConverter.swift; sourceTree = "<group>"; };
+		52A8E12F25010EA900321550 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
+		52A8E1322501132700321550 /* EmailDAODTOConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailDAODTOConverterTests.swift; sourceTree = "<group>"; };
+		52A8E1342501196E00321550 /* NumberDTODAOConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDTODAOConverterTests.swift; sourceTree = "<group>"; };
+		52A8E13825011F5600321550 /* NumberNetworkResponseToDTOConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberNetworkResponseToDTOConverterTests.swift; sourceTree = "<group>"; };
+		52A8E13A25013EA300321550 /* EmailNetworkResponseToDTOConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailNetworkResponseToDTOConverterTests.swift; sourceTree = "<group>"; };
+		52A8E13D250141F600321550 /* EmailDTOToViewModelConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailDTOToViewModelConverterTests.swift; sourceTree = "<group>"; };
+		52A8E13F2501449900321550 /* NumberDTOToViewModelConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDTOToViewModelConverterTests.swift; sourceTree = "<group>"; };
 		52B17D9D24E4342100FC8653 /* CheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckViewController.swift; sourceTree = "<group>"; };
 		52B17D9F24E4387B00FC8653 /* CheckAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAssembly.swift; sourceTree = "<group>"; };
 		52B17DA224E43B3300FC8653 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -179,6 +193,8 @@
 		5220FED724FD4F4C002731EF /* AppVTBTests */ = {
 			isa = PBXGroup;
 			children = (
+				52A8E131250112D500321550 /* ConverterTests */,
+				52A8E12E25010E8C00321550 /* ParserTests */,
 				5250F0EF24FFF7ED0013F189 /* NetworkManagerTests */,
 				5250F0EC24FFEE710013F189 /* FavoritesScreenTests */,
 				5220FEDA24FD4F4C002731EF /* Info.plist */,
@@ -272,7 +288,7 @@
 				52B4683424E30AA80077C938 /* TabBarController */,
 				5277A55924D844F5006032F3 /* Converters */,
 				5277A52224D4356F006032F3 /* Networking */,
-				5255C89724C3C9E9008E43ED /* EmailNumberParser */,
+				5255C89724C3C9E9008E43ED /* Parsers */,
 				5255C89524C3C9C5008E43ED /* Data Manager */,
 				5255C87E24C3C9B4008E43ED /* AppDelegate.swift */,
 				5255C88A24C3C9B5008E43ED /* Assets.xcassets */,
@@ -305,12 +321,12 @@
 			path = HistoryScreen;
 			sourceTree = "<group>";
 		};
-		5255C89724C3C9E9008E43ED /* EmailNumberParser */ = {
+		5255C89724C3C9E9008E43ED /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
 				5255C89B24C3CAAC008E43ED /* EmailNumberParser.swift */,
 			);
-			path = EmailNumberParser;
+			path = Parsers;
 			sourceTree = "<group>";
 		};
 		5255C89824C3C9F6008E43ED /* CompatibleSafeAreLayoutGuide */ = {
@@ -569,6 +585,51 @@
 			path = DataToViewModelConverter;
 			sourceTree = "<group>";
 		};
+		52A8E12E25010E8C00321550 /* ParserTests */ = {
+			isa = PBXGroup;
+			children = (
+				52A8E12F25010EA900321550 /* ParserTests.swift */,
+			);
+			path = ParserTests;
+			sourceTree = "<group>";
+		};
+		52A8E131250112D500321550 /* ConverterTests */ = {
+			isa = PBXGroup;
+			children = (
+				52A8E13C250141C500321550 /* DTOToViewModelConverterTests */,
+				52A8E13725011D1E00321550 /* NetworkResponseToDTOConverterTests */,
+				52A8E13625011CF800321550 /* DTODAOConvertersTests */,
+			);
+			path = ConverterTests;
+			sourceTree = "<group>";
+		};
+		52A8E13625011CF800321550 /* DTODAOConvertersTests */ = {
+			isa = PBXGroup;
+			children = (
+				52A8E1322501132700321550 /* EmailDAODTOConverterTests.swift */,
+				52A8E1342501196E00321550 /* NumberDTODAOConverterTests.swift */,
+			);
+			path = DTODAOConvertersTests;
+			sourceTree = "<group>";
+		};
+		52A8E13725011D1E00321550 /* NetworkResponseToDTOConverterTests */ = {
+			isa = PBXGroup;
+			children = (
+				52A8E13825011F5600321550 /* NumberNetworkResponseToDTOConverterTests.swift */,
+				52A8E13A25013EA300321550 /* EmailNetworkResponseToDTOConverterTests.swift */,
+			);
+			path = NetworkResponseToDTOConverterTests;
+			sourceTree = "<group>";
+		};
+		52A8E13C250141C500321550 /* DTOToViewModelConverterTests */ = {
+			isa = PBXGroup;
+			children = (
+				52A8E13D250141F600321550 /* EmailDTOToViewModelConverterTests.swift */,
+				52A8E13F2501449900321550 /* NumberDTOToViewModelConverterTests.swift */,
+			);
+			path = DTOToViewModelConverterTests;
+			sourceTree = "<group>";
+		};
 		52B17D9724E432F800FC8653 /* CheckScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -737,8 +798,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52A8E1402501449900321550 /* NumberDTOToViewModelConverterTests.swift in Sources */,
 				5250F0F124FFF8190013F189 /* NetworkManagerTests.swift in Sources */,
+				52A8E1352501196E00321550 /* NumberDTODAOConverterTests.swift in Sources */,
 				5250F0EE24FFEEBF0013F189 /* FavoritesScreenTests.swift in Sources */,
+				52A8E13E250141F600321550 /* EmailDTOToViewModelConverterTests.swift in Sources */,
+				52A8E1332501132700321550 /* EmailDAODTOConverterTests.swift in Sources */,
+				52A8E13025010EA900321550 /* ParserTests.swift in Sources */,
+				52A8E13B25013EA300321550 /* EmailNetworkResponseToDTOConverterTests.swift in Sources */,
+				52A8E13925011F5700321550 /* NumberNetworkResponseToDTOConverterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

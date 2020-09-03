@@ -92,7 +92,7 @@ final class DetailedViewController: UIViewController {
     }
     
     private func configureLabels() {
-        for label in viewModel.toLabels() {
+        for label in viewModel.labels {
             stackView.addArrangedSubview(label)
             label.translatesAutoresizingMaskIntoConstraints = false
             
