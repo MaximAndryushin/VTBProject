@@ -12,4 +12,3 @@
 
  email: unlimimage@yandex.ru
 
- tg: @Limagination
